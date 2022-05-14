@@ -12,6 +12,10 @@
     ./modules/zsh
   ];
 
+  options.homecfg.NixOS = {
+    enable = lib.mkEnableOption "Set to true if running on NixOS";
+  };
+
   config = {
     programs.home-manager.enable = true;
     nixpkgs.config.allowUnfree = true;

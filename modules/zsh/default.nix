@@ -44,6 +44,7 @@ in
         PATH = "$PATH:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.local/bin:$HOME/.local/bin/npm/bin";
         VISUAL = "nvim";
       };
+
       initExtra = builtins.concatStringsSep "\n" (
         [ ]
         # tea autocomplete
@@ -60,8 +61,11 @@ in
           "for file in ~/.zsh_functions/*; do . $file; done"
           # local additional zsh file
           "[[ ! -f ~/.local.zsh ]] || source ~/.local.zsh"
+        ]
+        ++ lib.optionals (config.homecfg.NixOS == false) [
           # nix things
           ". $HOME/.nix-profile/etc/profile.d/nix.sh"
+          "unset GIT_SSH"
         ]
       );
     };
