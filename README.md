@@ -12,6 +12,8 @@ maybe I will make a flake out of it eventually.
 ## Usage
 
 1. Go to some repo where you want to use this config.
-2. Add this repo as submodule: `git submodule add https://github.com/clemak27/home-manager`
-3. create a `home.nix`, which imports the homecfg.nix file in this repo.
-4. After this, yuo can use the homecfg config options to enable modules as needed.
+2. Add this repo as submodule: `git submodule add git@github.com:clemak27/home-manager.git`
+3. create a `home.nix`, which imports the `homecfg.nix` file in this repo.
+4. After this, you can use the `homecfg` config options to enable modules as needed.
+5. When reloading the config and using flakes, you need to use `home-manager switch --flake '.?submodules=1' --impure`  
+   (we will see when get around to making this more convenient ¯\\\_(ツ)_/¯)
