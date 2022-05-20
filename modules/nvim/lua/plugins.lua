@@ -81,7 +81,6 @@ M.load = function()
     ----------------- vimtex --------------------------------------------
     use { 'lervag/vimtex',
       config = function ()
-        vim.g.vimtex_syntax_conceal_default = 0
         vim.g.vimtex_indent_enabled = 1
         vim.g.vimtex_indent_conditionals = {}
         vim.g.vimtex_indent_on_ampersands = 0
