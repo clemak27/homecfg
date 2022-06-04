@@ -28,6 +28,7 @@ in
     home.packages = with pkgs; [
       nodePackages.eslint
       nodePackages.markdownlint-cli
+      vale
       cargo
       shellcheck
     ];
