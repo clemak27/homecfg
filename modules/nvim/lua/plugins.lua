@@ -59,7 +59,7 @@ M.load = function()
     use 'kyazdani42/nvim-web-devicons'
     use { 'nvim-lualine/lualine.nvim', config = function () require("lualine-config").load() end }
     use { 'akinsho/nvim-bufferline.lua', config = function () require("bufferline-config").load() end }
-    use { 'nvim-treesitter/nvim-treesitter', config = function () require("treesitter-config").load() end }
+    use { 'nvim-treesitter/nvim-treesitter', config = function () require("treesitter-config").load() end, run = ':TSUpdate' }
     use { 'norcalli/nvim-colorizer.lua', config = function () require("nvim-colorizer-config").load() end }
 
     ----------------- markdown ------------------------------------------
