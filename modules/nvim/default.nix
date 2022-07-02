@@ -3,10 +3,6 @@ let
   cfg = config.homecfg.nvim;
 in
 {
-  imports = [
-    ./jdtls.nix
-  ];
-
   options.homecfg.nvim.enable = lib.mkEnableOption "Manage neovim with homecfg";
 
   config = lib.mkIf (cfg.enable) {
@@ -42,5 +38,4 @@ in
     };
 
   };
-
 }
