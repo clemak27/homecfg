@@ -13,11 +13,9 @@ M.load = function()
   require('packer').startup(function(use)
 
     ----------------- packer --------------------------------------------
-
     use 'wbthomason/packer.nvim'
 
     ----------------- default plugins -----------------------------------
-
     use 'tpope/vim-repeat'
     use 'tpope/vim-vinegar'
     use 'inkarkat/vim-ReplaceWithRegister'
@@ -39,9 +37,9 @@ M.load = function()
     use 'editorconfig/editorconfig-vim'
     use 'Calder-Ty/todotext.vim'
     use 'tpope/vim-obsession'
+    use { 'kyazdani42/nvim-tree.lua', config = function () require("nvim-tree-config").load() end }
 
     ----------------- git integration -----------------------------------
-
     use 'tpope/vim-fugitive'
     use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = function () require("gitsigns-config").load() end }
 
@@ -101,7 +99,6 @@ M.load = function()
     use { 'mfussenegger/nvim-jdtls', ft = {'java'}, config = function() require('jdtls-config').load() end}
 
     ----------------- cmp -----------------------------------------------
-
     use { 'hrsh7th/nvim-cmp',
       requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline', 'hrsh7th/cmp-vsnip', 'ray-x/cmp-treesitter', 'onsails/lspkind-nvim'},
       config = function() require('nvim-cmp-config').load() end
