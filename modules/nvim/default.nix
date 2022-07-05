@@ -35,6 +35,7 @@ in
     };
     xdg.configFile = {
       "nvim/lua".source = ./lua;
+      "nvim/ftplugin".source = ./ftplugin;
     };
 
   };

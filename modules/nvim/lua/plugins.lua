@@ -96,7 +96,7 @@ M.load = function()
     ----------------- LSP -----------------------------------------------
     use { 'neovim/nvim-lspconfig', requires = {'williamboman/nvim-lsp-installer'}, config = function() require('lsp-config').load() end }
     use { 'ojroques/nvim-lspfuzzy', requires = {'junegunn/fzf', 'junegunn/fzf.vim'}, config = function() require('lspfuzzy').setup {} end  }
-    use { 'mfussenegger/nvim-jdtls', ft = {'java'}, config = function() require('jdtls-config').load() end}
+    use { 'mfussenegger/nvim-jdtls'}
 
     ----------------- cmp -----------------------------------------------
     use { 'hrsh7th/nvim-cmp',
