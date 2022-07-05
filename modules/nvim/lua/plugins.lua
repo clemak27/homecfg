@@ -34,7 +34,7 @@ M.load = function()
     use { 'windwp/nvim-autopairs', config = function () require("autopairs-config").load() end }
     use 'tpope/vim-surround'
     use 'antoinemadec/FixCursorHold.nvim'
-    use 'editorconfig/editorconfig-vim'
+    use 'gpanders/editorconfig.nvim'
     use 'Calder-Ty/todotext.vim'
     use 'tpope/vim-obsession'
     use { 'kyazdani42/nvim-tree.lua', config = function () require("nvim-tree-config").load() end }
