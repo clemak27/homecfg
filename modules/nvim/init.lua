@@ -114,8 +114,6 @@ vim.api.nvim_exec([[
   autocmd FileChangedShellPost *
         \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-  " set mapleader to space
-  let mapleader = ' '
 ]], false)
 
 ----------------------------------------- mappings -----------------------------------------
@@ -135,6 +133,8 @@ local function vim_nmap(keyMap, action)
   vim.api.nvim_set_keymap("n", keyMap, action, opt)
 end
 
+-- Set mapleader to space
+vim.g.mapleader = " "
 -- Smart way to move between windows
 vim_map("<C-j>", "<C-W>j")
 vim_map("<C-k>", "<C-W>k")
