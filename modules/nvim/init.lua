@@ -85,7 +85,7 @@ vim.o.si = true
 vim.o.wrap = true
 
 -- " Always show the status line
-vim.o.laststatus = 2
+vim.o.laststatus = 3
 
 -- " Always show the tab/buffer line
 vim.o.showtabline = 2
