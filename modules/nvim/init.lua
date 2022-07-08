@@ -1,93 +1,68 @@
+----------------------------------------- general settings -----------------------------------------
+
+-- enable termguicolors for colorschemes
 vim.o.termguicolors = true
--- filetype off
-
--- " enable mouse support
+-- enable mouse support
 vim.o.mouse = 'a'
-
--- " line number
+-- line number
 vim.o.number = true
-
--- " use system clipboard
+-- use system clipboard
 vim.cmd [[set clipboard+=unnamedplus]]
-
--- " Sets how many lines of history VIM has to remember
+-- Sets how many lines of history VIM has to remember
 vim.o.history = 500
-
--- " Set to auto read when a file is changed from the outside
+-- Set to auto read when a file is changed from the outside
 vim.o.autoread = true
-
--- " Set 7 lines to the cursor - when moving vertically using j/k
+-- Set 7 lines to the cursor - when moving vertically using j/k
 vim.o.so = 7
-
--- " Turn on the Wild menu
+-- Turn on the Wild menu
 vim.o.wildmenu = true
-
--- " Ignore compiled files
+-- Ignore compiled files
 vim.o.wildignore = '*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store'
-
--- "Always show current position
+--Always show current position
 vim.o.ruler = true
-
--- " Height of the command bar
+-- Height of the command bar
 vim.o.cmdheight = 2
-
--- " A buffer becomes hidden when it is abandoned
+-- A buffer becomes hidden when it is abandoned
 vim.o.hid = true
-
--- " Ignore case when searching
+-- Ignore case when searching
 vim.o.ignorecase = true
-
--- " When searching try to be smart about cases
+-- When searching try to be smart about cases
 vim.o.smartcase = true
-
--- " Highlight search results
+-- Highlight search results
 vim.o.hlsearch = true
-
--- " Makes search act like search in modern browsers
+-- Makes search act like search in modern browsers
 vim.o.incsearch = true
-
--- " Don't redraw while executing macros (good performance config)
+-- Don't redraw while executing macros (good performance config)
 vim.o.lazyredraw = true
-
--- " For regular expressions turn magic on
+-- For regular expressions turn magic on
 vim.o.magic = true
-
--- " Show matching brackets when text indicator is over them
+-- Show matching brackets when text indicator is over them
 vim.o.showmatch = true
-
--- " How many tenths of a second to blink when matching brackets
+-- How many tenths of a second to blink when matching brackets
 vim.o.mat = 2
-
--- " No annoying sound on errors
+-- No annoying sound on errors
 vim.o.t_vb = ''
 vim.o.tm = 500
-
--- " Set utf8 as standard encoding and en_US as the standard language
+-- Set utf8 as standard encoding and en_US as the standard language
 vim.o.encoding = 'utf8'
-
--- " Use Unix as the standard file type
+-- Use Unix as the standard file type
 vim.o.ffs = 'unix,dos,mac'
--- " Use spaces instead of tabs
+-- Use spaces instead of tabs
 vim.o.expandtab = true
-
--- " Be smart when using tabs
+-- Be smart when using tabs
 vim.o.smarttab = true
-
--- " 1 tab == 2 spaces
+-- 1 tab == 2 spaces
 vim.o.shiftwidth = 2
 vim.o.tabstop = 2
-
--- " Auto indent
+-- Auto indent
 vim.o.ai = true
--- " Smart indent
+-- Smart indent
 vim.o.si = true
--- " Wrap lines
+-- Wrap lines
 vim.o.wrap = true
-
--- " Always show the status line
+-- Always show the status line
 vim.o.laststatus = 3
-
--- " Always show the tab/buffer line
+-- Always show the tab/buffer line
 vim.o.showtabline = 2
 
 vim.api.nvim_exec([[
@@ -143,7 +118,7 @@ vim.api.nvim_exec([[
   let mapleader = ' '
 ]], false)
 
--- " ------------------------------------------------- mappings ---------------------------------------------------
+----------------------------------------- mappings -----------------------------------------
 
 local function vim_map(keyMap, action)
   local opt = { noremap = false, silent = true }
@@ -179,6 +154,6 @@ vim_map("0", "^")
 -- Remap ß to end of line
 vim_map("ß", "$")
 
--- " ------------------------------------------------- plugins ---------------------------------------------------
+----------------------------------------- plugins -----------------------------------------
 
 require('plugins').load()
