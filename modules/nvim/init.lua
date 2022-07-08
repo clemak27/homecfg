@@ -143,33 +143,41 @@ vim.api.nvim_exec([[
   let mapleader = ' '
 ]], false)
 
-vim.api.nvim_exec([[
-  " Smart way to move between windows
-  map <C-j> <C-W>j
-  map <C-k> <C-W>k
-  map <C-h> <C-W>h
-  map <C-l> <C-W>l
+-- " ------------------------------------------------- mappings ---------------------------------------------------
 
-  " Move a line of text using ALT+[jk]
-  nmap <M-j> mz:m+<cr>`z
-  nmap <M-k> mz:m-2<cr>`z
+local function vim_map(keyMap, action)
+  local opt = { noremap = false, silent = true }
+  vim.api.nvim_set_keymap("", keyMap, action, opt)
+end
 
-  " disable arrow keys
-  noremap <Up> <Nop>
-  noremap <Down> <Nop>
-  noremap <Left> <Nop>
-  noremap <Right> <Nop>
-]], false)
+local function vim_noremap(keyMap, action)
+  local opt = { noremap = true, silent = true }
+  vim.api.nvim_set_keymap("", keyMap, action, opt)
+end
 
--- " ------------------------------------------------- german mappings ------------------------------------------
-vim.api.nvim_exec([[
-  " Remap 0 and § to first non-blank character
-  map § ^
-  map 0 ^
-  
-  " Remap ß to end of line
-  map ß $
-]], false)
+local function vim_nmap(keyMap, action)
+  local opt = { noremap = false, silent = true }
+  vim.api.nvim_set_keymap("n", keyMap, action, opt)
+end
+
+-- Smart way to move between windows
+vim_map("<C-j>", "<C-W>j")
+vim_map("<C-k>", "<C-W>k")
+vim_map("<C-h>", "<C-W>h")
+vim_map("<C-l>", "<C-W>l")
+-- Move a line of text using ALT+[jk]
+vim_nmap("<M-j>", "mz:m+<cr>`z")
+vim_nmap("<M-k>", "mz:m-2<cr>`z")
+-- Disable arrow keys
+vim_noremap("<Up>", "<Nop>")
+vim_noremap("<Down>", "<Nop>")
+vim_noremap("<Left>", "<Nop>")
+vim_noremap("<Right>", "<Nop>")
+-- Remap 0 and § to first non-blank character
+vim_map("§", "^")
+vim_map("0", "^")
+-- Remap ß to end of line
+vim_map("ß", "$")
 
 -- " ------------------------------------------------- plugins ---------------------------------------------------
 
