@@ -7,17 +7,11 @@ in
 
   config = lib.mkIf (cfg.enable) {
 
-    programs.neovim = {
-      enable = true;
-      withNodeJs = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      extraConfig = builtins.readFile (./. + "/init.vim");
-    };
-
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
         { name = "notes"; value = "nvim ~/Notes/index.md"; }
+        { name = "vi"; value = "nvim"; }
+        { name = "vim"; value = "nvim"; }
       ]
     );
 
@@ -27,6 +21,10 @@ in
       vale
       cargo
       shellcheck
+
+      # add neovim as normal package as a workaround for
+      # https://github.com/nix-community/home-manager/issues/1907
+      neovim
     ];
 
     home.file = {
@@ -34,9 +32,9 @@ in
       ".vsnip".source = ./vsnip;
     };
     xdg.configFile = {
+      "nvim/init.lua".source = ./init.lua;
       "nvim/lua".source = ./lua;
       "nvim/ftplugin".source = ./ftplugin;
     };
-
   };
 }
