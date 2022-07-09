@@ -19,13 +19,15 @@ M.load = function()
     ----------------- default plugins -----------------------------------
     use 'tpope/vim-repeat'
     use 'tpope/vim-vinegar'
-    use 'inkarkat/vim-ReplaceWithRegister'
-    vim.api.nvim_exec([[
-      nmap r  <Plug>ReplaceWithRegisterOperator
-      nmap rr <Plug>ReplaceWithRegisterLine
-      nmap R  r$
-      xmap r  <Plug>ReplaceWithRegisterVisual
-    ]], false)
+    use { 'inkarkat/vim-ReplaceWithRegister',
+      config = function()
+        local opt = { noremap = false, silent = true }
+        vim.api.nvim_set_keymap("n", "r", "<Plug>ReplaceWithRegisterOperator", opt)
+        vim.api.nvim_set_keymap("n", "rr", "<Plug>ReplaceWithRegisterLine", opt)
+        vim.api.nvim_set_keymap("n", "R", "r$", opt)
+        vim.api.nvim_set_keymap("x", "r", "<Plug>ReplaceWithRegisterVisual", opt)
+      end
+    }
 
     use 'tpope/vim-commentary'
     vim.api.nvim_exec([[
