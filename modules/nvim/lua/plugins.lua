@@ -5,9 +5,10 @@ local M = {}
 M.load = function()
 
   local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    packer_bootstrap = fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
+      install_path })
   end
 
   require('packer').startup(function(use)
@@ -31,38 +32,47 @@ M.load = function()
       autocmd FileType nix setlocal commentstring=#\ %s
     ]], false)
 
-    use { 'windwp/nvim-autopairs', config = function () require("autopairs-config").load() end }
+    use { 'windwp/nvim-autopairs', config = function() require("autopairs-config").load() end }
     use 'tpope/vim-surround'
     use 'antoinemadec/FixCursorHold.nvim'
     use 'gpanders/editorconfig.nvim'
     use 'Calder-Ty/todotext.vim'
-    use 'tpope/vim-obsession'
-    use { 'kyazdani42/nvim-tree.lua', config = function () require("nvim-tree-config").load() end }
+    use { 'rmagatti/auto-session',
+      config = function()
+        require('auto-session').setup {
+          log_level = 'info',
+          auto_session_suppress_dirs = { '~/', '~/Projects' }
+        }
+      end
+    }
+    use { 'kyazdani42/nvim-tree.lua', config = function() require("nvim-tree-config").load() end }
 
     ----------------- git integration -----------------------------------
     use 'tpope/vim-fugitive'
-    use { 'lewis6991/gitsigns.nvim', requires = {'nvim-lua/plenary.nvim'}, config = function () require("gitsigns-config").load() end }
+    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' },
+      config = function() require("gitsigns-config").load() end }
 
     ----------------- custom textobjects --------------------------------
     use 'kana/vim-textobj-user'
     use 'kana/vim-textobj-entire'
     use { 'sgur/vim-textobj-parameter',
-      config = function ()
+      config = function()
         vim.g.vim_textobj_parameter_mapping = 'a'
       end
     }
 
     ----------------- theming -------------------------------------------
-    use { 'olimorris/onedarkpro.nvim', config = function () require("colorscheme-config").load() end }
+    use { 'olimorris/onedarkpro.nvim', config = function() require("colorscheme-config").load() end }
     use 'kyazdani42/nvim-web-devicons'
-    use { 'nvim-lualine/lualine.nvim', config = function () require("lualine-config").load() end }
-    use { 'akinsho/nvim-bufferline.lua', config = function () require("bufferline-config").load() end }
-    use { 'nvim-treesitter/nvim-treesitter', config = function () require("treesitter-config").load() end, run = ':TSUpdate' }
-    use { 'norcalli/nvim-colorizer.lua', config = function () require("nvim-colorizer-config").load() end }
+    use { 'nvim-lualine/lualine.nvim', config = function() require("lualine-config").load() end }
+    use { 'akinsho/nvim-bufferline.lua', config = function() require("bufferline-config").load() end }
+    use { 'nvim-treesitter/nvim-treesitter', config = function() require("treesitter-config").load() end,
+      run = ':TSUpdate' }
+    use { 'norcalli/nvim-colorizer.lua', config = function() require("nvim-colorizer-config").load() end }
 
     ----------------- markdown ------------------------------------------
     use { 'preservim/vim-markdown',
-      config = function ()
+      config = function()
         vim.o.conceallevel = 2
         vim.api.nvim_exec([[
           let g:vim_markdown_folding_disabled = 1
@@ -70,15 +80,15 @@ M.load = function()
           let g:vim_markdown_conceal_code_blocks = 0
           let g:vim_markdown_new_list_item_indent = 2
         ]], false)
-        vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], {noremap = true, silent = true})
+        vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
       end
     }
     use 'godlygeek/tabular'
-    use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install'}
+    use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
 
     ----------------- vimtex --------------------------------------------
     use { 'lervag/vimtex',
-      config = function ()
+      config = function()
         vim.g.vimtex_indent_enabled = 1
         vim.g.vimtex_indent_conditionals = {}
         vim.g.vimtex_indent_on_ampersands = 0
@@ -91,16 +101,19 @@ M.load = function()
 
     ----------------- fzf -----------------------------------------------
     use { 'ibhagwan/fzf-lua', config = function() require('fzf-lua-config').load() end }
-    use { 'gfanto/fzf-lsp.nvim', config = function() require'fzf_lsp'.setup() end }
+    use { 'gfanto/fzf-lsp.nvim', config = function() require 'fzf_lsp'.setup() end }
 
     ----------------- LSP -----------------------------------------------
-    use { 'neovim/nvim-lspconfig', requires = {'williamboman/nvim-lsp-installer'}, config = function() require('lsp-config').load() end }
-    use { 'ojroques/nvim-lspfuzzy', requires = {'junegunn/fzf', 'junegunn/fzf.vim'}, config = function() require('lspfuzzy').setup {} end  }
-    use { 'mfussenegger/nvim-jdtls'}
+    use { 'neovim/nvim-lspconfig', requires = { 'williamboman/nvim-lsp-installer' },
+      config = function() require('lsp-config').load() end }
+    use { 'ojroques/nvim-lspfuzzy', requires = { 'junegunn/fzf', 'junegunn/fzf.vim' },
+      config = function() require('lspfuzzy').setup {} end }
+    use { 'mfussenegger/nvim-jdtls' }
 
     ----------------- cmp -----------------------------------------------
     use { 'hrsh7th/nvim-cmp',
-      requires = {'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline', 'hrsh7th/cmp-vsnip', 'ray-x/cmp-treesitter', 'onsails/lspkind-nvim'},
+      requires = { 'hrsh7th/cmp-nvim-lsp', 'hrsh7th/cmp-buffer', 'hrsh7th/cmp-path', 'hrsh7th/cmp-cmdline',
+        'hrsh7th/cmp-vsnip', 'ray-x/cmp-treesitter', 'onsails/lspkind-nvim' },
       config = function() require('nvim-cmp-config').load() end
     }
 
