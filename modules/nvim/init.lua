@@ -63,7 +63,9 @@ vim.o.wrap = true
 -- Always show the status line
 vim.o.laststatus = 3
 -- Always show the tab/buffer line
-vim.o.showtabline = 2
+vim.o.showtabline = 0
+-- Specify the behavior when switching between buffers
+vim.o.switchbuf = 'useopen,usetab,newtab'
 
 vim.api.nvim_exec([[
   " Dont show mode in statusline
@@ -84,28 +86,8 @@ vim.api.nvim_exec([[
 
 
 vim.api.nvim_exec([[
-  " Specify the behavior when switching between buffers
-  try
-    set switchbuf=useopen,usetab,newtab
-    set stal=0
-  catch
-  endtry
-  
-  " Return to last edit position when opening files (You want this!)
+  " Return to last edit position when opening files
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  
-  " Delete trailing white space on save
-  fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-  endfun
-  
-  if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-  endif
   
   " Autoload on file changes
   autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
