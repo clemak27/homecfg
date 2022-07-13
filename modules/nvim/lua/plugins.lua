@@ -34,7 +34,7 @@ M.load = function()
       autocmd FileType nix setlocal commentstring=#\ %s
     ]], false)
 
-    use { 'windwp/nvim-autopairs', config = function() require("autopairs-config").load() end }
+    use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup {} end }
     use 'tpope/vim-surround'
     use 'antoinemadec/FixCursorHold.nvim'
     use 'gpanders/editorconfig.nvim'
@@ -103,7 +103,7 @@ M.load = function()
 
     ----------------- fzf -----------------------------------------------
     use { 'ibhagwan/fzf-lua', config = function() require('fzf-lua-config').load() end }
-    use { 'gfanto/fzf-lsp.nvim', config = function() require 'fzf_lsp'.setup() end }
+    use { 'gfanto/fzf-lsp.nvim', config = function() require('fzf_lsp').setup() end }
 
     ----------------- LSP -----------------------------------------------
     use { 'neovim/nvim-lspconfig', requires = { 'williamboman/nvim-lsp-installer' },
