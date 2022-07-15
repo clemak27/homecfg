@@ -15,6 +15,9 @@ M.load = function()
     filters = {
       dotfiles = true,
     },
+    update_focused_file = {
+      enable = true,
+    },
   })
 
   local opt = { noremap = true, silent = true }
