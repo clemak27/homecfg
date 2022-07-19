@@ -90,8 +90,9 @@ in
         { name = "gpskip"; value = "git push -o ci.skip"; }
         { name = "gs"; value = "git status"; }
         { name = "gst"; value = "git stash"; }
-        { name = "gstp"; value = "git stash pop"; }
         { name = "gstd"; value = "git stash drop"; }
+        { name = "gstp"; value = "git stash pop"; }
+        { name = "gsurr"; value = "git submodule update --remote --rebase"; }
         { name = "gus"; value = "git reset HEAD"; }
       ]
     );
