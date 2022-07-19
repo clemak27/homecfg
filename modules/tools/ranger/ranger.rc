@@ -21,7 +21,7 @@ set preview_images_method ueberzug
 set wrap_plaintext_previews true
 
 # Set a title for the window? Updates both `WM_NAME` and `WM_ICON_NAME`
-set update_title true
+# set update_title true
 
 # Abbreviate $HOME with ~ in the titlebar (first line) of ranger?
 set tilde_in_titlebar true
