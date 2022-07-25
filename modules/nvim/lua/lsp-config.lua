@@ -8,13 +8,14 @@ M.load = function()
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
     local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+
     local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
     --Enable completion triggered by <c-x><c-o>
     buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
     -- Mappings.
-    local opts = { noremap=true, silent=true }
+    local opts = { noremap = true, silent = true }
 
     -- See :help vim.lsp.* for documentation on any of the below functions
     buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
@@ -44,6 +45,10 @@ M.load = function()
     }
   end
 
+  local lspconfig = require("lspconfig")
+
+  require("mason-lspconfig").setup()
+
   local servers = {
     "bashls",
     "cssls",
@@ -67,71 +72,69 @@ M.load = function()
     for _, server in pairs(servers) do
       local config = make_config()
 
-      local lsp_installer_servers = require'nvim-lsp-installer.servers'
+      if server == "bashls" then
+        config.filetypes = { "bash", "sh", "zsh" };
+      end
 
-      local server_available, requested_server = lsp_installer_servers.get_server(server)
-      if server_available then
-        requested_server:on_ready(function ()
+      if server == "jsonls" then
+        config.filetypes = { "json", "json5" }
+      end
 
-          if server == "bashls" then
-            config.filetypes = {"bash", "sh", "zsh"};
-          end
+      if server == "sumneko_lua" then
+        local runtime_path = vim.split(package.path, ';')
+        table.insert(runtime_path, "lua/?.lua")
+        table.insert(runtime_path, "lua/?/init.lua")
+        config.cmd = { "lua-language-server" }
+        config.settings = {
+          Lua = {
+            runtime = {
+              -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+              -- Setup your lua path
+              path = runtime_path,
+            },
+            diagnostics = {
+              -- Get the language server to recognize the `vim` global
+              globals = { 'vim' },
+            },
+            workspace = {
+              -- Make the server aware of Neovim runtime files
+              library = vim.api.nvim_get_runtime_file("", true),
+            },
+            -- Do not send telemetry data containing a randomized but unique identifier
+            telemetry = {
+              enable = false,
+            },
+          },
+        }
+      end
 
-          if server == "jsonls" then
-            config.filetypes = {"json", "json5"}
-          end
-
-          if server == "sumneko_lua" then
-            local runtime_path = vim.split(package.path, ';')
-            table.insert(runtime_path, "lua/?.lua")
-            table.insert(runtime_path, "lua/?/init.lua")
-            config.cmd = { "lua-language-server" }
-            config.settings = {
-              Lua = {
-                runtime = {
-                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                  version = 'LuaJIT',
-                  -- Setup your lua path
-                  path = runtime_path,
-                },
-                diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = {'vim'},
-                },
-                workspace = {
-                  -- Make the server aware of Neovim runtime files
-                  library = vim.api.nvim_get_runtime_file("", true),
-                },
-                -- Do not send telemetry data containing a randomized but unique identifier
-                telemetry = {
-                  enable = false,
-                },
-              },
-            }
-          end
-
-          if server == "eslint" then
-            config.cmd = { os.getenv('HOME') .. "/.local/share/nvim/lsp_servers/vscode-eslint/node_modules/vscode-langservers-extracted/bin/vscode-eslint-language-server", "--stdio" }
-            config.on_attach = function (client, bufnr)
-              -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
-              -- the resolved capabilities of the eslint server ourselves!
-              client.resolved_capabilities.document_formatting = true
-            end
-            config.settings = {
-              format = { enable = true }, -- this will enable formatting
-            }
-          end
-
-          -- java is setup in jdtls-config
-          if server ~= "jdtls" then
-            requested_server:setup(config)
-          end
-
-        end)
-        if not requested_server:is_installed() then
-          -- Queue the server to be installed
-          requested_server:install()
+      if server == "eslint" then
+        config.cmd = {
+          os.getenv('HOME') .. "/.local/share/nvim/mason/bin/vscode-eslint-language-server",
+          "--stdio"
+        }
+        config.on_attach = function(client, bufnr)
+          -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
+          -- the resolved capabilities of the eslint server ourselves!
+          client.resolved_capabilities.document_formatting = true
         end
+        config.settings = {
+          format = { enable = true }, -- this will enable formatting
+        }
+      end
+
+      if server == "gopls" then
+        config.settings = {
+          gopls = {
+            gofumpt = true
+          }
+        }
+      end
+
+      -- java is setup in jdtls-config
+      if server ~= "jdtls" then
+        lspconfig[server].setup(config)
       end
     end
   end

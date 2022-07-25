@@ -11,9 +11,6 @@ M.load = function()
 
   local linters = {
     markdown = { 'markdownlint' },
-    sh = { 'shellcheck' },
-    bash = { 'shellcheck' },
-    zsh = { 'shellcheck' },
   }
 
   local valeFile = vim.fn.getcwd() .. "/.vale.ini"
@@ -23,12 +20,11 @@ M.load = function()
 
   require('lint').linters_by_ft = linters
 
-  vim.api.nvim_exec(
-    [[
-    au BufWritePost * lua require('lint').try_lint()
-    ]],
-    false
-  )
+  vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function()
+      require("lint").try_lint()
+    end,
+  })
 
 end
 return M

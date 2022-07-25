@@ -105,8 +105,21 @@ M.load = function()
     use { 'ibhagwan/fzf-lua', config = function() require('fzf-lua-config').load() end }
     use { 'gfanto/fzf-lsp.nvim', config = function() require('fzf_lsp').setup() end }
 
+    ----------------- Mason -----------------------------------------------
+    use {
+      "williamboman/mason.nvim",
+      requires = {
+        "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim"
+      },
+      config = function() require('mason-config').load() end
+    }
+
     ----------------- LSP -----------------------------------------------
-    use { 'neovim/nvim-lspconfig', requires = { 'williamboman/nvim-lsp-installer' },
+    use { 'neovim/nvim-lspconfig',
+      requires = {
+        "williamboman/mason-lspconfig.nvim",
+      },
       config = function() require('lsp-config').load() end }
     use { 'ojroques/nvim-lspfuzzy', requires = { 'junegunn/fzf', 'junegunn/fzf.vim' },
       config = function() require('lspfuzzy').setup {} end }
