@@ -111,7 +111,7 @@ M.load = function()
 
       if server == "eslint" then
         config.cmd = {
-          os.getenv('HOME') .. "/.local/share/nvim/mason/bin/vscode-eslint-language-server",
+          vim.fn.stdpath "data" .. "/mason/bin/vscode-eslint-language-server",
           "--stdio"
         }
         config.on_attach = function(client, bufnr)

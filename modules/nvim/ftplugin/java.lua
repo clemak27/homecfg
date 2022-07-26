@@ -33,7 +33,7 @@ local on_attach = function(client, bufnr)
   require('jdtls.setup').add_commands()
 end
 
-local jdtlsPath = os.getenv('HOME') .. "/.local/share/nvim/mason/packages/jdtls";
+local jdtlsPath = vim.fn.stdpath "data" .. "/mason/packages/jdtls";
 local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar";
 if vim.loop.os_uname().sysname == "Darwin" then
   osName = "mac"
