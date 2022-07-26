@@ -70,7 +70,7 @@ M.load = function()
     use { 'akinsho/nvim-bufferline.lua', config = function() require("bufferline-config").load() end }
     use { 'nvim-treesitter/nvim-treesitter', config = function() require("treesitter-config").load() end,
       run = ':TSUpdate' }
-    use { 'norcalli/nvim-colorizer.lua', config = function() require("nvim-colorizer-config").load() end }
+    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end }
 
     ----------------- markdown ------------------------------------------
     use { 'preservim/vim-markdown',
@@ -126,30 +126,10 @@ M.load = function()
     use { 'mfussenegger/nvim-jdtls' }
 
     ----------------- go-debugging --------------------------------------
-    use { 'leoluz/nvim-dap-go',
-      requires = { 'mfussenegger/nvim-dap', 'theHamsta/nvim-dap-virtual-text' },
+    use { 'mfussenegger/nvim-dap',
+      requires = { 'leoluz/nvim-dap-go', 'theHamsta/nvim-dap-virtual-text' },
       ft = { 'go' },
-      config = function()
-        require('dap-go').setup()
-        require("nvim-dap-virtual-text").setup()
-
-        local opt = { noremap = true, silent = true }
-
-        -- dap mappings
-        vim.api.nvim_set_keymap("n", "<F5>", [[<Cmd>lua require'dap'.continue()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<F6>", [[<Cmd>lua require'dap'.step_over()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<F7>", [[<Cmd>lua require'dap'.step_into()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<F8>", [[<Cmd>lua require'dap'.step_out()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<F9>", [[<Cmd>lua require'dap'.toggle_breakpoint()<CR>]], opt)
-
-        -- fzf mappings
-        vim.api.nvim_set_keymap("n", "<Leader>i", [[<Cmd>lua require('fzf-lua').dap_commands()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<Leader>ic", [[<Cmd>lua require('fzf-lua').dap_configurations()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<Leader>ib", [[<Cmd>lua require('fzf-lua').dap_breakpoints()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<Leader>iv", [[<Cmd>lua require('fzf-lua').dap_variables()<CR>]], opt)
-        vim.api.nvim_set_keymap("n", "<Leader>if", [[<Cmd>lua require('fzf-lua').dap_frames()<CR>]], opt)
-
-      end
+      config = function() require('nvim-dap-config').load() end
     }
 
     ----------------- cmp -----------------------------------------------
