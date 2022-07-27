@@ -12,6 +12,7 @@ in
         { name = "notes"; value = "nvim ~/Notes/index.md"; }
         { name = "vi"; value = "nvim"; }
         { name = "vim"; value = "nvim"; }
+        { name = "vimdiff"; value = "nvim -d"; }
       ]
     );
 
