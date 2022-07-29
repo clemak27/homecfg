@@ -10,7 +10,6 @@ M.load = function()
       -- LSP
       "bash-language-server",
       "css-lsp",
-      "eslint-lsp",
       "golangci-lint-langserver",
       "gopls",
       "html-lsp",

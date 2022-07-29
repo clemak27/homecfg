@@ -52,7 +52,6 @@ M.load = function()
   local servers = {
     "bashls",
     "cssls",
-    "eslint",
     "golangci_lint_ls",
     "gopls",
     "html",
@@ -106,21 +105,6 @@ M.load = function()
               enable = false,
             },
           },
-        }
-      end
-
-      if server == "eslint" then
-        config.cmd = {
-          vim.fn.stdpath "data" .. "/mason/bin/vscode-eslint-language-server",
-          "--stdio"
-        }
-        config.on_attach = function(client, bufnr)
-          -- neovim's LSP client does not currently support dynamic capabilities registration, so we need to set
-          -- the resolved capabilities of the eslint server ourselves!
-          client.resolved_capabilities.document_formatting = true
-        end
-        config.settings = {
-          format = { enable = true }, -- this will enable formatting
         }
       end
 

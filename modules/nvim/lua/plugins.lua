@@ -156,7 +156,22 @@ M.load = function()
     use 'rafamadriz/friendly-snippets'
 
     ----------------- lint ----------------------------------------------
-    use { 'mfussenegger/nvim-lint', config = function() require('nvim-lint-config').load() end }
+    use { 'jose-elias-alvarez/null-ls.nvim',
+      config = function()
+        local null_ls = require("null-ls")
+        require("null-ls").setup({
+          sources = {
+            null_ls.builtins.code_actions.eslint,
+            null_ls.builtins.diagnostics.eslint,
+            null_ls.builtins.formatting.eslint,
+            null_ls.builtins.diagnostics.markdownlint.with({
+              diagnostics_format = "[#{c}] #{m} (#{s})",
+            }),
+            null_ls.builtins.code_actions.shellcheck,
+          },
+        })
+      end
+    }
 
     if packer_bootstrap then
       require('packer').sync()
