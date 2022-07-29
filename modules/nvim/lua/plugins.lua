@@ -35,7 +35,18 @@ M.load = function()
     ]], false)
 
     use { 'windwp/nvim-autopairs', config = function() require('nvim-autopairs').setup {} end }
-    use { "kylechui/nvim-surround", config = function() require("nvim-surround").setup {} end }
+    use { "kylechui/nvim-surround",
+      config = function()
+        require("nvim-surround").setup {
+          delimiters = {
+            pairs = {
+              ["c"] = { '`', '`' },
+              ["C"] = { '```', '```' },
+            }
+          }
+        }
+      end
+    }
     use 'antoinemadec/FixCursorHold.nvim'
     use 'gpanders/editorconfig.nvim'
     use 'Calder-Ty/todotext.vim'
