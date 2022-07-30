@@ -168,6 +168,7 @@ M.load = function()
               diagnostics_format = "[#{c}] #{m} (#{s})",
             }),
             null_ls.builtins.code_actions.shellcheck,
+            null_ls.builtins.formatting.stylua
           },
         })
       end
