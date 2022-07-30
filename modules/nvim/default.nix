@@ -27,6 +27,7 @@ in
 
     home.file = {
       ".markdownlintrc".source = ./markdownlintrc;
+      ".eslintrc.json".source = ./eslintrc.json;
       ".vsnip".source = ./vsnip;
     };
     xdg.configFile = {
