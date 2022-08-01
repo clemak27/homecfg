@@ -97,7 +97,12 @@ M.load = function()
       end
     }
     use 'godlygeek/tabular'
-    use { 'iamcco/markdown-preview.nvim', run = 'cd app && yarn install' }
+    use { 'iamcco/markdown-preview.nvim',
+      config = function()
+        vim.g.mkdp_echo_preview_url = true
+      end,
+      run = 'cd app && yarn install'
+    }
 
     ----------------- vimtex --------------------------------------------
     use { 'lervag/vimtex',
