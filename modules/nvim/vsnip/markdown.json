@@ -151,5 +151,14 @@
       "```"
     ],
     "description": "Inserts a mermaid Git Graph"
+  },
+  "collapsible_section": {
+    "prefix": "collapsible_section",
+    "body": [
+      "<details><summary>${1:section title}</summary>",
+      "$0",
+      "</details>"
+    ],
+    "description": "Inserts a mermaid Git Graph"
   }
 }
