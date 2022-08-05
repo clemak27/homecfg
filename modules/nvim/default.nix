@@ -17,7 +17,6 @@ in
     );
 
     home.packages = with pkgs; [
-      nodePackages.eslint
       cargo
 
       # add neovim as normal package as a workaround for
@@ -27,7 +26,6 @@ in
 
     home.file = {
       ".markdownlintrc".source = ./markdownlintrc;
-      ".eslintrc.json".source = ./eslintrc.json;
       ".vsnip".source = ./vsnip;
     };
     xdg.configFile = {
