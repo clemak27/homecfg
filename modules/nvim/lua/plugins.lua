@@ -44,7 +44,7 @@ M.load = function()
             },
           },
           aliases = {
-            ["c"] = { "`" },
+            ["c"] = "`",
           }
         }
       end
