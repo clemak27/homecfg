@@ -13,6 +13,7 @@ in
         { name = "vi"; value = "nvim"; }
         { name = "vim"; value = "nvim"; }
         { name = "vimdiff"; value = "nvim -d"; }
+        { name = "nps"; value = "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"; }
       ]
     );
 
