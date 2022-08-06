@@ -38,11 +38,13 @@ M.load = function()
     use { "kylechui/nvim-surround",
       config = function()
         require("nvim-surround").setup {
-          delimiters = {
-            pairs = {
-              ["c"] = { '`', '`' },
-              ["C"] = { '```', '```' },
-            }
+          surrounds = {
+            ["C"] = {
+              add = { "```", "```" },
+            },
+          },
+          aliases = {
+            ["c"] = { "`" },
           }
         }
       end
