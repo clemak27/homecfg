@@ -17,7 +17,7 @@ in
       hyperfine
       jo
       jq
-      # pgcli
+      pgcli
       ranger
       ripgrep
       sd
