@@ -96,10 +96,6 @@ M.load = function()
           let g:vim_markdown_new_list_item_indent = 2
         ]], false)
         vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
-        -- format tables on save
-        vim.api.nvim_exec([[
-          autocmd BufWritePre *.md :silent! TableFormat
-        ]], false)
       end
     }
     use 'godlygeek/tabular'
