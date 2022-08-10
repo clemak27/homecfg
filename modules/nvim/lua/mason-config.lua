@@ -33,6 +33,7 @@ M.load = function()
 
       -- Fomatter
       'gofumpt',
+      'goimports',
       'stylua',
     },
 
