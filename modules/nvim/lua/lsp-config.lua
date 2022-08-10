@@ -125,9 +125,13 @@ M.load = function()
 
   setup_servers()
 
-  -- format golang on save
+  -- format go and js on save
   vim.api.nvim_exec([[
-    autocmd BufWritePre *.go :silent! lua vim.lsp.buf.formatting_sync(nil,500)
+    augroup format_on_write
+      autocmd!
+      autocmd BufWritePre *.go :silent! lua vim.lsp.buf.formatting_seq_sync(nil,500)
+      autocmd BufWritePre *.js :silent! lua vim.lsp.buf.formatting_seq_sync(nil,500)
+    augroup END
   ]], false)
 
 end
