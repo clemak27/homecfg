@@ -27,6 +27,8 @@ __init_shell() {
 
 __remove_shell() {
   rm -rf .direnv .envrc flake.nix flake.lock
+  git update-index --remove flake.nix
+  git rm -f flake.lock
 }
 
 # shellcheck disable=SC3033
