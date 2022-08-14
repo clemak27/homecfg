@@ -22,7 +22,7 @@ maybe I will make a flake out of it eventually.
    git submodule update homecfg
    ```
 
-3. create a `home.nix`, which imports the `homecfg.nix` file in this repo.
+3. create a `home.nix`, which imports the `default.nix` file in this repo.
 4. After this, you can use the `homecfg` config options to enable modules as needed.
 5. When reloading the config and using flakes, you need to use
    `home-manager switch --flake '.?submodules=1' --impure`
@@ -31,4 +31,4 @@ maybe I will make a flake out of it eventually.
 ### separate repo
 
 1. Clone this repo somewhere
-2. import the `homecfg.nix` in your `home.nix` file (with an absolute path)
+2. import the `default.nix` in your `home.nix` file (with an absolute path)
