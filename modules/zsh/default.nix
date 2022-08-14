@@ -61,7 +61,7 @@ in
           # local additional zsh file
           "[[ ! -f ~/.local.zsh ]] || source ~/.local.zsh"
         ]
-        ++ lib.optionals (config.homecfg.NixOS == false) [
+        ++ [
           # nix things
           ". $HOME/.nix-profile/etc/profile.d/nix.sh"
           "export GIT_SSH=/usr/bin/ssh"
