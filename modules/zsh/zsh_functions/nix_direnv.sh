@@ -12,7 +12,7 @@ __init_shell() {
   fi
 
   nix flake new . -t github:nix-community/nix-direnv
-  nvim flake.nix
+  nvim flake.nix +12
 
   if [ $PERSIST_FLAKE -eq 1 ]; then
     git add flake.nix
@@ -26,32 +26,38 @@ __init_shell() {
 }
 
 __remove_shell() {
-  rm -rf .direnv .envrc flake.nix flake.lock
   git update-index --remove flake.nix
-  git rm -f flake.lock
+  git rm -f flake.lock .envrc flake.nix flake.lock
+  rm -rf .direnv .envrc flake.nix flake.lock
 }
 
 # shellcheck disable=SC3033
 nix-direnv() {
-  for arg in "$@"
-  do
-    case $arg in
-      -i|--ignore)
-        UPDATE_GITIGNORE=1
-        shift
-        ;;
-      -p|--persist)
-        PERSIST_FLAKE=1
-        shift
-        ;;
-      init)
-        __init_shell
-        shift
-        ;;
-      remove)
-        __remove_shell
-        shift
-        ;;
-    esac
-  done
+while getopts :i:p flag; do
+  case "${flag}" in
+    i)
+      UPDATE_GITIGNORE=1
+      ;;
+    p)
+      PERSIST_FLAKE=1
+      ;;
+    *)
+      echo "Invalid option: -$flag"
+      ;;
+  esac
+done
+
+for arg in "$@"
+do
+  case $arg in
+    init)
+      __init_shell
+      shift
+      ;;
+    remove)
+      __remove_shell
+      shift
+      ;;
+  esac
+done
 }
