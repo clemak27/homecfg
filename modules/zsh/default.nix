@@ -22,7 +22,6 @@ in
       oh-my-zsh = {
         enable = true;
         plugins = [
-          "adb"
           "extract"
           "rsync"
         ];
