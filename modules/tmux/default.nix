@@ -19,6 +19,18 @@ in
       plugins = with pkgs; [
         {
           plugin = tmuxPlugins.resurrect;
+          extraConfig = ''
+            set -g @resurrect-strategy-nvim 'session'
+            set -g @resurrect-strategy-vim 'session'
+          '';
+        }
+        # TODO this does not work, it gets loaded before extraConfig which means status-right get overridden
+        {
+          plugin = tmuxPlugins.continuum;
+          extraConfig = ''
+            set -g @continuum-restore 'on'
+            set -g @continuum-save-interval '15' # minutes
+          '';
         }
       ];
       extraConfig = ''
