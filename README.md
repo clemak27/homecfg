@@ -65,3 +65,39 @@ it more convenient than as a submodule/directory:
    `nix flake update --override-input
    homecfg "path:/home/clemens/Projects/homecfg" &&
    home-manager switch --flake . --impure`
+
+## Notes
+
+### Aliases
+
+some aliases that are useful:
+
+```nix
+{ name = "hms"; value = "home-manager switch --flake '.?submodules=1' --impure"; }
+{ name = "hmsl"; value = "nix flake update --override-input homecfg 'path:/home/clemens/Projects/homecfg' && home-manager switch --flake '.?submodules=1' --impure && git restore flake.lock"; }
+```
+
+### Updating
+
+It's useful to add a convenience-function to update home-mananger:
+
+```nix
+  updateHM = pkgs.writeShellScriptBin "update-homecfg" ''
+    echo "Updating flake"
+    nix flake update
+    git add flake.nix flake.lock
+    git commit -m "chore(flake): Update $(date -I)"
+
+    echo "Reloading home-manager config"
+    home-manager switch --flake '.?submodules=1' --impure
+
+    echo "Collecting garbage"
+    nix-collect-garbage
+
+    echo "Updating tealdeer cache"
+    tldr --update
+
+    echo "Updating nvim plugins"
+    nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  '';
+```
