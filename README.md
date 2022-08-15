@@ -101,3 +101,12 @@ It's useful to add a convenience-function to update home-mananger:
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   '';
 ```
+
+### NixOS vs HM
+
+If running on non NixOS systems, you need to add this to your .zshrc:
+
+```nix
+". $HOME/.nix-profile/etc/profile.d/nix.sh"
+"export GIT_SSH=/usr/bin/ssh"
+```
