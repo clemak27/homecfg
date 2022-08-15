@@ -62,5 +62,6 @@ it more convenient than as a submodule/directory:
    `nix flake lock --update-input homecfg`
 
    Alternatively, you can also keep the lockfile as is and use:
-   `home-manager switch --flake . --override-input
-   homecfg "/home/clemens/Projects/homecfg" --impure`
+   `nix flake update --override-input
+   homecfg "path:/home/clemens/Projects/homecfg" &&
+   home-manager switch --flake . --impure`
