@@ -66,6 +66,26 @@ it more convenient than as a submodule/directory:
    homecfg "path:/home/clemens/Projects/homecfg" &&
    home-manager switch --flake . --impure`
 
+### home-manager as NixOS module
+
+If you use home-manager as NixOS module, you need to add this
+(there is probably a better way, but I have not figured it out yet):
+
+```nix
+home-manager.nixosModules.home-manager
+{
+  home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
+  home-manager.users.clemens = { config, pkgs, lib, ... }:
+  {
+    imports = [
+      "${self.inputs.homecfg}/default.nix"
+      ./configurations/xyz/home.nix
+    ];
+  };
+}
+```
+
 ## Notes
 
 ### Aliases
