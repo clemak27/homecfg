@@ -32,3 +32,35 @@ maybe I will make a flake out of it eventually.
 
 1. Clone this repo somewhere
 2. import the `default.nix` in your `home.nix` file (with an absolute path)
+
+### flake-input
+
+While this repo is not a flake, it can still leverage flakes to make updating
+it more convenient than as a submodule/directory:
+
+1. Add this input to you `flake.nix`:
+
+   ```nix
+   homecfg = {
+     url = "github:clemak27/homecfg";
+     flake = false;
+   };
+   ```
+
+2. Add it as module to you homeManagerConfiguration:
+
+   ```nix
+   modules = [
+     "${self.inputs.homecfg}/default.nix"
+     ...
+   ];
+   ```
+
+3. For local development/changes to homecfg, use the absolute path to
+   the checked out git repo, e.g. `url = "path:/home/clemens/Projects/homecfg";`.
+   After you changed something, update the input:
+   `nix flake lock --update-input homecfg`
+
+   Alternatively, you can also keep the lockfile as is and use:
+   `home-manager switch --flake . --override-input
+   homecfg "/home/clemens/Projects/homecfg" --impure`
