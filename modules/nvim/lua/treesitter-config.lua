@@ -4,7 +4,7 @@ local M = {}
 
 M.load = function()
 
-  require'nvim-treesitter.configs'.setup {
+  require 'nvim-treesitter.configs'.setup {
     ensure_installed = "all",
     highlight = {
       enable = true
@@ -14,7 +14,11 @@ M.load = function()
     },
     indent = {
       enable = true
-    }
+    },
+    -- does not compile on macOS
+    ignore_install = {
+      "phpdoc"
+    },
   }
 
   -- workaround issue with vim-markdown
