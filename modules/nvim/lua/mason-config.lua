@@ -16,7 +16,6 @@ M.load = function()
       { 'jdtls', version = '1.12.0' },
       "json-lsp",
       "lua-language-server",
-      "rnix-lsp",
       "texlab",
       "typescript-language-server",
       "vetur-vls",

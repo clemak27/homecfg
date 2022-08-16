@@ -19,6 +19,7 @@ in
 
     home.packages = with pkgs; [
       cargo
+      rnix-lsp
 
       # add neovim as normal package as a workaround for
       # https://github.com/nix-community/home-manager/issues/1907
