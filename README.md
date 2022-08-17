@@ -26,7 +26,6 @@ maybe I will make a flake out of it eventually.
 4. After this, you can use the `homecfg` config options to enable modules as needed.
 5. When reloading the config and using flakes, you need to use
    `home-manager switch --flake '.?submodules=1' --impure`
-   (we will see when get around to making this more convenient ¯\\\_(ツ)_/¯)
 
 ### separate repo
 
@@ -57,14 +56,12 @@ it more convenient than as a submodule/directory:
    ```
 
 3. For local development/changes to homecfg, use the absolute path to
-   the checked out git repo, e.g. `url = "path:/home/clemens/Projects/homecfg";`.
+   the checked out git repo, e.g. `url = "path:<path-to-homecfg>";`.
    After you changed something, update the input:
    `nix flake lock --update-input homecfg`
 
    Alternatively, you can also keep the lockfile as is and use:
-   `nix flake update --override-input
-   homecfg "path:/home/clemens/Projects/homecfg" &&
-   home-manager switch --flake . --impure`
+   `home-manager switch --flake . --impure --override-input homecfg 'path:<path-to-homecfg>'"`
 
 ### home-manager as NixOS module
 
@@ -94,7 +91,7 @@ some aliases that are useful:
 
 ```nix
 { name = "hms"; value = "home-manager switch --flake '.?submodules=1' --impure"; }
-{ name = "hmsl"; value = "nix flake update --override-input homecfg 'path:/home/clemens/Projects/homecfg' && home-manager switch --flake '.?submodules=1' --impure && git restore flake.lock"; }
+{ name = "hmsl"; value = "home-manager switch --flake . --impure --override-input homecfg 'path:/home/clemens/Projects/homecfg'"; }
 ```
 
 ### Updating
