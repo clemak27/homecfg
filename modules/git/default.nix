@@ -83,6 +83,7 @@ in
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
         { name = "gcm"; value = "git commit -v -m"; }
+        { name = "gdc"; value = "git diff --cached"; }
         { name = "gdm"; value = "git diff --cached master"; }
         { name = "gfmm"; value = "git fetch origin && git merge origin/master"; }
         { name = "gprom"; value = "git pull --rebase origin master"; }
