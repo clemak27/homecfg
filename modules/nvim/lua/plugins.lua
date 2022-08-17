@@ -77,7 +77,9 @@ M.load = function()
     }
 
     ----------------- theming -------------------------------------------
-    use { 'olimorris/onedarkpro.nvim', config = function() require("colorscheme-config").load() end }
+    use { 'olimorris/onedarkpro.nvim',
+      commit = "2c439754e1a60d42197e79461bf04e358213a654",
+      config = function() require("colorscheme-config").load() end }
     use 'kyazdani42/nvim-web-devicons'
     use { 'nvim-lualine/lualine.nvim', config = function() require("lualine-config").load() end }
     use { 'akinsho/nvim-bufferline.lua', config = function() require("bufferline-config").load() end }
