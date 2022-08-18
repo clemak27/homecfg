@@ -15,8 +15,8 @@ in
       pipes
       sl
       tokei
-      tty-clock
     ] ++ lib.optionals stdenv.isLinux [
+      tty-clock
       cava
     ];
 
