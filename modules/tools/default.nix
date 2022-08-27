@@ -17,6 +17,7 @@ in
       hyperfine
       jo
       jq
+      libqalculate 
       pgcli
       ranger
       ripgrep
