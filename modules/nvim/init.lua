@@ -96,6 +96,14 @@ vim.api.nvim_exec([[
 
 ]], false)
 
+vim.api.nvim_exec([[
+  augroup coreos_ft
+    autocmd!
+    autocmd BufRead,BufNewFile *.bu set filetype=yaml
+    autocmd BufRead,BufNewFile *.ign set filetype=json
+  augroup END
+]], false)
+
 ----------------------------------------- mappings -----------------------------------------
 
 local function vim_map(keyMap, action)
