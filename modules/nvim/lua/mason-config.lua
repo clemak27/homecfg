@@ -29,6 +29,7 @@ M.load = function()
       'shellcheck',
       'markdownlint',
       'vale',
+      'yamllint',
 
       -- Fomatter
       'gofumpt',

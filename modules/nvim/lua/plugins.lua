@@ -184,7 +184,8 @@ M.load = function()
             }),
             null_ls.builtins.code_actions.shellcheck,
             null_ls.builtins.formatting.stylua,
-            null_ls.builtins.formatting.goimports
+            null_ls.builtins.formatting.goimports,
+            null_ls.builtins.diagnostics.yamllint
           },
         })
       end
