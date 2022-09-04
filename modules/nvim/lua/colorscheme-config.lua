@@ -13,8 +13,11 @@ M.load = function()
     },
     hlgroups = {
       TSField = { fg = "${red}" }
+    },
+    options = {
+      cursorline = true,
     }
-    })
+  })
   onedarkpro.load()
 
 end
