@@ -15,10 +15,10 @@ in
       pipes
       sl
       tokei
-      vitetris
     ] ++ lib.optionals stdenv.isLinux [
-      tty-clock
       cava
+      tty-clock
+      vitetris
     ];
 
     programs.zsh.shellAliases = builtins.listToAttrs (
