@@ -51,7 +51,6 @@ M.load = function()
     }
     use 'antoinemadec/FixCursorHold.nvim'
     use 'gpanders/editorconfig.nvim'
-    use 'Calder-Ty/todotext.vim'
     use { 'rmagatti/auto-session',
       config = function()
         require('auto-session').setup {
