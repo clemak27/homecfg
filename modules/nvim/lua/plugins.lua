@@ -84,7 +84,15 @@ M.load = function()
     use { 'akinsho/nvim-bufferline.lua', config = function() require("bufferline-config").load() end }
     use { 'nvim-treesitter/nvim-treesitter', config = function() require("treesitter-config").load() end,
       run = ':TSUpdate' }
-    use { 'norcalli/nvim-colorizer.lua', config = function() require 'colorizer'.setup() end }
+    use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
+    use { 'RRethy/vim-illuminate',
+      config = function()
+        require('illuminate').configure({
+          delay = 1000,
+          filetypes_denylist = { 'NvimTree' },
+        })
+      end
+    }
 
     ----------------- markdown ------------------------------------------
     use { 'preservim/vim-markdown',
