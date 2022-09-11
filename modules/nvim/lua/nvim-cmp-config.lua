@@ -9,8 +9,8 @@ M.load = function()
 
   local cmp_autopairs = require('nvim-autopairs.completion.cmp')
   local lspkind = require('lspkind')
-  local cmp = require'cmp'
-  cmp.event:on( 'confirm_done', cmp_autopairs.on_confirm_done({  map_char = { tex = '' } }))
+  local cmp = require 'cmp'
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -66,9 +66,9 @@ M.load = function()
       { name = 'vsnip' },
       { name = 'path' },
       { name = 'treesitter' },
-    }, {
-        { name = 'buffer' },
-      })
+      { name = 'buffer' },
+      { name = 'nvim_lsp_signature_help' },
+    })
   })
 
 end
