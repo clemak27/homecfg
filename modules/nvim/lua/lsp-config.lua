@@ -131,6 +131,7 @@ M.load = function()
       autocmd!
       autocmd BufWritePre *.go :silent! lua vim.lsp.buf.formatting_seq_sync(nil,500)
       autocmd BufWritePre *.js :silent! lua vim.lsp.buf.formatting_seq_sync(nil,500)
+      autocmd BufWritePre *.lua :silent! lua vim.lsp.buf.formatting_seq_sync(nil,500)
     augroup END
   ]], false)
 
