@@ -38,7 +38,7 @@ in
     fg-light = "#bfc5ce";
     # bg
     bg = "#1e1e1e";
-    bg-light = "#3f3f3f";
+    bg-light = "#242424";
     bg-darker = "#121212";
     bg-dark = "#000000";
     # black
