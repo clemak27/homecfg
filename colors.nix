@@ -38,12 +38,12 @@ in
     fg-light = "#bfc5ce";
     # bg
     bg = "#1e1e1e";
-    bg-light = "#242424";
+    bg-light = "#3f3f3f";
     bg-darker = "#121212";
     bg-dark = "#000000";
     # black
     ansi.color0 = "#1e1e1e";
-    ansi.color8 = "#3f3f3f";
+    ansi.color8 = "#2d333b";
     # red
     ansi.color1 = "#e06c75";
     ansi.color9 = "#e06c75";
