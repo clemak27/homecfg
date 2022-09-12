@@ -43,7 +43,7 @@ in
     bg-dark = "#000000";
     # black
     ansi.color0 = "#1e1e1e";
-    ansi.color8 = "#2d333b";
+    ansi.color8 = "#3f3f3f";
     # red
     ansi.color1 = "#e06c75";
     ansi.color9 = "#e06c75";
