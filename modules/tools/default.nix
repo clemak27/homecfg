@@ -9,7 +9,7 @@ in
     home.packages = with pkgs; [
       bat
       bat-extras.batman
-      bottom
+      btop
       curl
       exa
       fd
@@ -75,6 +75,7 @@ in
       ".todo/config".source = ./todo/todo.cfg;
       ".local/bin/rfv".source = ./rfv;
       ".local/bin/git-edit".source = ./git-edit;
+      ".config/btop/btop.conf".source = ./btop.conf;
     };
 
     xdg.configFile = {
