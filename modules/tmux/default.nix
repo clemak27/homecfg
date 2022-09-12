@@ -13,7 +13,7 @@ in
       sensibleOnTop = false;
       baseIndex = 1;
       escapeTime = 0;
-      historyLimit = 15000;
+      historyLimit = 50000;
       terminal = "xterm-256color";
       prefix = "C-y";
       plugins = with pkgs; [
