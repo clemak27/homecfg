@@ -123,9 +123,6 @@ end
 
 -- Set mapleader to space
 vim.g.mapleader = " "
--- Focus center if using page up/down
-vim_map("<C-f>", "<C-f>zz")
-vim_map("<C-b>", "<C-b>zz")
 -- Smart way to move between windows
 vim_map("<C-j>", "<C-W>j")
 vim_map("<C-k>", "<C-W>k")

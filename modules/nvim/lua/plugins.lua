@@ -85,6 +85,7 @@ M.load = function()
     use { 'nvim-treesitter/nvim-treesitter', config = function() require("treesitter-config").load() end,
       run = ':TSUpdate' }
     use { 'norcalli/nvim-colorizer.lua', config = function() require('colorizer').setup() end }
+    use { 'petertriho/nvim-scrollbar', config = function() require('scrollbar').setup() end }
     use { 'RRethy/vim-illuminate',
       config = function()
         require('illuminate').configure({
