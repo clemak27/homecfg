@@ -18,10 +18,22 @@ M.load = function()
       separator_style = "thick",
       enforce_regular_tabs = false,
       always_show_bufferline = false,
+      offsets = {
+        {
+          filetype = "NvimTree",
+          text = "NvimTree",
+          highlight = "Directory",
+          separator = true -- use a "true" to enable the default, or set your own character
+        }
+      },
+      truncate_names = false,
+      indicator = {
+        style = 'none'
+      },
     }
   }
 
-  local opt = {noremap = true, silent = true}
+  local opt = { noremap = true, silent = true }
 
   -- mappings
   vim.api.nvim_set_keymap("n", "<Leader>1", [[<Cmd>BufferLineGoToBuffer 1<CR>]], opt)
