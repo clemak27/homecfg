@@ -30,6 +30,7 @@ M.load = function()
       'markdownlint',
       'vale',
       'yamllint',
+      'hadolint',
 
       -- Fomatter
       'gofumpt',
