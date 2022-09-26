@@ -89,6 +89,16 @@ local config = {
           "jdk.*",
           "sun.*",
         },
+        -- Defines the sorting order of import statements. A package or type name
+        -- prefix (e.g. 'org.eclipse') is a valid entry. An import is always added
+        -- to the most specific group.
+        importOrder = {
+          "at",
+          "com",
+          "org",
+          "javax",
+          "java",
+        },
       };
       sources = {
         organizeImports = {
