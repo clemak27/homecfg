@@ -9,21 +9,20 @@ in
 
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
-        { name = "notes"; value = "nvim ~/Notes/index.md"; }
-        { name = "vi"; value = "nvim"; }
-        { name = "vim"; value = "nvim"; }
-        { name = "vimdiff"; value = "nvim -d"; }
         { name = "nps"; value = "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"; }
       ]
     );
 
+    programs.neovim = {
+      enable = true;
+      withNodeJs = true;
+      vimAlias = true;
+      vimdiffAlias = true;
+    };
+
     home.packages = with pkgs; [
       cargo
       rnix-lsp
-
-      # add neovim as normal package as a workaround for
-      # https://github.com/nix-community/home-manager/issues/1907
-      neovim
     ];
 
     home.file = {
