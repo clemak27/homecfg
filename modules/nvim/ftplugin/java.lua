@@ -37,7 +37,8 @@ local on_attach = function(client, bufnr)
   require("jdtls.setup").add_commands()
 end
 
-local jdtlsPath = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+local masonPath = vim.fn.stdpath("data") .. "/mason/packages"
+local jdtlsPath = masonPath .. "/jdtls"
 local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
 if vim.loop.os_uname().sysname == "Darwin" then
   osName = "mac"
@@ -48,6 +49,14 @@ local lspConfig = jdtlsPath .. "/config_" .. osName
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = os.getenv("HOME") .. "/.jdtls-workspace/" .. project_name
+
+-- This bundles definition is the same as in the previous section (java-debug installation)
+local bundles = {
+  vim.fn.glob(masonPath .. "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"),
+}
+
+-- This is the new part
+vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/vscode-java-test/server/*.jar"), "\n"))
 
 local config = {
   cmd = {
@@ -128,7 +137,7 @@ local config = {
   --
   -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
   init_options = {
-    bundles = {},
+    bundles = bundles,
   },
 }
 -- This starts a new client & server,

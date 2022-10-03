@@ -17,7 +17,34 @@ M.load = function()
     dapui.close({})
   end
 
+  -- go
   require("dap-go").setup()
+
+  -- java workaround for debugging tests:
+  -- 1. start server with gradle --no-daemon --no-build-cache --rerun-tasks test --tests=DemoApplicationTests.contextLoads --debug-jvm
+  -- 2. attach DAP
+  -- for running other tasks, JdtRefreshDebugConfigs + dap normally works
+  -- related gh issues: https://github.com/microsoft/vscode-java-test/issues/1481, https://github.com/microsoft/vscode-java-test/issues/1045
+  local util = require("jdtls.util")
+  dap.adapters.java = function(callback)
+    util.execute_command({ command = "vscode.java.startDebugSession" }, function(err0, port)
+      assert(not err0, vim.inspect(err0))
+      callback({
+        type = "server",
+        host = "127.0.0.1",
+        port = port,
+      })
+    end)
+  end
+  dap.configurations.java = {
+    {
+      type = "java",
+      request = "attach",
+      name = "Java attach",
+      hostName = "127.0.0.1",
+      port = 5005,
+    },
+  }
 
   -- dont display separate repl buffer
   vim.api.nvim_create_autocmd("FileType", {
