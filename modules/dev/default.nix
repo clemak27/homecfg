@@ -31,7 +31,7 @@ in
 
     home.file.".npmrc".text = ''
       prefix=~/.local/bin/npm
-      save_exact=true
+      save-exact=true
     '';
 
     programs.java = {
