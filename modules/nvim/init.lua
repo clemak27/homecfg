@@ -97,6 +97,11 @@ vim.api.nvim_exec([[
 ]], false)
 
 vim.api.nvim_exec([[
+  augroup tsconfig_ft
+    autocmd!
+    autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
+  augroup END
+
   augroup coreos_ft
     autocmd!
     autocmd BufRead,BufNewFile *.bu set filetype=yaml
