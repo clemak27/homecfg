@@ -3,11 +3,10 @@
 local M = {}
 
 M.load = function()
-
-  require("bufferline").setup {
+  require("bufferline").setup({
     options = {
       numbers = function(opts)
-        return string.format('%s.', opts.ordinal)
+        return string.format("%s.", opts.ordinal)
       end,
       diagnostics = false,
       show_buffer_icons = true,
@@ -23,15 +22,20 @@ M.load = function()
           filetype = "NvimTree",
           text = "NvimTree",
           highlight = "Directory",
-          separator = true -- use a "true" to enable the default, or set your own character
-        }
+          separator = true, -- use a "true" to enable the default, or set your own character
+        },
       },
       truncate_names = false,
       indicator = {
-        style = 'none'
+        style = "none",
       },
-    }
-  }
+      groups = {
+        items = {
+          require("bufferline.groups").builtin.pinned:with({ icon = "" }),
+        },
+      },
+    },
+  })
 
   local opt = { noremap = true, silent = true }
 
@@ -45,7 +49,6 @@ M.load = function()
   vim.api.nvim_set_keymap("n", "<Leader>7", [[<Cmd>BufferLineGoToBuffer 7<CR>]], opt)
   vim.api.nvim_set_keymap("n", "<Leader>8", [[<Cmd>BufferLineGoToBuffer 8<CR>]], opt)
   vim.api.nvim_set_keymap("n", "<Leader>9", [[<Cmd>BufferLineGoToBuffer 9<CR>]], opt)
-
 end
 
 return M
