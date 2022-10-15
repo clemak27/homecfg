@@ -3,23 +3,20 @@
 local M = {}
 
 M.load = function()
-
-
-  local onedarkpro = require('onedarkpro')
+  local onedarkpro = require("onedarkpro")
   onedarkpro.setup({
-    theme = 'onedark',
+    theme = "onedark",
     colors = {
-      bg = "#1e1e1e"
+      bg = "#1e1e1e",
     },
     hlgroups = {
-      TSField = { fg = "${red}" }
+      TSField = { fg = "${red}" },
     },
     options = {
       cursorline = true,
-    }
+    },
   })
   onedarkpro.load()
-
 end
 
 return M

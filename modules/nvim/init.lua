@@ -3,11 +3,11 @@
 -- enable termguicolors for colorschemes
 vim.o.termguicolors = true
 -- enable mouse support
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 -- line number
 vim.o.number = true
 -- use system clipboard
-vim.cmd [[set clipboard+=unnamedplus]]
+vim.cmd([[set clipboard+=unnamedplus]])
 -- Sets how many lines of history VIM has to remember
 vim.o.history = 500
 -- Set to auto read when a file is changed from the outside
@@ -17,7 +17,7 @@ vim.o.so = 7
 -- Turn on the Wild menu
 vim.o.wildmenu = true
 -- Ignore compiled files
-vim.o.wildignore = '*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store'
+vim.o.wildignore = "*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store"
 --Always show current position
 vim.o.ruler = true
 -- Height of the command bar
@@ -41,12 +41,12 @@ vim.o.showmatch = true
 -- How many tenths of a second to blink when matching brackets
 vim.o.mat = 2
 -- No annoying sound on errors
-vim.o.t_vb = ''
+vim.o.t_vb = ""
 vim.o.tm = 500
 -- Set utf8 as standard encoding and en_US as the standard language
-vim.o.encoding = 'utf8'
+vim.o.encoding = "utf8"
 -- Use Unix as the standard file type
-vim.o.ffs = 'unix,dos,mac'
+vim.o.ffs = "unix,dos,mac"
 -- Use spaces instead of tabs
 vim.o.expandtab = true
 -- Be smart when using tabs
@@ -65,9 +65,10 @@ vim.o.laststatus = 3
 -- Always show the tab/buffer line
 vim.o.showtabline = 0
 -- Specify the behavior when switching between buffers
-vim.o.switchbuf = 'useopen,usetab,newtab'
+vim.o.switchbuf = "useopen,usetab,newtab"
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
   " Dont show mode in statusline
   set noshowmode
   " E355: Unknown option: noshowmode
@@ -82,10 +83,12 @@ vim.api.nvim_exec([[
   " E355: Unknown option: nobackup
   " E355: Unknown option: nowb
   " E355: Unknown option: noswapfile
-]], false)
+]],
+  false
+)
 
-
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
   " Return to last edit position when opening files
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   
@@ -94,9 +97,12 @@ vim.api.nvim_exec([[
   autocmd FileChangedShellPost *
         \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-]], false)
+]],
+  false
+)
 
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
   augroup tsconfig_ft
     autocmd!
     autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
@@ -107,7 +113,9 @@ vim.api.nvim_exec([[
     autocmd BufRead,BufNewFile *.bu set filetype=yaml
     autocmd BufRead,BufNewFile *.ign set filetype=json
   augroup END
-]], false)
+]],
+  false
+)
 
 ----------------------------------------- mappings -----------------------------------------
 
@@ -149,4 +157,4 @@ vim_map("ß", "$")
 
 ----------------------------------------- plugins -----------------------------------------
 
-require('plugins').load()
+require("plugins").load()

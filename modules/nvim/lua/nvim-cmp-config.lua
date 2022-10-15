@@ -3,14 +3,13 @@
 local M = {}
 
 M.load = function()
-
   vim.o.completeopt = "menuone,noselect"
-  vim.cmd('set shortmess+=c')
+  vim.cmd("set shortmess+=c")
 
-  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-  local lspkind = require('lspkind')
-  local cmp = require 'cmp'
-  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+  local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+  local lspkind = require("lspkind")
+  local cmp = require("cmp")
+  cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done({ map_char = { tex = "" } }))
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -28,14 +27,14 @@ M.load = function()
       end,
     },
     mapping = {
-      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-      ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-      ['<C-e>'] = cmp.mapping({
+      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
+      ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
+      ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-e>"] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
       }),
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ["<CR>"] = cmp.mapping.confirm({ select = true }),
       ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -57,20 +56,19 @@ M.load = function()
     },
     formatting = {
       format = lspkind.cmp_format({
-        mode = 'symbol_text',
+        mode = "symbol_text",
         maxwidth = 50,
-      })
+      }),
     },
     sources = cmp.config.sources({
-      { name = 'nvim_lsp' },
-      { name = 'vsnip' },
-      { name = 'path' },
-      { name = 'treesitter' },
-      { name = 'buffer' },
-      { name = 'nvim_lsp_signature_help' },
-    })
+      { name = "nvim_lsp" },
+      { name = "vsnip" },
+      { name = "path" },
+      { name = "treesitter" },
+      { name = "buffer" },
+      { name = "nvim_lsp_signature_help" },
+    }),
   })
-
 end
 
 return M

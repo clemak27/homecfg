@@ -3,8 +3,7 @@
 local M = {}
 
 M.load = function()
-
-  local custom_onedark = require'lualine.themes.onedark'
+  local custom_onedark = require("lualine.themes.onedark")
   custom_onedark.normal.a.gui = nil
   custom_onedark.normal.b.bg = nil
   custom_onedark.normal.c.bg = nil
@@ -20,31 +19,30 @@ M.load = function()
   custom_onedark.inactive.b.bg = nil
   custom_onedark.inactive.c.bg = nil
 
-  require('lualine').setup {
+  require("lualine").setup({
     options = {
       theme = custom_onedark,
-      section_separators = '',
-      component_separators = '|'
+      section_separators = "",
+      component_separators = "|",
     },
     sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'filename'},
+      lualine_a = { "mode" },
+      lualine_b = { "filename" },
       lualine_c = {},
       lualine_x = {
         {
-          'fileformat',
-          icon = false
+          "fileformat",
+          icon = false,
         },
-        'encoding',
-        'filetype'
+        "encoding",
+        "filetype",
       },
-      lualine_y = {'progress'},
-      lualine_z = {'location'}
+      lualine_y = { "progress" },
+      lualine_z = { "location" },
     },
     tabline = {},
-    extensions = {}
-  }
-
+    extensions = {},
+  })
 end
 
 return M

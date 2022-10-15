@@ -3,7 +3,6 @@
 local M = {}
 
 M.load = function()
-
   local null_ls = require("null-ls")
   require("null-ls").setup({
     sources = {
@@ -23,10 +22,9 @@ M.load = function()
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.goimports,
       null_ls.builtins.diagnostics.yamllint,
-      null_ls.builtins.diagnostics.hadolint
+      null_ls.builtins.diagnostics.hadolint,
     },
   })
-
 end
 
 return M

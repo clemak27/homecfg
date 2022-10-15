@@ -3,9 +3,8 @@
 local M = {}
 
 M.load = function()
-
-  require("mason").setup {}
-  require 'mason-tool-installer'.setup {
+  require("mason").setup({})
+  require("mason-tool-installer").setup({
     ensure_installed = {
       -- LSP
       "bash-language-server",
@@ -13,7 +12,7 @@ M.load = function()
       "golangci-lint-langserver",
       "gopls",
       "html-lsp",
-      { 'jdtls', version = '1.12.0' },
+      { "jdtls", version = "1.12.0" },
       "json-lsp",
       "lua-language-server",
       "texlab",
@@ -23,24 +22,23 @@ M.load = function()
       "yaml-language-server",
 
       -- DAP
-      'delve',
+      "delve",
 
       -- Linter
-      'shellcheck',
-      'markdownlint',
-      'vale',
-      'yamllint',
-      'hadolint',
+      "shellcheck",
+      "markdownlint",
+      "vale",
+      "yamllint",
+      "hadolint",
 
       -- Fomatter
-      'gofumpt',
-      'goimports',
-      'stylua',
+      "gofumpt",
+      "goimports",
+      "stylua",
     },
 
     auto_update = true,
-
-  }
+  })
 end
 
 return M
