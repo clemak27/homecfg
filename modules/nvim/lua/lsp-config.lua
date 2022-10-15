@@ -126,16 +126,15 @@ M.load = function()
 
   setup_servers()
 
-  -- format go and js on save
-  vim.api.nvim_exec(
-    [[
-    augroup format_on_write
-      autocmd!
-      autocmd BufWritePre *.go,*.js,*.ts,*.lua :silent! lua vim.lsp.buf.formatting_seq_sync(nil,500)
-    augroup END
-  ]],
-    false
-  )
+  -- format on save
+  vim.api.nvim_create_augroup("format_on_write", { clear = true })
+  vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+    pattern = "*.go,*.js,*.ts,*.lua",
+    group = "format_on_write",
+    callback = function()
+      vim.lsp.buf.formatting_seq_sync(nil, 500)
+    end,
+  })
 end
 
 return M

@@ -83,39 +83,68 @@ vim.api.nvim_exec(
   " E355: Unknown option: nobackup
   " E355: Unknown option: nowb
   " E355: Unknown option: noswapfile
-]],
+]] ,
   false
 )
 
-vim.api.nvim_exec(
-  [[
-  " Return to last edit position when opening files
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  
-  " Autoload on file changes
-  autocmd FocusGained,BufEnter,CursorHold,CursorHoldI * if mode() != 'c' | checktime | endif
-  autocmd FileChangedShellPost *
-        \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+-- Return to last edit position when opening files
+vim.api.nvim_create_augroup("reopen_pos", { clear = true })
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = "*",
+  group = "reopen_pos",
+  callback = function()
+    vim.api.nvim_exec(
+      [[
+    if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    ]] ,
+      false
+    )
+  end,
+})
 
-]],
-  false
-)
+-- Autoload on file changes
+vim.api.nvim_create_augroup("reload_on_change", { clear = true })
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, {
+  pattern = "*",
+  group = "reload_on_change",
+  callback = function()
+    vim.api.nvim_exec([[ if mode() != 'c' | checktime | endif ]], false)
+  end,
+})
+vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
+  pattern = "*",
+  group = "reload_on_change",
+  callback = function()
+    vim.api.nvim_exec([[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]], false)
+  end,
+})
 
-vim.api.nvim_exec(
-  [[
-  augroup tsconfig_ft
-    autocmd!
-    autocmd BufRead,BufNewFile tsconfig.json set filetype=jsonc
-  augroup END
+----------------------------------------- autocmds -----------------------------------------
 
-  augroup coreos_ft
-    autocmd!
-    autocmd BufRead,BufNewFile *.bu set filetype=yaml
-    autocmd BufRead,BufNewFile *.ign set filetype=json
-  augroup END
-]],
-  false
-)
+vim.api.nvim_create_augroup("coreos_ft", { clear = true })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.bu",
+  group = "coreos_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=yaml", false)
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.ign",
+  group = "coreos_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=json", false)
+  end,
+})
+
+vim.api.nvim_create_augroup("tsconfig_ft", { clear = true })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "tsconfig.json",
+  group = "coreos_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=jsonc", false)
+  end,
+})
 
 ----------------------------------------- mappings -----------------------------------------
 
