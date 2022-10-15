@@ -155,7 +155,7 @@ M.load = function()
 
     ----------------- go-debugging --------------------------------------
     use { 'mfussenegger/nvim-dap',
-      requires = { 'leoluz/nvim-dap-go', 'theHamsta/nvim-dap-virtual-text' },
+      requires = { 'leoluz/nvim-dap-go', 'theHamsta/nvim-dap-virtual-text', 'rcarriga/nvim-dap-ui' },
       ft = { 'go' },
       config = function() require('nvim-dap-config').load() end
     }
