@@ -59,9 +59,18 @@ in
           "for file in ~/.zsh_functions/*; do . $file; done"
           # local additional zsh file
           "[[ ! -f ~/.local.zsh ]] || source ~/.local.zsh"
+          # https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
+          "source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
         ]
       );
     };
+
+    home.file.".oh-my-zsh/custom/plugins/zsh-syntax-highlighting".source =
+      builtins.fetchGit {
+        url = "https://github.com/zsh-users/zsh-syntax-highlighting.git";
+        ref = "master";
+        rev = "122dc464392302114556b53ec01a1390c54f739f";
+      };
 
     programs.dircolors.enable = true;
 
