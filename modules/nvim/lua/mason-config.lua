@@ -28,7 +28,6 @@ M.load = function()
       -- Linter
       "shellcheck",
       "markdownlint",
-      "vale",
       "yamllint",
       "hadolint",
 
