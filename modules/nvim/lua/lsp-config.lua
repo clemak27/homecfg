@@ -56,6 +56,7 @@ M.load = function()
     "cssls",
     "golangci_lint_ls",
     "gopls",
+    "gradle_ls",
     "html",
     "jdtls",
     "jsonls",
@@ -117,6 +118,11 @@ M.load = function()
         }
       end
 
+      if server == "gradle_ls" then
+        config.settings = {
+          gradleWrapperEnabled = true,
+        }
+      end
       -- java is setup in jdtls-config
       if server ~= "jdtls" then
         lspconfig[server].setup(config)

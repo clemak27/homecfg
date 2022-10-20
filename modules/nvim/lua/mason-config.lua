@@ -11,6 +11,7 @@ M.load = function()
       "css-lsp",
       "golangci-lint-langserver",
       "gopls",
+      "gradle-language-server",
       "html-lsp",
       { "jdtls", version = "1.12.0" },
       "json-lsp",
