@@ -50,7 +50,7 @@ in
     programs.fzf = {
       enable = true;
       defaultCommand = "rg --files --hidden";
-      defaultOptions = [ "--height=50%" "--layout=reverse" "--info=inline" "--border=sharp" "--margin=1" "--padding=1" ];
+      defaultOptions = [ "--height=99%" "--layout=reverse" "--info=inline" "--border=sharp" "--margin=2" "--padding=1" ];
     };
 
     programs.zsh.oh-my-zsh.plugins = [
