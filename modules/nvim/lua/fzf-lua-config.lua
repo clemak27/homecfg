@@ -21,23 +21,20 @@ M.load = function()
   vim.api.nvim_set_keymap(
     "n",
     "<Leader>ff",
-    [[<Cmd>lua require('fzf-lua').grep_project({rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=512"})<CR>]]
-    ,
+    [[<Cmd>lua require('fzf-lua').grep_project({rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=512"})<CR>]],
     opt
   )
   vim.api.nvim_set_keymap("n", "<Leader>g", [[<Cmd>lua require('fzf-lua').git_status()<CR>]], opt)
   vim.api.nvim_set_keymap(
     "n",
     "<Leader>p",
-    [[<Cmd>lua require('fzf-lua').files({ fd_opts = '--color=never --type f --follow --exclude .git', fzf_cli_args = '--keep-right' })<CR>]]
-    ,
+    [[<Cmd>lua require('fzf-lua').files({ fd_opts = '--color=never --type f --follow --exclude .git', fzf_cli_args = '--keep-right' })<CR>]],
     opt
   )
   vim.api.nvim_set_keymap(
     "n",
     "<Leader>pp",
-    [[<Cmd>lua require('fzf-lua').files({ fd_opts = '--color=never --type f --hidden --follow --exclude .git', fzf_cli_args = '--keep-right' })<CR>]]
-    ,
+    [[<Cmd>lua require('fzf-lua').files({ fd_opts = '--color=never --type f --hidden --follow --exclude .git', fzf_cli_args = '--keep-right' })<CR>]],
     opt
   )
   vim.api.nvim_set_keymap("n", "<Leader>c", [[<Cmd>lua require('fzf-lua').commands()<CR>]], opt)

@@ -5,9 +5,8 @@ local M = {}
 M.load = function()
   require("bufferline").setup({
     options = {
-      numbers = function(opts)
-        return string.format("%s.", opts.ordinal)
-      end,
+      right_mouse_command = "vertical sbuffer %d",
+      middle_mouse_command = "bdelete! %d",
       diagnostics = false,
       show_buffer_icons = true,
       show_buffer_close_icons = true,
@@ -22,7 +21,7 @@ M.load = function()
           filetype = "NvimTree",
           text = "NvimTree",
           highlight = "Directory",
-          separator = true, -- use a "true" to enable the default, or set your own character
+          separator = true,
         },
       },
       truncate_names = false,
@@ -49,6 +48,13 @@ M.load = function()
   vim.api.nvim_set_keymap("n", "<Leader>7", [[<Cmd>BufferLineGoToBuffer 7<CR>]], opt)
   vim.api.nvim_set_keymap("n", "<Leader>8", [[<Cmd>BufferLineGoToBuffer 8<CR>]], opt)
   vim.api.nvim_set_keymap("n", "<Leader>9", [[<Cmd>BufferLineGoToBuffer 9<CR>]], opt)
+
+  vim.api.nvim_set_keymap("n", "gb", [[<Cmd>BufferLinePick<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "gB", [[<Cmd>BufferLinePickClose<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "gn", [[<Cmd>BufferLineCycleNext<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "gp", [[<Cmd>BufferLineCyclePrev<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "gN", [[<Cmd>BufferLineMoveNext<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "gP", [[<Cmd>BufferLineMovePrev<CR>]], opt)
 end
 
 return M
