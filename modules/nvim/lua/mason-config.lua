@@ -24,6 +24,7 @@ M.load = function()
 
       -- DAP
       "delve",
+      "js-debug-adapter",
 
       -- Linter
       "shellcheck",
