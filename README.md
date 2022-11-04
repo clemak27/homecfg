@@ -1,13 +1,10 @@
-# home-manager
+# homecfg
 
 This is my home-manager configuration. It was split of from my linux_setup,
 since I use it on other places as well.
 
 It configures basically all CLI tools I want and is split into modules that can be
 enabled/disabled as needed.
-
-Currently, it is intended to be used as a git-submodule or as extra repo,
-maybe I will make a flake out of it eventually.
 
 ## Usage
 
@@ -34,15 +31,11 @@ maybe I will make a flake out of it eventually.
 
 ### flake-input
 
-While this repo is not a flake, it can still leverage flakes to make updating
-it more convenient than as a submodule/directory:
-
 1. Add this input to you `flake.nix`:
 
    ```nix
    homecfg = {
      url = "github:clemak27/homecfg";
-     flake = false;
    };
    ```
 
@@ -50,7 +43,7 @@ it more convenient than as a submodule/directory:
 
    ```nix
    modules = [
-     "${self.inputs.homecfg}/default.nix"
+     homecfg.nixosModules.homecfg
      ...
    ];
    ```
@@ -63,26 +56,6 @@ it more convenient than as a submodule/directory:
    Alternatively, you can also keep the lockfile as is and use:
    `home-manager switch --flake . --impure --override-input homecfg 'path:<path-to-homecfg>'"`
 
-### home-manager as NixOS module
-
-If you use home-manager as NixOS module, you need to add this
-(there is probably a better way, but I have not figured it out yet):
-
-```nix
-home-manager.nixosModules.home-manager
-{
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
-  home-manager.users.clemens = { config, pkgs, lib, ... }:
-  {
-    imports = [
-      "${self.inputs.homecfg}/default.nix"
-      ./configurations/xyz/home.nix
-    ];
-  };
-}
-```
-
 ## Notes
 
 ### Aliases
@@ -90,8 +63,8 @@ home-manager.nixosModules.home-manager
 some aliases that are useful:
 
 ```nix
-{ name = "hms"; value = "home-manager switch --flake '.?submodules=1' --impure"; }
-{ name = "hmsl"; value = "home-manager switch --flake . --impure --override-input homecfg 'path:/home/clemens/Projects/homecfg'"; }
+{ name = "hms"; value = "home-manager switch --flake . --impure"; }
+{ name = "hmsl"; value = "home-manager switch --flake . --impure --override-input homecfg 'path:<path-to-homecfg>'"; }
 ```
 
 ### Updating
@@ -100,6 +73,8 @@ It's useful to add a convenience-function to update home-mananger:
 
 ```nix
   updateHM = pkgs.writeShellScriptBin "update-homecfg" ''
+    set -eo pipefail
+
     echo "Updating flake"
     nix flake update
     git add flake.nix flake.lock
@@ -116,6 +91,10 @@ It's useful to add a convenience-function to update home-mananger:
 
     echo "Updating nvim plugins"
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+
+    # start update, cause it runs async after PackerSync and usually gets interrupted
+    echo "Updating nvim-treesitter"
+    nvim --headless -c 'TSUpdateSync' -c 'q!'
   '';
 ```
 
