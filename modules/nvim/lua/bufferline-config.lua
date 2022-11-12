@@ -4,6 +4,7 @@ local M = {}
 
 M.load = function()
   require("bufferline").setup({
+    highlights = require("catppuccin.groups.integrations.bufferline").get(),
     options = {
       right_mouse_command = "vertical sbuffer %d",
       middle_mouse_command = "bdelete! %d",
