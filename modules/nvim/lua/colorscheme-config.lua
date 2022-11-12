@@ -3,20 +3,41 @@
 local M = {}
 
 M.load = function()
-  local onedarkpro = require("onedarkpro")
-  onedarkpro.setup({
-    theme = "onedark",
-    colors = {
-      bg = "#1e1e1e",
+  require("catppuccin").setup({
+    flavour = "mocha",
+    compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+    transparent_background = true,
+    color_overrides = {
+      all = {
+        rosewater = "#dc8a78",
+        flamingo = "#DD7878",
+        pink = "#ea76cb",
+        mauve = "#8839EF",
+        red = "#D20F39",
+        maroon = "#E64553",
+        peach = "#FE640B",
+        yellow = "#df8e1d",
+        green = "#40A02B",
+        teal = "#179299",
+        sky = "#04A5E5",
+        sapphire = "#209FB5",
+        blue = "#1e66f5",
+        lavender = "#7287FD",
+
+        text = "#abb2bf",
+      },
     },
-    hlgroups = {
-      TSField = { fg = "${red}" },
-    },
-    options = {
-      cursorline = true,
+    integrations = {
+      cmp = true,
+      gitsigns = true,
+      gitgutter = true,
+      nvimtree = true,
+      treesitter = true,
+      markdown = true,
     },
   })
-  onedarkpro.load()
+  vim.wo.cursorline = true
+  vim.cmd.colorscheme("catppuccin")
 end
 
 return M
