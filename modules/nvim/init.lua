@@ -146,6 +146,23 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+-- relative line numbers
+vim.api.nvim_create_augroup("numbertoggle", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
+  pattern = "*",
+  group = "numbertoggle",
+  callback = function()
+    vim.api.nvim_exec([[ if &nu && mode() != "i" | set rnu | endif ]], false)
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
+  pattern = "*",
+  group = "numbertoggle",
+  callback = function()
+    vim.api.nvim_exec([[ if &nu | set nornu | endif ]], false)
+  end,
+})
+
 ----------------------------------------- mappings -----------------------------------------
 
 local function vim_map(keyMap, action)
