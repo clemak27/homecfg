@@ -66,8 +66,6 @@ vim.o.laststatus = 3
 vim.o.showtabline = 0
 -- Specify the behavior when switching between buffers
 vim.o.switchbuf = "useopen,usetab,newtab"
--- Display cursorline
-vim.wo.cursorline = true
 
 vim.api.nvim_exec(
   [[
