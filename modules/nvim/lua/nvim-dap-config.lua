@@ -95,6 +95,13 @@ M.load = function()
     end,
   })
 
+  -- custom signs
+  vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "", linehl = "", numhl = "" })
+  vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "", linehl = "", numhl = "" })
+  vim.fn.sign_define("DapLogPoint", { text = "L", texthl = "", linehl = "", numhl = "" })
+  vim.fn.sign_define("DapStopped", { text = "", texthl = "", linehl = "", numhl = "" })
+  vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "", linehl = "", numhl = "" })
+
   local opt = { noremap = true, silent = true }
 
   -- dap mappings
