@@ -9,20 +9,13 @@ M.load = function()
     transparent_background = true,
     color_overrides = {
       all = {
-        rosewater = "#dc8a78",
-        flamingo = "#DD7878",
-        pink = "#ea76cb",
-        mauve = "#8839EF",
-        red = "#D20F39",
-        maroon = "#E64553",
-        peach = "#FE640B",
-        yellow = "#df8e1d",
-        green = "#40A02B",
-        teal = "#179299",
-        sky = "#04A5E5",
-        sapphire = "#209FB5",
-        blue = "#1e66f5",
-        lavender = "#7287FD",
+        mauve = "#c678dd",
+        red = "#e06c75",
+        peach = "#d19a66",
+        yellow = "#e5c07b",
+        green = "#98c379",
+        sky = "#56b6c2",
+        blue = "#61afef",
 
         text = "#abb2bf",
       },
@@ -36,6 +29,22 @@ M.load = function()
       markdown = true,
     },
   })
+
+  require("transparent").setup({
+    enable = true,
+    extra_groups = {
+      -- nvim-bufferline
+      "BufferLineTabClose",
+      "BufferlineBufferSelected",
+      "BufferLineFill",
+      "BufferLineBackground",
+      "BufferLineSeparator",
+      "BufferLineIndicatorSelected",
+    },
+    exclude = {},
+  })
+
+  vim.wo.fillchars = "eob: "
   vim.wo.cursorline = true
   vim.cmd.colorscheme("catppuccin")
 end
