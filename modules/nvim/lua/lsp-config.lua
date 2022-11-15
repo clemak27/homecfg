@@ -157,7 +157,11 @@ M.load = function()
   })
 
   -- setup fidget
-  require("fidget").setup({})
+  require("fidget").setup({
+    window = {
+      blend = 0,
+    },
+  })
 end
 
 return M

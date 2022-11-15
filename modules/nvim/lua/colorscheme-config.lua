@@ -27,11 +27,14 @@ M.load = function()
     end,
     integrations = {
       cmp = true,
-      gitsigns = true,
+      fidget = true,
       gitgutter = true,
+      gitsigns = true,
+      lsp_saga = true,
+      markdown = true,
+      mason = true,
       nvimtree = true,
       treesitter = true,
-      markdown = true,
     },
   })
 
