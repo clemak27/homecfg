@@ -20,6 +20,11 @@ M.load = function()
         text = "#abb2bf",
       },
     },
+    custom_highlights = function(colors)
+      return {
+        ["@field"] = { fg = colors.red },
+      }
+    end,
     integrations = {
       cmp = true,
       gitsigns = true,
