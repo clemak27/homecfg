@@ -22,7 +22,11 @@ M.load = function()
 
     -- saga
     local saga = require("lspsaga")
-    saga.init_lsp_saga()
+    saga.init_lsp_saga({
+      code_action_lightbulb = {
+        enable = false,
+      },
+    })
 
     -- See :help vim.lsp.* for documentation on any of the below functions
     buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
