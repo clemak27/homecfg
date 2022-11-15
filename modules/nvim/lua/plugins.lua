@@ -221,6 +221,7 @@ M.load = function()
       requires = {
         "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim",
+        { "glepnir/lspsaga.nvim", branch = "main" },
       },
       config = function()
         require("lsp-config").load()
