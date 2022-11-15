@@ -60,7 +60,7 @@ M.load = function()
     },
     formatting = {
       format = lspkind.cmp_format({
-        mode = "symbol_text",
+        mode = "symbol",
         maxwidth = 50,
       }),
     },
