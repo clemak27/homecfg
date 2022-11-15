@@ -136,7 +136,11 @@ M.load = function()
     use({
       "petertriho/nvim-scrollbar",
       config = function()
-        require("scrollbar").setup()
+        require("scrollbar").setup({
+          handle = {
+            color = "#585B70",
+          },
+        })
       end,
     })
     use({
