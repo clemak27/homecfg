@@ -19,6 +19,10 @@ in
         PROMPT_EOL_MARK = "";
         ZSH_DISABLE_COMPFIX = inSecureDirs;
       };
+      history = {
+        size = 50000;
+        save = 25000;
+      };
       oh-my-zsh = {
         enable = true;
         plugins = [
