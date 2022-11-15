@@ -22,6 +22,7 @@ M.load = function()
     },
     custom_highlights = function(colors)
       return {
+        NvimTreeVertSplit = { link = "VertSplit" },
         ["@field"] = { fg = colors.red },
       }
     end,
