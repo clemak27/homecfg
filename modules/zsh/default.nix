@@ -55,6 +55,8 @@ in
         ++ [
           # no beeps
           "unsetopt beep"
+          # don't save duplicates in zsh_history
+          "setopt HIST_SAVE_NO_DUPS"
           # custom functions
           "for file in ~/.zsh_functions/*; do . $file; done"
           # local additional zsh file
