@@ -132,11 +132,15 @@ M.load = function()
 
   setup_servers()
 
+  -- customize signs
   local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
   for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
   end
+
+  -- show borders around lspconfig windows
+  require("lspconfig.ui.windows").default_options.border = "single"
 
   -- format on save
   vim.api.nvim_create_augroup("format_on_write", { clear = true })
