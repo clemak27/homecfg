@@ -7,7 +7,7 @@ M.load = function()
   local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
   if fn.empty(fn.glob(install_path)) > 0 then
     packer_bootstrap =
-      fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
   end
 
   require("packer").startup(function(use)
@@ -160,7 +160,7 @@ M.load = function()
           let g:vim_markdown_emphasis_multiline = 0
           let g:vim_markdown_conceal_code_blocks = 0
           let g:vim_markdown_new_list_item_indent = 2
-        ]],
+        ]] ,
           false
         )
         vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
@@ -220,6 +220,7 @@ M.load = function()
       "neovim/nvim-lspconfig",
       requires = {
         "williamboman/mason-lspconfig.nvim",
+        "j-hui/fidget.nvim",
       },
       config = function()
         require("lsp-config").load()

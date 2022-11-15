@@ -151,6 +151,9 @@ M.load = function()
       vim.lsp.buf.formatting_seq_sync(nil, 500)
     end,
   })
+
+  -- setup fidget
+  require("fidget").setup({})
 end
 
 return M
