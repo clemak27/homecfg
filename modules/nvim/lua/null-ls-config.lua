@@ -19,6 +19,9 @@ M.load = function()
         diagnostics_format = "[#{c}] #{m} (#{s})",
       }),
       null_ls.builtins.code_actions.shellcheck,
+      null_ls.builtins.formatting.shfmt.with({
+        extra_args = { "-i", "2", "-sr", "-ci" },
+      }),
       null_ls.builtins.formatting.stylua,
       null_ls.builtins.formatting.goimports,
       null_ls.builtins.diagnostics.yamllint,

@@ -35,6 +35,7 @@ M.load = function()
       -- Fomatter
       "gofumpt",
       "goimports",
+      "shfmt",
       "stylua",
     },
 
