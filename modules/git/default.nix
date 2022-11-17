@@ -76,6 +76,10 @@ in
       };
     };
 
+    home.packages = [
+      pkgs.gitAndTools.git-absorb
+    ];
+
     programs.zsh.oh-my-zsh.plugins = [
       "git"
     ];
