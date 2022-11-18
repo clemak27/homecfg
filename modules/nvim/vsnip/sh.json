@@ -1,0 +1,11 @@
+{
+  "heredoc": {
+    "prefix": "heredoc",
+    "body": [
+      "cat << EOF > file.txt",
+      "\t$0",
+      "EOF"
+    ],
+    "description": "Inserts a heredoc redirecting into a file"
+  }
+}
