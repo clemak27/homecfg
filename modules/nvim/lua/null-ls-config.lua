@@ -28,6 +28,10 @@ M.load = function()
       null_ls.builtins.diagnostics.hadolint,
     },
   })
+
+  vim.api.nvim_create_user_command("NullLsToggle", function()
+    require("null-ls").toggle({})
+  end, {})
 end
 
 return M
