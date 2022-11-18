@@ -73,6 +73,7 @@ in
 
     home.file = {
       ".todo/config".source = ./todo/todo.cfg;
+      ".config/tealdeer/config.toml".source = ./tealdeer.toml;
       ".local/bin/rfv".source = ./rfv;
       ".local/bin/git-edit".source = ./git-edit;
       ".config/btop/btop.conf".source = ./btop.conf;
