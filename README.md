@@ -8,28 +8,10 @@ enabled/disabled as needed.
 
 ## Usage
 
-### git submodule
+The flake provides 2 nixOS modules, which can be imported in an existing config.
 
-1. Go to some repo where you want to use this config.
-2. Add this repo as submodule:
-
-   ```sh
-   git submodule add git@github.com:clemak27/homecfg.git
-   git submodule init homecfg
-   git submodule update homecfg
-   ```
-
-3. create a `home.nix`, which imports the `default.nix` file in this repo.
-4. After this, you can use the `homecfg` config options to enable modules as needed.
-5. When reloading the config and using flakes, you need to use
-   `home-manager switch --flake '.?submodules=1' --impure`
-
-### separate repo
-
-1. Clone this repo somewhere
-2. import the `default.nix` in your `home.nix` file (with an absolute path)
-
-### flake-input
+<!-- markdownlint-disable-next-line -->
+### homecfg
 
 1. Add this input to you `flake.nix`:
 
@@ -56,6 +38,26 @@ enabled/disabled as needed.
    Alternatively, you can also keep the lockfile as is and use:
    `home-manager switch --flake . --impure --override-input homecfg 'path:<path-to-homecfg>'"`
 
+### nvim-plugins
+
+In addition, homecfg contains a second module, that automatically,
+fetches all needed nvim-plugins.
+The integration still uses packer, it's just that the plugins are not
+downloaded but supplied by a path.
+If the module is not used, plugins are downloaded as expected.
+The only exception is `nvim-treesitter`,
+which is always downloaded (but the parsers themselves are supplied by nix).
+
+Usage:
+
+```nix
+modules = [
+  homecfg.nixosModules.homecfg
+  homecfg.nixosModules.nvim-plugins
+  ...
+];
+```
+
 ## Notes
 
 ### Aliases
@@ -81,17 +83,13 @@ It's useful to add a convenience-function to update home-mananger:
     git commit -m "chore(flake): Update $(date -I)"
 
     echo "Reloading home-manager config"
-    home-manager switch --flake '.?submodules=1' --impure
+    home-manager switch --flake . --impure
 
     echo "Collecting garbage"
     nix-collect-garbage
 
     echo "Updating nvim plugins"
     nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-    # start update, cause it runs async after PackerSync and usually gets interrupted
-    echo "Updating nvim-treesitter"
-    nvim --headless -c 'TSUpdateSync' -c 'q!'
   '';
 ```
 

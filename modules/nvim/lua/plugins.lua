@@ -4,21 +4,42 @@ local M = {}
 
 M.load = function()
   local fn = vim.fn
-  local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-  if fn.empty(fn.glob(install_path)) > 0 then
-    packer_bootstrap =
-    fn.system({ "git", "clone", "--depth", "1", "https://github.com/wbthomason/packer.nvim", install_path })
+
+  local function file_exists(name)
+    local f = io.open(name, "r")
+    if f ~= nil then
+      io.close(f)
+      return true
+    else
+      return false
+    end
+  end
+
+  local function local_path(plugin)
+    local plname = string.gsub(plugin, ".+/", "", 1)
+    local packer_path = fn.stdpath("data") .. "/site/pack/packer/start/"
+    if file_exists(packer_path .. plname) then
+      return packer_path .. plname
+    end
+  end
+
+  local function local_path_opt(plugin)
+    local plname = string.gsub(plugin, ".+/", "", 1)
+    local packer_path = fn.stdpath("data") .. "/site/pack/packer/opt/"
+    if file_exists(packer_path .. plname) then
+      return packer_path .. plname
+    end
   end
 
   require("packer").startup(function(use)
     ----------------- packer --------------------------------------------
-    use("wbthomason/packer.nvim")
+    use(local_path("wbthomason/packer.nvim"))
 
     ----------------- default plugins -----------------------------------
-    use("tpope/vim-repeat")
-    use("tpope/vim-vinegar")
+    use(local_path("tpope/vim-repeat"))
+    use(local_path("tpope/vim-vinegar"))
     use({
-      "inkarkat/vim-ReplaceWithRegister",
+      local_path("inkarkat/vim-ReplaceWithRegister"),
       config = function()
         local opt = { noremap = false, silent = true }
         vim.api.nvim_set_keymap("n", "r", "<Plug>ReplaceWithRegisterOperator", opt)
@@ -28,7 +49,7 @@ M.load = function()
       end,
     })
 
-    use("tpope/vim-commentary")
+    use(local_path("tpope/vim-commentary"))
     vim.api.nvim_create_augroup("nix_comment_fix", { clear = true })
     vim.api.nvim_create_autocmd({ "FileType" }, {
       pattern = "nix",
@@ -39,13 +60,13 @@ M.load = function()
     })
 
     use({
-      "windwp/nvim-autopairs",
+      local_path("windwp/nvim-autopairs"),
       config = function()
         require("nvim-autopairs").setup({})
       end,
     })
     use({
-      "kylechui/nvim-surround",
+      local_path("kylechui/nvim-surround"),
       config = function()
         require("nvim-surround").setup({
           surrounds = {
@@ -59,10 +80,10 @@ M.load = function()
         })
       end,
     })
-    use("antoinemadec/FixCursorHold.nvim")
-    use("gpanders/editorconfig.nvim")
+    use(local_path("antoinemadec/FixCursorHold.nvim"))
+    use(local_path("gpanders/editorconfig.nvim"))
     use({
-      "rmagatti/auto-session",
+      local_path("rmagatti/auto-session"),
       config = function()
         require("auto-session").setup({
           log_level = "info",
@@ -71,27 +92,27 @@ M.load = function()
       end,
     })
     use({
-      "kyazdani42/nvim-tree.lua",
+      local_path("kyazdani42/nvim-tree.lua"),
       config = function()
         require("nvim-tree-config").load()
       end,
     })
 
     ----------------- git integration -----------------------------------
-    use("tpope/vim-fugitive")
+    use(local_path("tpope/vim-fugitive"))
     use({
-      "lewis6991/gitsigns.nvim",
-      requires = { "nvim-lua/plenary.nvim" },
+      local_path("lewis6991/gitsigns.nvim"),
+      requires = { local_path("nvim-lua/plenary.nvim") },
       config = function()
         require("gitsigns-config").load()
       end,
     })
 
     ----------------- custom textobjects --------------------------------
-    use("kana/vim-textobj-user")
-    use("kana/vim-textobj-entire")
+    use(local_path("kana/vim-textobj-user"))
+    use(local_path("kana/vim-textobj-entire"))
     use({
-      "sgur/vim-textobj-parameter",
+      local_path("sgur/vim-textobj-parameter"),
       config = function()
         vim.g.vim_textobj_parameter_mapping = "a"
       end,
@@ -99,22 +120,21 @@ M.load = function()
 
     ----------------- theming -------------------------------------------
     use({
-      "catppuccin/nvim",
-      as = "catppuccin",
-      requires = "xiyaowong/nvim-transparent",
+      local_path("catppuccin"),
+      requires = local_path("xiyaowong/nvim-transparent"),
       config = function()
         require("colorscheme-config").load()
       end,
     })
-    use("kyazdani42/nvim-web-devicons")
+    use(local_path("kyazdani42/nvim-web-devicons"))
     use({
-      "nvim-lualine/lualine.nvim",
+      local_path("nvim-lualine/lualine.nvim"),
       config = function()
         require("lualine-config").load()
       end,
     })
     use({
-      "akinsho/nvim-bufferline.lua",
+      local_path_opt("akinsho/bufferline.nvim"),
       after = "catppuccin",
       config = function()
         require("bufferline-config").load()
@@ -122,19 +142,20 @@ M.load = function()
     })
     use({
       "nvim-treesitter/nvim-treesitter",
+      -- local_path("nvim-treesitter/nvim-treesitter"),
       config = function()
         require("treesitter-config").load()
       end,
-      run = ":TSUpdate",
+      -- run = ":TSUpdateSync",
     })
     use({
-      "norcalli/nvim-colorizer.lua",
+      local_path("norcalli/nvim-colorizer.lua"),
       config = function()
         require("colorizer").setup()
       end,
     })
     use({
-      "petertriho/nvim-scrollbar",
+      local_path("petertriho/nvim-scrollbar"),
       config = function()
         require("scrollbar").setup({
           handle = {
@@ -144,7 +165,7 @@ M.load = function()
       end,
     })
     use({
-      "RRethy/vim-illuminate",
+      local_path("RRethy/vim-illuminate"),
       config = function()
         require("illuminate").configure({
           delay = 1000,
@@ -155,7 +176,7 @@ M.load = function()
 
     ----------------- markdown ------------------------------------------
     use({
-      "preservim/vim-markdown",
+      local_path("preservim/vim-markdown"),
       config = function()
         vim.o.conceallevel = 2
         vim.api.nvim_exec(
@@ -164,15 +185,15 @@ M.load = function()
           let g:vim_markdown_emphasis_multiline = 0
           let g:vim_markdown_conceal_code_blocks = 0
           let g:vim_markdown_new_list_item_indent = 2
-        ]] ,
+        ]],
           false
         )
         vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
       end,
     })
-    use("godlygeek/tabular")
+    use(local_path("godlygeek/tabular"))
     use({
-      "iamcco/markdown-preview.nvim",
+      local_path("iamcco/markdown-preview.nvim"),
       config = function()
         vim.g.mkdp_echo_preview_url = true
       end,
@@ -181,7 +202,7 @@ M.load = function()
 
     ----------------- vimtex --------------------------------------------
     use({
-      "lervag/vimtex",
+      local_path("lervag/vimtex"),
       config = function()
         vim.g.vimtex_indent_enabled = 1
         vim.g.vimtex_indent_conditionals = {}
@@ -195,13 +216,13 @@ M.load = function()
 
     ----------------- fzf -----------------------------------------------
     use({
-      "ibhagwan/fzf-lua",
+      local_path("ibhagwan/fzf-lua"),
       config = function()
         require("fzf-lua-config").load()
       end,
     })
     use({
-      "gfanto/fzf-lsp.nvim",
+      local_path("gfanto/fzf-lsp.nvim"),
       config = function()
         require("fzf_lsp").setup()
       end,
@@ -209,10 +230,10 @@ M.load = function()
 
     ----------------- Mason -----------------------------------------------
     use({
-      "williamboman/mason.nvim",
+      local_path("williamboman/mason.nvim"),
       requires = {
-        "williamboman/mason-lspconfig.nvim",
-        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        local_path("williamboman/mason-lspconfig.nvim"),
+        local_path("WhoIsSethDaniel/mason-tool-installer.nvim"),
       },
       config = function()
         require("mason-config").load()
@@ -221,33 +242,39 @@ M.load = function()
 
     ----------------- LSP -----------------------------------------------
     use({
-      "neovim/nvim-lspconfig",
+      local_path("neovim/nvim-lspconfig"),
       requires = {
-        "williamboman/mason-lspconfig.nvim",
-        "j-hui/fidget.nvim",
-        { "glepnir/lspsaga.nvim", branch = "main" },
+        local_path("williamboman/mason-lspconfig.nvim"),
+        local_path("j-hui/fidget.nvim"),
+        { local_path("glepnir/lspsaga.nvim"), branch = "main" },
       },
       config = function()
         require("lsp-config").load()
       end,
     })
     use({
-      "ojroques/nvim-lspfuzzy",
-      requires = { "junegunn/fzf", "junegunn/fzf.vim" },
+      local_path("ojroques/nvim-lspfuzzy"),
+      requires = { local_path("junegunn/fzf"), local_path("junegunn/fzf.vim") },
       config = function()
         require("lspfuzzy").setup({})
       end,
     })
-    use({ "mfussenegger/nvim-jdtls" })
-
-    ----------------- go-debugging --------------------------------------
+    use({ local_path("mfussenegger/nvim-jdtls") })
     use({
-      "mfussenegger/nvim-dap",
+      local_path("jose-elias-alvarez/null-ls.nvim"),
+      config = function()
+        require("null-ls-config").load()
+      end,
+    })
+
+    ----------------- debugging --------------------------------------
+    use({
+      local_path_opt("mfussenegger/nvim-dap"),
       requires = {
-        "leoluz/nvim-dap-go",
-        "mxsdev/nvim-dap-vscode-js",
-        "theHamsta/nvim-dap-virtual-text",
-        "rcarriga/nvim-dap-ui",
+        local_path("leoluz/nvim-dap-go"),
+        local_path("mxsdev/nvim-dap-vscode-js"),
+        local_path("theHamsta/nvim-dap-virtual-text"),
+        local_path("rcarriga/nvim-dap-ui"),
       },
       ft = { "go", "java", "javascript", "typescript" },
       config = function()
@@ -257,16 +284,16 @@ M.load = function()
 
     ----------------- cmp -----------------------------------------------
     use({
-      "hrsh7th/nvim-cmp",
+      local_path("hrsh7th/nvim-cmp"),
       requires = {
-        "hrsh7th/cmp-nvim-lsp",
-        "hrsh7th/cmp-buffer",
-        "hrsh7th/cmp-path",
-        "hrsh7th/cmp-cmdline",
-        "hrsh7th/cmp-vsnip",
-        "ray-x/cmp-treesitter",
-        "hrsh7th/cmp-nvim-lsp-signature-help",
-        "onsails/lspkind-nvim",
+        local_path("hrsh7th/cmp-nvim-lsp"),
+        local_path("hrsh7th/cmp-buffer"),
+        local_path("hrsh7th/cmp-path"),
+        local_path("hrsh7th/cmp-cmdline"),
+        local_path("hrsh7th/cmp-vsnip"),
+        local_path("ray-x/cmp-treesitter"),
+        local_path("hrsh7th/cmp-nvim-lsp-signature-help"),
+        local_path("onsails/lspkind-nvim"),
       },
       config = function()
         require("nvim-cmp-config").load()
@@ -274,17 +301,9 @@ M.load = function()
     })
 
     ----------------- snippets ------------------------------------------
-    use("hrsh7th/vim-vsnip")
-    use("hrsh7th/vim-vsnip-integ")
-    use("rafamadriz/friendly-snippets")
-
-    ----------------- lint ----------------------------------------------
-    use({
-      "jose-elias-alvarez/null-ls.nvim",
-      config = function()
-        require("null-ls-config").load()
-      end,
-    })
+    use(local_path("hrsh7th/vim-vsnip"))
+    use(local_path("hrsh7th/vim-vsnip-integ"))
+    use(local_path("rafamadriz/friendly-snippets"))
 
     if packer_bootstrap then
       require("packer").sync()
