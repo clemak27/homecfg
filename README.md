@@ -46,7 +46,7 @@ The integration still uses packer, it's just that the plugins are not
 downloaded but supplied by a path.
 If the module is not used, plugins are downloaded as expected.
 The only exception is `nvim-treesitter`,
-which is always downloaded (but the parsers themselves are supplied by nix).
+which is always downloaded.
 
 Usage:
 

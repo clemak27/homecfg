@@ -3,11 +3,8 @@
 local M = {}
 
 M.load = function()
-  local parser_dir = vim.fn.stdpath("data") .. "site/parser"
-
   require("nvim-treesitter.configs").setup({
-    -- ensure_installed = "all",
-    parser_install_dir = parser_dir,
+    ensure_installed = "all",
     highlight = {
       enable = true,
     },
@@ -23,9 +20,6 @@ M.load = function()
     },
   })
 
-  -- add parser dir to rtp
-  vim.opt.runtimepath:append(parser_dir)
-  --
   -- workaround issue with vim-markdown
   vim.api.nvim_exec(
     [[
