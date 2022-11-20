@@ -45,7 +45,6 @@ in
       kubernetes-helm
       stern
       starshipK8s
-      kind
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
