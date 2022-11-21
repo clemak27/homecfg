@@ -92,7 +92,7 @@ M.load = function()
 
     ----------------- theming -------------------------------------------
     use({
-      "catppuccin",
+      "catppuccin/nvim",
       as = "catppuccin",
       requires = "xiyaowong/nvim-transparent",
       config = function()
