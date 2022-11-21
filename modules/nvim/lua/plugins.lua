@@ -93,6 +93,7 @@ M.load = function()
     ----------------- theming -------------------------------------------
     use({
       "catppuccin",
+      as = "catppuccin",
       requires = "xiyaowong/nvim-transparent",
       config = function()
         require("colorscheme-config").load()
@@ -114,11 +115,10 @@ M.load = function()
     })
     use({
       "nvim-treesitter/nvim-treesitter",
-      -- ("nvim-treesitter/nvim-treesitter"),
       config = function()
         require("treesitter-config").load()
       end,
-      -- run = ":TSUpdateSync",
+      run = ":TSUpdate",
     })
     use({
       "norcalli/nvim-colorizer.lua",
