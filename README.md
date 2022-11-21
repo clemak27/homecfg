@@ -8,7 +8,7 @@ enabled/disabled as needed.
 
 ## Usage
 
-The flake provides 2 nixOS modules, which can be imported in an existing config.
+The flake provides a nixOS modules, which can be imported in an existing config.
 
 <!-- markdownlint-disable-next-line -->
 ### homecfg
@@ -37,26 +37,6 @@ The flake provides 2 nixOS modules, which can be imported in an existing config.
 
    Alternatively, you can also keep the lockfile as is and use:
    `home-manager switch --flake . --impure --override-input homecfg 'path:<path-to-homecfg>'"`
-
-### nvim-plugins
-
-In addition, homecfg contains a second module, that automatically,
-fetches all needed nvim-plugins.
-The integration still uses packer, it's just that the plugins are not
-downloaded but supplied by a path.
-If the module is not used, plugins are downloaded as expected.
-The only exception is `nvim-treesitter`,
-which is always downloaded.
-
-Usage:
-
-```nix
-modules = [
-  homecfg.nixosModules.homecfg
-  homecfg.nixosModules.nvim-plugins
-  ...
-];
-```
 
 ## Notes
 
@@ -93,7 +73,7 @@ It's useful to add a convenience-function to update home-mananger:
   '';
 ```
 
-### NixOS vs HM
+### non-NixOS
 
 If running on non NixOS systems, you need to add this to your .zshrc:
 
