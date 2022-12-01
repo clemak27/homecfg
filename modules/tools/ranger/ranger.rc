@@ -14,8 +14,7 @@ set preview_directories true
 set collapse_preview true
 
 # Image previews
-set preview_images true
-set preview_images_method ueberzug
+set preview_images false
 
 # Wrap long lines in plain text previews?
 set wrap_plaintext_previews true

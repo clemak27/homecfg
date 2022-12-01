@@ -33,7 +33,6 @@ in
       timewarrior
       todo-txt-cli
       tree
-      ueberzug
       unzip
       viddy
     ] ++ lib.optionals stdenv.isLinux [
