@@ -3,9 +3,29 @@
 local M = {}
 
 M.load = function()
+  local fn = vim.fn
+
+  local function file_exists(name)
+    local f = io.open(name, "r")
+    if f ~= nil then
+      io.close(f)
+      return true
+    else
+      return false
+    end
+  end
+
+  local function local_path(plugin)
+    local plname = string.gsub(plugin, ".+/", "", 1)
+    local packer_path = fn.stdpath("data") .. "/site/pack/packer/start/"
+    if file_exists(packer_path .. plname) then
+      return packer_path .. plname
+    end
+  end
+
   require("packer").startup(function(use)
     ----------------- packer --------------------------------------------
-    use("wbthomason/packer.nvim")
+    use(local_path("wbthomason/packer.nvim"))
 
     ----------------- default plugins -----------------------------------
     use("tpope/vim-repeat")
