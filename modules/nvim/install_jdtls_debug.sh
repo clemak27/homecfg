@@ -23,6 +23,8 @@ mkdir -p "$HOME/.local/share/nvim/mason/packages"
 cd "$HOME/.local/share/nvim/mason/packages" || exit 1
 git clone https://github.com/microsoft/java-debug
 cd java-debug || exit 1
+# we need to use an ancient version that compiles with java11
+git checkout 8c0e87defedc5bc2a17a9e2980824f8573c08386
 ./mvnw clean install
 
 cd "$HOME/.local/share/nvim/mason/packages" || exit 1
