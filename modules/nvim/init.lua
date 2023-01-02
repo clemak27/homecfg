@@ -6,8 +6,6 @@ vim.o.termguicolors = true
 vim.o.mouse = "a"
 -- line number
 vim.o.number = true
--- use system clipboard
-vim.cmd([[set clipboard+=unnamedplus]])
 -- Sets how many lines of history VIM has to remember
 vim.o.history = 500
 -- Set to auto read when a file is changed from the outside
@@ -83,7 +81,7 @@ vim.api.nvim_exec(
   " E355: Unknown option: nobackup
   " E355: Unknown option: nowb
   " E355: Unknown option: noswapfile
-]] ,
+]],
   false
 )
 

@@ -73,6 +73,13 @@ M.load = function()
       end,
     })
     use("antoinemadec/FixCursorHold.nvim")
+    use({
+      "EtiamNullam/deferred-clipboard.nvim",
+      config = function()
+        vim.o.clipboard = "unnamedplus"
+        require("deferred-clipboard").setup()
+      end,
+    })
     use("gpanders/editorconfig.nvim")
     use({
       "rmagatti/auto-session",
