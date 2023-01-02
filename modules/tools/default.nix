@@ -51,7 +51,7 @@ in
       builtins.fetchGit {
         url = "https://github.com/alexanderjeurissen/ranger_devicons.git";
         ref = "main";
-        rev = "11941619b853e9608a41028ac8ebde2e6ca7d934";
+        rev = "49fe4753c89615a32f14b2f4c78bbd02ee76be3c";
       };
 
     programs.fzf = {
