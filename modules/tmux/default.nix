@@ -20,14 +20,6 @@ in
         {
           plugin = tmuxPlugins.resurrect;
         }
-        # TODO this does not work, it gets loaded before extraConfig which means status-right get overridden
-        {
-          plugin = tmuxPlugins.continuum;
-          extraConfig = ''
-            set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '15' # minutes
-          '';
-        }
       ];
       extraConfig = ''
         set-window-option -g xterm-keys on
