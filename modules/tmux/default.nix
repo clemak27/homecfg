@@ -20,6 +20,9 @@ in
         {
           plugin = tmuxPlugins.resurrect;
         }
+        {
+          plugin = tmuxPlugins.continuum;
+        }
       ];
       extraConfig = ''
         set-window-option -g xterm-keys on
