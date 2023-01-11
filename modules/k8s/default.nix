@@ -57,5 +57,9 @@ in
         { name = "stk"; value = "source starship-toggle-k8s"; }
       ]
     );
+
+    programs.zsh.initExtra = ''
+      source <(stern --completion=zsh)
+    '';
   };
 }
