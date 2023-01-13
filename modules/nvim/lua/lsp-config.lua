@@ -21,8 +21,7 @@ M.load = function()
     local opts = { noremap = true, silent = true }
 
     -- saga
-    local saga = require("lspsaga")
-    saga.init_lsp_saga({
+    require("lspsaga").setup({
       code_action_lightbulb = {
         enable = false,
       },
