@@ -177,7 +177,7 @@ M.load = function()
           let g:vim_markdown_emphasis_multiline = 0
           let g:vim_markdown_conceal_code_blocks = 0
           let g:vim_markdown_new_list_item_indent = 2
-        ]],
+        ]] ,
           false
         )
         vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
@@ -206,19 +206,21 @@ M.load = function()
       end,
     })
 
-    ----------------- fzf -----------------------------------------------
+    ----------------- telescope -----------------------------------------------
     use({
-      "ibhagwan/fzf-lua",
+      "nvim-telescope/telescope.nvim",
+      tag = "0.1.0",
+      requires = {
+        { "nvim-lua/plenary.nvim" },
+      },
       config = function()
-        require("fzf-lua-config").load()
+        require("telescope-config").load()
       end,
     })
-    use({
-      "gfanto/fzf-lsp.nvim",
-      config = function()
-        require("fzf_lsp").setup()
-      end,
-    })
+    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+    use({ "nvim-telescope/telescope-dap.nvim" })
+
+    use({ "stevearc/dressing.nvim" })
 
     ----------------- Mason -----------------------------------------------
     use({
@@ -238,17 +240,9 @@ M.load = function()
       requires = {
         "williamboman/mason-lspconfig.nvim",
         "j-hui/fidget.nvim",
-        { "glepnir/lspsaga.nvim", branch = "main" },
       },
       config = function()
         require("lsp-config").load()
-      end,
-    })
-    use({
-      "ojroques/nvim-lspfuzzy",
-      requires = { "junegunn/fzf", "junegunn/fzf.vim" },
-      config = function()
-        require("lspfuzzy").setup({})
       end,
     })
     use({ "mfussenegger/nvim-jdtls" })
