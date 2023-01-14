@@ -8,6 +8,15 @@ M.load = function()
       layout_strategy = "flex",
       layout_config = { prompt_position = "top" },
       sorting_strategy = "ascending",
+      mappings = {
+        n = {
+          ["<f2>"] = require("telescope.actions.layout").toggle_preview,
+        },
+        i = {
+          ["<f2>"] = require("telescope.actions.layout").toggle_preview,
+          ["<esc>"] = require("telescope.actions").close,
+        },
+      },
     },
     pickers = {
       -- Default configuration for builtin pickers goes here:
