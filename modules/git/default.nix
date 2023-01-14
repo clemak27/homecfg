@@ -76,6 +76,10 @@ in
       };
     };
 
+    home.packages = with pkgs; [
+      lazygit
+    ];
+
     programs.zsh.oh-my-zsh.plugins = [
       "git"
     ];
@@ -94,6 +98,7 @@ in
         { name = "gstp"; value = "git stash pop"; }
         { name = "gsurr"; value = "git submodule update --remote --rebase"; }
         { name = "gus"; value = "git reset HEAD"; }
+        { name = "lg"; value = "lazygit"; }
       ]
     );
   };
