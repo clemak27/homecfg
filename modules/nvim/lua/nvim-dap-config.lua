@@ -104,7 +104,13 @@ M.load = function()
 
   local opt = { noremap = true, silent = true }
 
+  -- telescope mappings
   require("telescope").load_extension("dap")
+  vim.api.nvim_set_keymap("n", "<Leader>i", [[<Cmd>Telescope dap commands<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "<Leader>ic", [[<Cmd>Telescope dap configurations<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "<Leader>ib", [[<Cmd>Telescope dap list_breakpoints<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "<Leader>iv", [[<Cmd>Telescope dap variables<CR>]], opt)
+  vim.api.nvim_set_keymap("n", "<Leader>if", [[<Cmd>Telescope dap frames<CR>]], opt)
 
   -- dap mappings
   vim.api.nvim_set_keymap("n", "<F5>", [[<Cmd>lua require'dap'.continue()<CR>]], opt)
