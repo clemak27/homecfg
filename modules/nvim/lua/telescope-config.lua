@@ -50,7 +50,9 @@ M.load = function()
   vim.keymap.set("n", "<leader>g", builtin.git_status, {})
 
   vim.keymap.set("n", "<leader>p", builtin.find_files, {})
-  -- vim.api.nvim_set_keymap( "n", "<Leader>pp", [[<Cmd>lua require('fzf-lua').files({ fd_opts = '--color=never --type f --hidden --follow --exclude .git', fzf_cli_args = '--keep-right' })<CR>]] , opt)
+  vim.keymap.set("n", "<leader>pp", function()
+    builtin.find_files({ find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" } })
+  end, {})
 
   vim.keymap.set("n", "<leader>c", builtin.commands, {})
   vim.keymap.set("n", "<leader>cc", builtin.command_history, {})
