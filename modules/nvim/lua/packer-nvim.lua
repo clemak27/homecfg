@@ -221,6 +221,12 @@ M.load = function()
     use({ "nvim-telescope/telescope-dap.nvim" })
 
     use({ "stevearc/dressing.nvim" })
+    use({
+      "someone-stole-my-name/yaml-companion.nvim",
+      config = function()
+        require("telescope").load_extension("yaml_schema")
+      end,
+    })
 
     ----------------- Mason -----------------------------------------------
     use({
