@@ -60,6 +60,8 @@ in
 
     programs.zsh.initExtra = ''
       source <(stern --completion=zsh)
+      # completion is not working otherwise?
+      source <(kubectl completion zsh)
     '';
   };
 }
