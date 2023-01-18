@@ -63,8 +63,6 @@ in
           "setopt HIST_SAVE_NO_DUPS"
           # custom functions
           "for file in ~/.zsh_functions/*; do . $file; done"
-          # local additional zsh file
-          "[[ ! -f ~/.local.zsh ]] || source ~/.local.zsh"
           # https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
           "source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
         ]
