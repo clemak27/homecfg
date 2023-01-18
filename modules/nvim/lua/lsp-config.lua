@@ -91,6 +91,10 @@ M.load = function()
     -- This is the new part
     vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/vscode-java-test/server/*.jar"), "\n"))
 
+    vim.api.nvim_create_user_command("JdtAddCommands", function()
+      require("jdtls.setup").add_commands()
+    end, {})
+
     return {
       cmd = {
         os.getenv("HOME") .. "/.nix-profile/bin/java",
