@@ -81,7 +81,10 @@ in
     programs.dircolors.enable = true;
 
     home.file = {
-      ".zsh_functions".source = ./zsh_functions;
+      ".zsh_functions" = {
+        source = ./zsh_functions;
+        recursive = true;
+      };
     };
   };
 }
