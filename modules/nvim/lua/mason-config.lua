@@ -16,6 +16,7 @@ M.load = function()
       { "jdtls", version = "1.12.0" },
       "json-lsp",
       "lua-language-server",
+      "terraform-ls",
       "texlab",
       "typescript-language-server",
       "vetur-vls",

@@ -206,6 +206,7 @@ M.load = function()
     "jsonls",
     "rnix",
     "sumneko_lua",
+    "terraformls",
     "texlab",
     "tsserver",
     "vimls",
