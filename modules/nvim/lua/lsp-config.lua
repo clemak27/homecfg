@@ -295,7 +295,7 @@ M.load = function()
     pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh",
     group = "format_on_write",
     callback = function()
-      vim.lsp.buf.formatting_seq_sync(nil, 500)
+      vim.lsp.buf.format(nil, 500)
     end,
   })
 

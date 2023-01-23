@@ -83,7 +83,7 @@ vim.api.nvim_exec(
   " E355: Unknown option: nobackup
   " E355: Unknown option: nowb
   " E355: Unknown option: noswapfile
-]] ,
+]],
   false
 )
 
