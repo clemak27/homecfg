@@ -35,7 +35,8 @@ in
 
         bind-key y send-prefix
 
-        set-option -sa terminal-overrides ",xterm*:Tc"
+        set -g default-terminal "xterm-256color"
+        set-option -ga terminal-overrides ",xterm-256color:Tc"
         set-option -g -w automatic-rename on
         set-option -g renumber-windows on
         set-option -g bell-action none
@@ -87,20 +88,36 @@ in
         bind-key '?' copy-mode \; send-keys "?"
 
         # theme
-        set -g mode-style "fg=${colors.fg},bg=${colors.bg-light}"
 
-        set -g message-style "fg=${colors.fg},bg=${colors.bg-darker}"
-        set -g message-command-style "fg=${colors.fg},bg=${colors.bg-darker}"
+        # --> Catppuccin (Mocha)
+        thm_bg="#1e1e2e"
+        thm_fg="#cdd6f4"
+        thm_cyan="#89dceb"
+        thm_black="#181825"
+        thm_gray="#313244"
+        thm_magenta="#cba6f7"
+        thm_pink="#f5c2e7"
+        thm_red="#f38ba8"
+        thm_green="#a6e3a1"
+        thm_yellow="#f9e2af"
+        thm_blue="#89b4fa"
+        thm_orange="#fab387"
+        thm_black4="#585b70"
 
-        set -g pane-border-style "fg=${colors.bg-light}"
-        set -g pane-active-border-style "fg=${colors.bg-light}"
+        set -g mode-style "fg=$thm_fg,bg=$thm_bg"
+
+        set -g message-style "fg=$thm_fg,bg=$thm_black"
+        set -g message-command-style "fg=$thm_fg,bg=$thm_black"
+
+        set -g pane-border-style "fg=$thm_black4"
+        set -g pane-active-border-style "fg=$thm_black4"
 
         set -g status on
         set -g status-interval 5
         set -g status-position top
         set -g status-justify "left"
 
-        set -g status-style "fg=${colors.ansi.color4},bg=default"
+        set -g status-style "fg=$thm_blue,bg=#11111b"
 
         set -g status-left-length "100"
         set -g status-right-length "100"
@@ -108,14 +125,14 @@ in
         set -g status-left-style NONE
         set -g status-right-style NONE
 
-        set -g status-left "#[fg=${colors.bg},bg=${colors.ansi.color4},bold] #S "
+        set -g status-left "#[fg=$thm_blue,bg=$thm_gray] #S "
         set -g status-right ""
 
-        setw -g window-status-activity-style "underscore,fg=${colors.fg},bg=${colors.bg}"
-        setw -g window-status-separator "|"
-        setw -g window-status-style "NONE,fg=${colors.fg},bg=${colors.bg-darker}"
+        setw -g window-status-activity-style "underscore,fg=$thm_fg,bg=$thm_black"
+        setw -g window-status-separator ""
+        setw -g window-status-style "NONE,fg=$thm_fg,bg=#11111b"
         setw -g window-status-format " #I: #W#F "
-        setw -g window-status-current-format "#[fg=${colors.bg},bg=${colors.fg},bold] #I: #W#F "
+        setw -g window-status-current-format "#[fg=$thm_fg,bg=$thm_bg,bold] #I: #W#F "
       '';
     };
 

@@ -20,9 +20,8 @@ M.load = function()
       offsets = {
         {
           filetype = "NvimTree",
-          text = "NvimTree",
-          highlight = "Directory",
-          separator = true,
+          highlight = "StatusLine",
+          separator = false,
         },
       },
       truncate_names = false,

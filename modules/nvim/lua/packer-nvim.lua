@@ -84,7 +84,8 @@ M.load = function()
       end,
     })
     use({
-      "kyazdani42/nvim-tree.lua",
+      "nvim-tree/nvim-tree.lua",
+      after = "catppuccin",
       config = function()
         require("nvim-tree-config").load()
       end,
@@ -116,7 +117,7 @@ M.load = function()
       as = "catppuccin",
       requires = "xiyaowong/nvim-transparent",
       config = function()
-        require("colorscheme-config").load()
+        require("catppuccin-config").load()
       end,
     })
     use("kyazdani42/nvim-web-devicons")
@@ -151,7 +152,7 @@ M.load = function()
       config = function()
         require("scrollbar").setup({
           handle = {
-            color = "#585B70",
+            color = "#45475A",
           },
         })
       end,
@@ -177,7 +178,7 @@ M.load = function()
           let g:vim_markdown_emphasis_multiline = 0
           let g:vim_markdown_conceal_code_blocks = 0
           let g:vim_markdown_new_list_item_indent = 2
-        ]] ,
+        ]],
           false
         )
         vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
