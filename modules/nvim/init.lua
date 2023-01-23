@@ -21,7 +21,7 @@ vim.o.wildignore = "*.o,*~,*.pyc,*/.git/*,*/.hg/*,*/.svn/*,*/.DS_Store"
 --Always show current position
 vim.o.ruler = true
 -- Height of the command bar
-vim.o.cmdheight = 2
+vim.o.cmdheight = 0
 -- A buffer becomes hidden when it is abandoned
 vim.o.hid = true
 -- Ignore case when searching
@@ -33,7 +33,7 @@ vim.o.hlsearch = true
 -- Makes search act like search in modern browsers
 vim.o.incsearch = true
 -- Don't redraw while executing macros (good performance config)
-vim.o.lazyredraw = true
+vim.o.lazyredraw = false
 -- For regular expressions turn magic on
 vim.o.magic = true
 -- Show matching brackets when text indicator is over them

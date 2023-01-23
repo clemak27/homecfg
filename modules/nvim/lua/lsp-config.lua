@@ -298,13 +298,6 @@ M.load = function()
       vim.lsp.buf.format(nil, 500)
     end,
   })
-
-  -- setup fidget
-  require("fidget").setup({
-    window = {
-      blend = 0,
-    },
-  })
 end
 
 return M

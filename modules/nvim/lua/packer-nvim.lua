@@ -166,6 +166,14 @@ M.load = function()
         })
       end,
     })
+    use({
+      "folke/noice.nvim",
+      config = require("noice-config").load(),
+      requires = {
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify",
+      },
+    })
 
     ----------------- markdown ------------------------------------------
     use({
@@ -246,7 +254,6 @@ M.load = function()
       "neovim/nvim-lspconfig",
       requires = {
         "williamboman/mason-lspconfig.nvim",
-        "j-hui/fidget.nvim",
       },
       config = function()
         require("lsp-config").load()
@@ -257,6 +264,15 @@ M.load = function()
       "jose-elias-alvarez/null-ls.nvim",
       config = function()
         require("null-ls-config").load()
+      end,
+    })
+    use({
+      "mrded/nvim-lsp-notify",
+      requires = { "rcarriga/nvim-notify" },
+      config = function()
+        require("lsp-notify").setup({
+          notify = require("notify"),
+        })
       end,
     })
 
