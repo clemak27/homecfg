@@ -104,7 +104,7 @@ in
         thm_orange="#fab387"
         thm_black4="#585b70"
 
-        set -g mode-style "fg=$thm_fg,bg=$thm_bg"
+        set -g mode-style "fg=$thm_fg,bg=$thm_black4"
 
         set -g message-style "fg=$thm_fg,bg=$thm_black"
         set -g message-command-style "fg=$thm_fg,bg=$thm_black"
