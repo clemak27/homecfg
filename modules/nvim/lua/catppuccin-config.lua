@@ -14,6 +14,7 @@ M.load = function()
         ["@field"] = { fg = colors.red },
       }
     end,
+    no_italic = true,
     integrations = {
       cmp = true,
       fidget = true,
