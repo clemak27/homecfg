@@ -18,7 +18,8 @@ let
             sed '/kubernetes/,$ d' "$HOME/.config/starship.toml"
             echo '[kubernetes]'
             echo 'disabled = false'
-            echo 'format = "[$symbol$context( ($namespace))]($style) "'
+            echo 'symbol = "󱃾"'
+            echo 'format = "[$symbol $context( ($namespace))]($style) "'
             echo ""
             echo "[line_break]"
             echo "disabled = false"

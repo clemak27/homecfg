@@ -14,7 +14,6 @@ in
       };
       kubernetes = {
         disabled = true;
-        format = "[$symbol$context( \($namespace\))]($style) ";
       };
       directory = {
         format = "[ $path]($style)[$read_only]($read_only_style) ";
