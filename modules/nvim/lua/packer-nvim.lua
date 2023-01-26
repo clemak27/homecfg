@@ -168,11 +168,21 @@ M.load = function()
     })
     use({
       "folke/noice.nvim",
-      config = require("noice-config").load(),
       requires = {
         "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
+        {
+          "rcarriga/nvim-notify",
+          config = function()
+            require("notify").setup({
+              background_colour = "#1e1e2e",
+            })
+            vim.notify = require("notify")
+          end,
+        },
       },
+      config = function()
+        require("noice-config").load()
+      end,
     })
 
     ----------------- markdown ------------------------------------------
@@ -269,10 +279,9 @@ M.load = function()
     use({
       "mrded/nvim-lsp-notify",
       requires = { "rcarriga/nvim-notify" },
+      after = { "noice.nvim" },
       config = function()
-        require("lsp-notify").setup({
-          notify = require("notify"),
-        })
+        require("lsp-notify").setup({})
       end,
     })
 

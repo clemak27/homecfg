@@ -3,11 +3,6 @@
 local M = {}
 
 M.load = function()
-  require("notify").setup({
-    background_colour = "#1e1e2e",
-  })
-  vim.notify = require("notify")
-
   require("noice").setup({
     messages = {
       view_search = false,
