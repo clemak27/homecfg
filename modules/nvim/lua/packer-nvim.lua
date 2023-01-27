@@ -276,14 +276,6 @@ M.load = function()
         require("null-ls-config").load()
       end,
     })
-    use({
-      "mrded/nvim-lsp-notify",
-      requires = { "rcarriga/nvim-notify" },
-      after = { "noice.nvim" },
-      config = function()
-        require("lsp-notify").setup({})
-      end,
-    })
 
     ----------------- debugging --------------------------------------
     use({
