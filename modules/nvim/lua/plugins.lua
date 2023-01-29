@@ -52,11 +52,7 @@ return {
       })
     end,
   },
-
-  -- ----------------- git integration -----------------------------------
   "tpope/vim-fugitive",
-
-  -- ----------------- custom textobjects --------------------------------
   "kana/vim-textobj-user",
   { "kana/vim-textobj-entire", dependencies = "kana/vim-textobj-user" },
   {
