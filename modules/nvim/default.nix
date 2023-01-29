@@ -7,12 +7,6 @@ in
 
   config = lib.mkIf (cfg.enable) {
 
-    programs.zsh.shellAliases = builtins.listToAttrs (
-      [
-        { name = "nps"; value = "nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'"; }
-      ]
-    );
-
     programs.neovim = {
       enable = true;
       withNodeJs = true;
