@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.tmux;
-  colors = config.homecfg.colors;
 in
 {
   options.homecfg.tmux.enable = lib.mkEnableOption "Manage tmux with home-manager";

@@ -1,7 +1,6 @@
 { config, lib, pkgs, ... }:
 {
   imports = [
-    ./colors.nix
     ./modules/dev
     ./modules/fun
     ./modules/k8s
