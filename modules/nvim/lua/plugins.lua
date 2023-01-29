@@ -65,32 +65,4 @@ return {
       vim.g.vim_textobj_parameter_mapping = "a"
     end,
   },
-
-  -- ----------------- theming -------------------------------------------
-  "kyazdani42/nvim-web-devicons",
-  {
-    "norcalli/nvim-colorizer.lua",
-    -- config = function()
-    --   require("colorizer").setup()
-    -- end,
-  },
-  {
-    "petertriho/nvim-scrollbar",
-    config = function()
-      require("scrollbar").setup({
-        handle = {
-          color = "#45475A",
-        },
-      })
-    end,
-  },
-  {
-    "RRethy/vim-illuminate",
-    config = function()
-      require("illuminate").configure({
-        delay = 1000,
-        filetypes_denylist = { "NvimTree" },
-      })
-    end,
-  },
 }
