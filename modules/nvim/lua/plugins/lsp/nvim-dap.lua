@@ -127,4 +127,5 @@ return {
       vim.api.nvim_set_keymap("n", "<F9>", [[<Cmd>lua require'dap'.toggle_breakpoint()<CR>]], opt)
     end,
   },
+  "nvim-telescope/telescope-dap.nvim",
 }

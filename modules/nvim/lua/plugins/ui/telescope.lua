@@ -75,12 +75,4 @@ return {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
   },
-  "nvim-telescope/telescope-dap.nvim",
-  "stevearc/dressing.nvim",
-  {
-    "someone-stole-my-name/yaml-companion.nvim",
-    config = function()
-      require("telescope").load_extension("yaml_schema")
-    end,
-  },
 }
