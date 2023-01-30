@@ -90,7 +90,7 @@ in
         { name = "gdc"; value = "git diff --cached"; }
         { name = "gdm"; value = "git diff --cached master"; }
         { name = "gfmm"; value = "git fetch origin && git merge origin/master"; }
-        { name = "gprom"; value = "git pull --rebase origin master"; }
+        { name = "gprom"; value = "if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then git pull --rebase origin master; else git pull --rebase origin main; fi"; }
         { name = "gpskip"; value = "git push -o ci.skip"; }
         { name = "gs"; value = "git status"; }
         { name = "gst"; value = "git stash"; }
