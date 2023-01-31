@@ -64,8 +64,6 @@ return {
       vim.keymap.set("n", "<leader>ll", builtin.resume, {})
 
       -- -- lsp mappings
-      vim.keymap.set("n", "<leader>d", builtin.diagnostics, {})
-      -- vim.api.nvim_set_keymap( "n", "<Leader>dd", [[<Cmd>lua require('fzf-lua').lsp_workspace_diagnostics({ previewer = false })<CR>]], opt)
 
       vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
       -- vim.api.nvim_set_keymap("n", "<Leader>ss", [[<Cmd>lua require('fzf-lua').lsp_workspace_symbols()<CR>]], opt)
