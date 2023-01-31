@@ -2,6 +2,7 @@
 return {
   {
     "preservim/vim-markdown",
+    ft = { "markdown" },
     config = function()
       vim.o.conceallevel = 2
       vim.api.nvim_exec(
@@ -16,9 +17,10 @@ return {
       vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
     end,
   },
-  "godlygeek/tabular",
+  { "godlygeek/tabular", ft = { "markdown" } },
   {
     "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
     config = function()
       vim.g.mkdp_echo_preview_url = true
     end,
