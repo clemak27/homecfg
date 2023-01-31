@@ -4,6 +4,6 @@ return {
     require("trouble").setup({})
     local opt = { noremap = true, silent = true }
 
-    vim.api.nvim_set_keymap("n", "<Leader>d", [[<Cmd>TroubleToggle<CR>]], opt)
+    vim.api.nvim_set_keymap("n", "<Leader>t", [[<Cmd>TroubleToggle<CR>]], opt)
   end,
 }
