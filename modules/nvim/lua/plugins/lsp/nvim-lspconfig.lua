@@ -33,6 +33,7 @@ return {
         vim.keymap.set("n", "gr", builtin.lsp_references, bufopts)
         vim.keymap.set("n", "gi", builtin.lsp_implementations, bufopts)
         vim.keymap.set("n", "gt", builtin.lsp_type_definitions, bufopts)
+        vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
         vim.keymap.set("n", "gf", function()
           vim.lsp.buf.format({ async = true })
         end, bufopts)
