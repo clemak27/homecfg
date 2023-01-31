@@ -3,6 +3,7 @@
 return {
   {
     "lervag/vimtex",
+    ft = { "latex" },
     config = function()
       vim.g.vimtex_indent_enabled = 1
       vim.g.vimtex_indent_conditionals = {}
