@@ -208,6 +208,7 @@ return {
         "html",
         "jdtls",
         "jsonls",
+        "ltex",
         "rnix",
         "sumneko_lua",
         "terraformls",
