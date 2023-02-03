@@ -4,6 +4,13 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
+      "mfussenegger/nvim-jdtls",
+      {
+        "someone-stole-my-name/yaml-companion.nvim",
+        config = function()
+          require("telescope").load_extension("yaml_schema")
+        end,
+      },
     },
     config = function()
       local set_border = function()
@@ -304,13 +311,6 @@ return {
           vim.lsp.buf.format(nil, 500)
         end,
       })
-    end,
-  },
-  "mfussenegger/nvim-jdtls",
-  {
-    "someone-stole-my-name/yaml-companion.nvim",
-    config = function()
-      require("telescope").load_extension("yaml_schema")
     end,
   },
 }
