@@ -282,6 +282,41 @@ return {
             }
           end
 
+          if server == "ltex" then
+            local function file_exists(name)
+              local f = io.open(name, "r")
+              return f ~= nil and io.close(f)
+            end
+
+            local function loadConfig(configFile)
+              local f = assert(io.open(configFile))
+              local content = f:read("*all")
+              f:close()
+              local json = vim.json.decode(content)
+
+              config.settings = json
+            end
+
+            local function findCfg(path)
+              local cfg = "/.ltex-settings.json"
+              if file_exists(path .. cfg) then
+                loadConfig(path .. cfg)
+              else
+                local openPop = assert(io.popen("/usr/bin/realpath " .. path, "r"))
+                local output = openPop:read("*all")
+                openPop:close()
+
+                if output:gsub("\n[^\n]*$", "") == os.getenv("HOME") then
+                  config.settings = {}
+                else
+                  findCfg(path .. "/..")
+                end
+              end
+            end
+
+            findCfg(vim.fn.getcwd())
+          end
+
           if server == "jdtls" and vim.bo.filetype == "java" then
             require("jdtls").start_or_attach(jdtls_config())
           else
