@@ -36,7 +36,7 @@ in
 
     programs.java = {
       enable = true;
-      package = pkgs.jdk11;
+      package = pkgs.openjdk11-bootstrap;
     };
 
     programs.go = {
