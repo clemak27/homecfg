@@ -1,13 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.tools;
-  jqMaster = pkgs.jq.overrideAttrs (old: {
-    src = builtins.fetchGit {
-      url = "https://github.com/stedolan/jq.git";
-      ref = "master";
-      rev = "cff5336ec71b6fee396a95bb0e4bea365e0cd1e8";
-    };
-  });
 in
 {
   options.homecfg.tools.enable = lib.mkEnableOption "Manage command line tools with homecfg";
@@ -23,7 +16,6 @@ in
       htmlq
       hyperfine
       jo
-      jqMaster
       libqalculate
       pgcli
       ranger
