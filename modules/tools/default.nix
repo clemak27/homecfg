@@ -27,7 +27,7 @@ in
       tree
       unzip
       viddy
-      yq
+      yq-go
     ] ++ lib.optionals stdenv.isLinux [
       android-tools
     ];
