@@ -84,7 +84,6 @@ in
       ".todo/config".source = ./todo/todo.cfg;
       ".config/tealdeer/config.toml".source = ./tealdeer.toml;
       ".local/bin/rfv".source = ./rfv;
-      ".local/bin/git-edit".source = ./git-edit;
       ".local/bin/jq".source = "${pkgs.yq-go}/bin/yq";
       ".config/btop/btop.conf".source = ./btop.conf;
     };
