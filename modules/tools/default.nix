@@ -13,7 +13,6 @@ in
       curl
       exa
       fd
-      htmlq
       hyperfine
       jo
       libqalculate
