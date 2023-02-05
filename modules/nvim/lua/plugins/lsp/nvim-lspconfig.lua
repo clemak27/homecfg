@@ -302,7 +302,7 @@ return {
               if file_exists(path .. cfg) then
                 loadConfig(path .. cfg)
               else
-                local openPop = assert(io.popen("/usr/bin/realpath " .. path, "r"))
+                local openPop = assert(io.popen("realpath " .. path, "r"))
                 local output = openPop:read("*all")
                 openPop:close()
 
