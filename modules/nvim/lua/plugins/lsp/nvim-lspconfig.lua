@@ -127,11 +127,9 @@ return {
             "-data",
             workspace_dir,
           },
-
           -- This is the default if not provided, you can remove it. Or adjust as needed.
           -- One dedicated LSP server & client will be started per unique root_dir
           root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }),
-
           -- Here you can configure eclipse.jdt.ls specific settings
           -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
           -- for a list of options
@@ -174,7 +172,6 @@ return {
               },
             },
           },
-
           on_attach = function(client, bufnr)
             local function buf_set_option(...)
               vim.api.nvim_buf_set_option(bufnr, ...)
@@ -188,7 +185,6 @@ return {
 
             require("jdtls.setup").add_commands()
           end,
-
           -- Language server `initializationOptions`
           -- You need to extend the `bundles` with paths to jar files
           -- if you want to use additional eclipse.jdt.ls plugins.
@@ -209,7 +205,6 @@ return {
       local servers = {
         "bashls",
         "cssls",
-        "golangci_lint_ls",
         "gopls",
         "gradle_ls",
         "html",

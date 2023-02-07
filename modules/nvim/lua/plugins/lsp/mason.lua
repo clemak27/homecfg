@@ -13,7 +13,6 @@ return {
           -- LSP
           "bash-language-server",
           "css-lsp",
-          "golangci-lint-langserver",
           "gopls",
           "gradle-language-server",
           "html-lsp",
@@ -33,10 +32,11 @@ return {
           "js-debug-adapter",
 
           -- Linter
-          "shellcheck",
-          "markdownlint",
-          "yamllint",
+          "golangci-lint",
           "hadolint",
+          "markdownlint",
+          "shellcheck",
+          "yamllint",
 
           -- Fomatter
           "gofumpt",
@@ -44,7 +44,6 @@ return {
           "shfmt",
           "stylua",
         },
-
         auto_update = true,
       })
     end,

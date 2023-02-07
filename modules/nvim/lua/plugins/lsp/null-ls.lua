@@ -30,6 +30,7 @@ return {
           formatting.goimports,
           diagnostics.yamllint,
           diagnostics.hadolint,
+          diagnostics.golangci_lint,
         },
       })
 
