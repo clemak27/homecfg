@@ -13,6 +13,7 @@ in
       curl
       exa
       fd
+      gojq
       hyperfine
       jo
       libqalculate
@@ -83,7 +84,7 @@ in
       ".todo/config".source = ./todo/todo.cfg;
       ".config/tealdeer/config.toml".source = ./tealdeer.toml;
       ".local/bin/rfv".source = ./rfv;
-      ".local/bin/jq".source = "${pkgs.yq-go}/bin/yq";
+      ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
       ".config/btop/btop.conf".source = ./btop.conf;
     };
 
