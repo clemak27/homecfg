@@ -58,13 +58,4 @@ return {
     end,
   },
   "tpope/vim-fugitive",
-  "kana/vim-textobj-user",
-  { "kana/vim-textobj-entire", dependencies = "kana/vim-textobj-user" },
-  {
-    "sgur/vim-textobj-parameter",
-    dependencies = "kana/vim-textobj-user",
-    config = function()
-      vim.g.vim_textobj_parameter_mapping = "a"
-    end,
-  },
 }
