@@ -212,7 +212,7 @@ return {
         "jsonls",
         "ltex",
         "rnix",
-        "sumneko_lua",
+        "lua_ls",
         "terraformls",
         "texlab",
         "tsserver",
@@ -233,7 +233,7 @@ return {
             config.filetypes = { "json", "json5" }
           end
 
-          if server == "sumneko_lua" then
+          if server == "lua_ls" then
             local runtime_path = vim.split(package.path, ";")
             table.insert(runtime_path, "lua/?.lua")
             table.insert(runtime_path, "lua/?/init.lua")
