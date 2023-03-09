@@ -312,6 +312,14 @@ return {
             findCfg(vim.fn.getcwd())
           end
 
+          if server == "yamlls" then
+            config.settings = {
+              yaml = {
+                keyOrdering = false,
+              },
+            }
+          end
+
           if server == "jdtls" and vim.bo.filetype == "java" then
             require("jdtls").start_or_attach(jdtls_config())
           else
