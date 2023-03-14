@@ -78,6 +78,11 @@ in
 
     programs.dircolors.enable = true;
 
+    home.packages = with pkgs; [
+      zsh-completions
+    ];
+
+
     home.file = {
       ".zsh_functions" = {
         source = ./zsh_functions;
