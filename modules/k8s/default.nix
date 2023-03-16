@@ -44,8 +44,9 @@ in
       kubectl
       kubectx
       kubernetes-helm
-      stern
+      kustomize
       starshipK8s
+      stern
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
