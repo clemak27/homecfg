@@ -37,7 +37,9 @@ return {
 
         vim.keymap.set("n", "gd", builtin.lsp_definitions, bufopts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set("n", "gr", builtin.lsp_references, bufopts)
+        vim.keymap.set("n", "gr", function()
+          builtin.lsp_references({ show_line = false })
+        end, bufopts)
         vim.keymap.set("n", "gi", builtin.lsp_implementations, bufopts)
         vim.keymap.set("n", "gt", builtin.lsp_type_definitions, bufopts)
         vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
