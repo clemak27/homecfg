@@ -61,5 +61,16 @@ in
         { name = "stk"; value = "source starship-toggle-k8s"; }
       ]
     );
+
+    programs.zsh.initExtra = ''
+      # use kubecolor if available (install on nix did not work)
+      # go install github.com/hidetatz/kubecolor/cmd/kubecolor@latest
+      if [ -e "$GOPATH/bin/kubecolor" ]; then 
+        source <(kubectl completion zsh)
+        alias kubectl=kubecolor
+        compdef kubecolor=kubectl
+      fi
+
+    '';
   };
 }
