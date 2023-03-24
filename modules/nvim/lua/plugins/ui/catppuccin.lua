@@ -2,7 +2,6 @@ return {
   {
     "catppuccin/nvim",
     as = "catppuccin",
-    dependencies = { "xiyaowong/nvim-transparent" },
     priority = 1000,
     config = function()
       require("catppuccin").setup({
@@ -30,12 +29,6 @@ return {
           nvimtree = true,
           treesitter = true,
         },
-      })
-
-      require("transparent").setup({
-        enable = true,
-        extra_groups = {},
-        exclude = {},
       })
 
       vim.wo.fillchars = "eob: "
