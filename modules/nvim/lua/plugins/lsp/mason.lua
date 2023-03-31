@@ -44,7 +44,8 @@ return {
           "shfmt",
           "stylua",
         },
-        auto_update = true,
+        -- https://github.com/williamboman/mason.nvim/issues/916
+        -- auto_update = true,
       })
     end,
   },
