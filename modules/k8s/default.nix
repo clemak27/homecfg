@@ -55,7 +55,7 @@ in
 
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
-        { name = "kgaw"; value = "watch -n 1 --no-title kubectl get all"; }
+        { name = "kgaw"; value = "[ -e $GOPATH/bin/kubecolor ] && watch -n 1 --no-title kubecolor get all --force-colors ||  watch -n 1 --no-title kubectl get all"; }
         { name = "kns"; value = "kubens"; }
         { name = "kctx"; value = "kubectx"; }
         { name = "stk"; value = "source starship-toggle-k8s"; }
