@@ -34,7 +34,7 @@ in
       shellAliases = builtins.listToAttrs (
         [
           { name = "cd.."; value = "cd .."; }
-          { name = "clear"; value = "if [ -n $TMUX ]; then /usr/bin/clear && tmux clearhist; else printf '\\33c\\e[3J'; fi"; }
+          { name = "clear"; value = "[ -e /usr/bin/clear] && /usr/bin/clear || printf '\\33c\\e[3J'; [ -n $TMUX ] && tmux clearhist;"; }
           { name = "q"; value = "exit"; }
         ]
       );
