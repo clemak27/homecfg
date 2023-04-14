@@ -47,7 +47,6 @@ return {
     end,
   },
   "antoinemadec/FixCursorHold.nvim",
-  "gpanders/editorconfig.nvim",
   {
     "rmagatti/auto-session",
     config = function()
