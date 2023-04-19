@@ -45,6 +45,30 @@ in
       goPath = ".go";
     };
 
+    editorconfig = {
+      enable = true;
+      settings = {
+        "*" = {
+          charset = "utf-8";
+          end_of_line = "lf";
+          insert_final_newline = true;
+          trim_trailing_whitespace = true;
+          indent_size = 2;
+          indent_style = "space";
+        };
+        "Makefile" = {
+          indent_style = "tab";
+          tab_width = 2;
+        };
+        "{*.go,go.mod}" = {
+          indent_style = "tab";
+          indent_size = 2;
+        };
+        "*.java" = {
+          indent_style = "space";
+          indent_size = 4;
+        };
+      };
+    };
   };
-
 }
