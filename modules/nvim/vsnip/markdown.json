@@ -160,5 +160,33 @@
       "</details>"
     ],
     "description": "Inserts a mermaid Git Graph"
+  },
+  "mdl-disable": {
+    "prefix": "mdl-disable",
+    "body": [
+      "<!-- markdownlint-disable -->"
+    ],
+    "description": "Inserts a markdownlint-disable comment"
+  },
+  "mdl-disable-nl": {
+    "prefix": "mdl-disable-nl",
+    "body": [
+      "<!-- markdownlint-disable-next-line -->"
+    ],
+    "description": "Inserts a markdownlint-disable comment"
+  },
+  "mdl-capture": {
+    "prefix": "mdl-capture",
+    "body": [
+      "<!-- markdownlint-capture -->"
+    ],
+    "description": "Inserts a markdownlint-capture comment"
+  },
+  "mdl-restore": {
+    "prefix": "mdl-restore",
+    "body": [
+      "<!-- markdownlint-restore -->"
+    ],
+    "description": "Inserts a markdownlint-restore comment"
   }
 }
