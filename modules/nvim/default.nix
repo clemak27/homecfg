@@ -14,8 +14,11 @@ in
       vimdiffAlias = true;
       extraPackages = with pkgs; [
         cargo
+        gcc
+        nodejs-16_x
         rnix-lsp
         sumneko-lua-language-server
+        yarn
       ];
     };
 

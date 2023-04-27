@@ -7,13 +7,9 @@ in
 
   config = lib.mkIf (cfg.enable) {
     home.packages = with pkgs; [
-      nodejs-16_x
-      yarn
-
-      gradle
-
-      gcc
       gnumake
+      gradle
+      nodejs-16_x
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
