@@ -15,6 +15,7 @@ in
       extraPackages = with pkgs; [
         cargo
         rnix-lsp
+        sumneko-lua-language-server
       ];
     };
 

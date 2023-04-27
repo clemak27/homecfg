@@ -18,7 +18,6 @@ return {
           "html-lsp",
           { "jdtls", version = "1.12.0" },
           "json-lsp",
-          "lua-language-server",
           "ltex-ls",
           "terraform-ls",
           "texlab",
