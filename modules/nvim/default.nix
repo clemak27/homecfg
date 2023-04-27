@@ -12,12 +12,11 @@ in
       withNodeJs = true;
       vimAlias = true;
       vimdiffAlias = true;
+      extraPackages = with pkgs; [
+        cargo
+        rnix-lsp
+      ];
     };
-
-    home.packages = with pkgs; [
-      cargo
-      rnix-lsp
-    ];
 
     home.file = {
       ".markdownlintrc".source = ./markdownlintrc;
