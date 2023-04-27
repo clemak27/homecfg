@@ -7,7 +7,11 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
     },
     config = function()
-      require("mason").setup({})
+      require("mason").setup({
+        ui = {
+          border = "rounded",
+        },
+      })
       require("mason-tool-installer").setup({
         ensure_installed = {
           -- LSP
