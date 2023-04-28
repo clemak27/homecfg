@@ -20,7 +20,7 @@ return {
           "gopls",
           "gradle-language-server",
           "html-lsp",
-          { "jdtls", version = "1.12.0" },
+          "jdtls",
           "json-lsp",
           "ltex-ls",
           "terraform-ls",
@@ -33,6 +33,8 @@ return {
           -- DAP
           "delve",
           "js-debug-adapter",
+          "java-debug-adapter",
+          "java-test",
 
           -- Linter
           "golangci-lint",

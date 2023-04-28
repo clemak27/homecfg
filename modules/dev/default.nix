@@ -32,7 +32,7 @@ in
 
     programs.java = {
       enable = true;
-      package = pkgs.openjdk11-bootstrap;
+      package = pkgs.openjdk17-bootstrap;
     };
 
     programs.go = {
