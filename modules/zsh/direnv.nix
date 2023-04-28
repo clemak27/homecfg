@@ -7,6 +7,12 @@ in
     programs.direnv.enable = true;
     programs.direnv.nix-direnv.enable = true;
     programs.direnv.enableZshIntegration = true;
+
+    programs.zsh = {
+      sessionVariables = {
+        DIRENV_LOG_FORMAT = "";
+      };
+    };
   };
 }
 

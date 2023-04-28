@@ -41,7 +41,6 @@ in
 
       sessionVariables = {
         BROWSER = "firefox";
-        DIRENV_LOG_FORMAT = "";
         EDITOR = "nvim";
         PATH = "$PATH:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.local/bin:$HOME/.local/bin/npm/bin";
         VISUAL = "nvim";
