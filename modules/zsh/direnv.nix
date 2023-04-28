@@ -11,6 +11,7 @@ in
     programs.zsh = {
       sessionVariables = {
         DIRENV_LOG_FORMAT = "";
+        PRE_COMMIT_COLOR = "never";
       };
     };
   };
