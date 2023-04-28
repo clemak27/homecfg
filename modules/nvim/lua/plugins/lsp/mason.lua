@@ -41,7 +41,7 @@ return {
           "shellcheck",
           "yamllint",
 
-          -- Fomatter
+          -- Formatter
           "gofumpt",
           "goimports",
           "shfmt",
