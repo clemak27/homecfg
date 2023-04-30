@@ -56,12 +56,13 @@ local jdtls_config = function()
   -- This bundles definition is the same as in the previous section (java-debug installation)
   local bundles = {
     vim.fn.glob(
-      masonPath .. "/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
+      masonPath ..
+      "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
     ),
   }
 
   -- This is the new part
-  vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/vscode-java-test/server/*.jar"), "\n"))
+  vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/java-test/extension/server/*.jar"), "\n"))
 
   vim.api.nvim_create_user_command("JdtAddCommands", function()
     require("jdtls.setup").add_commands()
