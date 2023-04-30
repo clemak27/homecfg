@@ -54,7 +54,6 @@ local jdtls_config = function()
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
   local workspace_dir = os.getenv("HOME") .. "/.jdtls-workspace/" .. project_name
 
-  -- This bundles definition is the same as in the previous section (java-debug installation)
   local bundles = {
     vim.fn.glob(
       masonPath ..
@@ -62,7 +61,6 @@ local jdtls_config = function()
     ),
   }
 
-  -- This is the new part
   vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/java-test/extension/server/*.jar"), "\n"))
 
   vim.api.nvim_create_user_command("JdtAddCommands", function()
@@ -90,12 +88,7 @@ local jdtls_config = function()
       "-data",
       workspace_dir,
     },
-    -- This is the default if not provided, you can remove it. Or adjust as needed.
-    -- One dedicated LSP server & client will be started per unique root_dir
     root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }),
-    -- Here you can configure eclipse.jdt.ls specific settings
-    -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
-    -- for a list of options
     settings = {
       java = {
         signatureHelp = { enabled = true },
@@ -116,9 +109,6 @@ local jdtls_config = function()
             "jdk.*",
             "sun.*",
           },
-          -- Defines the sorting order of import statements. A package or type name
-          -- prefix (e.g. 'org.eclipse') is a valid entry. An import is always added
-          -- to the most specific group.
           importOrder = {
             "at",
             "com",
@@ -143,7 +133,6 @@ local jdtls_config = function()
       set_border()
       set_mappings()
 
-      --Enable completion triggered by <c-x><c-o>
       buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
       require("jdtls.setup").add_commands()
@@ -158,13 +147,6 @@ local jdtls_config = function()
 
       require('jdtls').setup_dap({ hotcodereplace = 'auto' })
     end,
-    -- Language server `initializationOptions`
-    -- You need to extend the `bundles` with paths to jar files
-    -- if you want to use additional eclipse.jdt.ls plugins.
-    --
-    -- See https://github.com/mfussenegger/nvim-jdtls#java-debug-installation
-    --
-    -- If you don't plan on using the debugger or other eclipse.jdt.ls plugins you can remove this
     init_options = {
       bundles = bundles,
     },
