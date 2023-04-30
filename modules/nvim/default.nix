@@ -15,6 +15,7 @@ in
       extraPackages = with pkgs; [
         cargo
         gcc
+        python311
         nodejs-16_x
         rnix-lsp
         sumneko-lua-language-server
