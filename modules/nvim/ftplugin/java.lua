@@ -147,6 +147,16 @@ local jdtls_config = function()
       buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
       require("jdtls.setup").add_commands()
+
+      vim.api.nvim_create_user_command("JdtTestClass", function()
+        require 'jdtls'.test_class()
+      end, {})
+
+      vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+        require 'jdtls'.test_nearest_method()
+      end, {})
+
+      require('jdtls').setup_dap({ hotcodereplace = 'auto' })
     end,
     -- Language server `initializationOptions`
     -- You need to extend the `bundles` with paths to jar files
