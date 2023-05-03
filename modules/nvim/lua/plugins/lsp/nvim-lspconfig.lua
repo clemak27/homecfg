@@ -11,6 +11,7 @@ return {
           require("telescope").load_extension("yaml_schema")
         end,
       },
+      "barreiroleo/ltex_extra.nvim",
     },
     config = function()
       local set_border = function()
@@ -159,38 +160,37 @@ return {
           end
 
           if server == "ltex" then
-            local function file_exists(name)
-              local f = io.open(name, "r")
-              return f ~= nil and io.close(f)
-            end
-
-            local function loadConfig(configFile)
-              local f = assert(io.open(configFile))
-              local content = f:read("*all")
-              f:close()
-              local json = vim.json.decode(content)
-
-              config.settings = json
-            end
-
-            local function findCfg(path)
-              local cfg = "/.ltex-settings.json"
-              if file_exists(path .. cfg) then
-                loadConfig(path .. cfg)
-              else
-                local openPop = assert(io.popen("realpath " .. path, "r"))
-                local output = openPop:read("*all")
-                openPop:close()
-
-                if output:gsub("\n[^\n]*$", "") == os.getenv("HOME") then
-                  config.settings = {}
-                else
-                  findCfg(path .. "/..")
-                end
+            config.on_attach = function(client, bufnr)
+              local function buf_set_option(...)
+                vim.api.nvim_buf_set_option(bufnr, ...)
               end
+
+              set_border()
+              set_mappings()
+
+              --Enable completion triggered by <c-x><c-o>
+              buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+              local configPath = ".ltex"
+              if os.getenv("NVIM_LTEX_LOCAL_CONFIG") == "true" then
+                configPath = os.getenv("HOME") .. "/.ltex"
+              end
+
+              require("ltex_extra").setup {
+                path = configPath,
+              }
             end
 
-            findCfg(vim.fn.getcwd())
+            local ltexEnabled = true
+            if os.getenv("NVIM_LTEX_ENABLE") == "false" then
+              ltexEnabled = false
+            end
+
+            config.settings = {
+              ltex = {
+                enabled = ltexEnabled,
+              },
+            }
           end
 
           if server == "yamlls" then
