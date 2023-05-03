@@ -28,6 +28,9 @@ in
       };
       git_status = {
         style = "bold yellow";
+        ahead = "󰧇";
+        behind = "󰦿";
+        diverged = "󰧈";
       };
       nix_shell = {
         disabled = false;
