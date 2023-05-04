@@ -171,9 +171,9 @@ return {
               --Enable completion triggered by <c-x><c-o>
               buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-              local configPath = ".ltex"
+              local configPath = os.getenv("HOME") .. "/.ltex"
               if os.getenv("NVIM_LTEX_LOCAL_CONFIG") == "true" then
-                configPath = os.getenv("HOME") .. "/.ltex"
+                configPath = ".ltex"
               end
 
               require("ltex_extra").setup {
