@@ -72,7 +72,7 @@ vim.api.nvim_exec(
   " Dont show mode in statusline
   set noshowmode
   " E355: Unknown option: noshowmode
-  
+
   " Configure backspace so it acts as it should act
   set backspace=eol,start,indent
   set whichwrap+=<,>,h,l
@@ -120,6 +120,7 @@ vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
 
 ----------------------------------------- autocmds -----------------------------------------
 
+-- filetypes
 vim.api.nvim_create_augroup("coreos_ft", { clear = true })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.bu",
@@ -142,6 +143,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   group = "coreos_ft",
   callback = function()
     vim.api.nvim_exec("set filetype=jsonc", false)
+  end,
+})
+
+vim.api.nvim_create_augroup("todo_ft", { clear = true })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "todo.txt",
+  group = "todo_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=todotxt", false)
   end,
 })
 
