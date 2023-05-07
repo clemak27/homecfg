@@ -1,6 +1,13 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.tools;
+  todoDue = pkgs.writeShellScript "todo-due" ''
+    todo.sh ls | rg -q due:$(date -I) -
+    if [ $? -eq 0 ]; then
+      echo "Tasks due today:"
+      todo.sh ls | rg --color=never due:$(date -I) -
+    fi
+  '';
 in
 {
   options.homecfg.tools.enable = lib.mkEnableOption "Manage command line tools with homecfg";
@@ -82,6 +89,7 @@ in
 
     home.file = {
       ".todo/config".source = ./todo/todo.cfg;
+      ".todo.actions.d/due".source = "${todoDue}";
       ".config/tealdeer/config.toml".source = ./tealdeer.toml;
       ".local/bin/rfv".source = ./rfv;
       ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
