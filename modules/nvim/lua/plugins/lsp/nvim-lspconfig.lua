@@ -177,6 +177,8 @@ return {
               end
 
               require("ltex_extra").setup {
+                load_langs = { 'en-US' },
+                init_check = true,
                 path = configPath,
               }
             end
