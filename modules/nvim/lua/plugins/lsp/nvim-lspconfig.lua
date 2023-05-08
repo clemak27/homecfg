@@ -176,11 +176,11 @@ return {
                 configPath = ".ltex"
               end
 
-              require("ltex_extra").setup {
-                load_langs = { 'en-US' },
+              require("ltex_extra").setup({
+                load_langs = { "en-US", "de-DE" },
                 init_check = true,
                 path = configPath,
-              }
+              })
             end
 
             local ltexEnabled = true
