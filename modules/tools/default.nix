@@ -8,6 +8,11 @@ let
       todo.sh ls | rg --color=never due:$(date -I) -
     fi
   '';
+  todoAgain = builtins.fetchGit {
+    url = "https://github.com/nthorne/todo.txt-cli-again-addon.git";
+    ref = "master";
+    rev = "0c29ac97018d0cd43f8f30006d8bc766b2173e86";
+  };
 in
 {
   options.homecfg.tools.enable = lib.mkEnableOption "Manage command line tools with homecfg";
@@ -94,6 +99,7 @@ in
       ".local/bin/rfv".source = ./rfv;
       ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
       ".config/btop/btop.conf".source = ./btop.conf;
+      ".todo.actions.d/again".source = "${todoAgain}/again";
     };
 
     xdg.configFile = {
