@@ -3,7 +3,7 @@
 # pull the protected branch and cleanup
 gcmld() {
   if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
-    git checkout master 
+    git checkout master
   else
     git checkout main
   fi

@@ -4,11 +4,11 @@ let
 in
 {
   options.homecfg.git.ssh_key = lib.mkOption {
-      type = lib.types.str;
-      default = "";
-      description = "The ssh key (public part) that is used to sign git commits.";
-      example = "ssh-ed25519 ABCD hostname";
-    };
+    type = lib.types.str;
+    default = "";
+    description = "The ssh key (public part) that is used to sign git commits.";
+    example = "ssh-ed25519 ABCD hostname";
+  };
 
   config = lib.mkIf (cfg.enable && cfg.ssh_key != "") {
     programs.git = {

@@ -29,7 +29,7 @@ let
 
       fi
     else
-     echo "starship not found"
+      echo "starship not found"
     fi
   '';
 in
@@ -65,7 +65,7 @@ in
     programs.zsh.initExtra = ''
       # use kubecolor if available (install on nix did not work)
       # go install github.com/hidetatz/kubecolor/cmd/kubecolor@latest
-      if [ -e "$GOPATH/bin/kubecolor" ]; then 
+      if [ -e "$GOPATH/bin/kubecolor" ]; then
         source <(kubectl completion zsh)
         alias kubectl=kubecolor
         compdef kubecolor=kubectl
