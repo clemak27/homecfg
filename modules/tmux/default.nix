@@ -47,6 +47,7 @@ in
         bind k select-pane -U
         bind l select-pane -R
         bind t if-shell -F '#{==:#{session_name},floating}' { detach-client } { popup -E -w 90% -h 90% 'tmux attach -t floating || tmux new -s floating -c "#{pane_current_path}"' }
+        bind g popup -E -w 90% -h 90% 'tmux new -s floating -c "#{pane_current_path}" lazygit'
         if -F "#{==:#{session_name},floating}" "set -g status off" "set -g status on"
         set-hook -g window-linked 'if -F "#{==:#{session_name},floating}" "set status off" "set status on"'
         set-hook -g window-unlinked 'if -F "#{==:#{session_name},floating}" "set status off" "set status on"'
@@ -135,12 +136,11 @@ in
       '';
     };
 
-
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
         { name = "trwp"; value = "tmux rename-window '#{b:pane_current_path}'"; }
         { name = "tfp"; value = ''tmux if-shell -F '#{==:#{session_name},floating}' { detach-client } { popup -E -w 90% -h 90% 'tmux attach -t floating || tmux new -s floating -c "#{pane_current_path}"' }''; }
-
+        { name = "tlg"; value = ''tmux popup -E -w 90% -h 90% 'tmux new -s floating -c "#{pane_current_path}" lazygit' ''; }
       ]
     );
   };
