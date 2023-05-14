@@ -51,7 +51,9 @@ return {
       vim.keymap.set("n", "<leader>f", builtin.live_grep, {})
       -- vim.api.nvim_set_keymap( "n", "<Leader>ff", [[<Cmd>lua require('fzf-lua').grep_project({rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=512"})<CR>]] , opt
 
-      vim.keymap.set("n", "<leader>g", builtin.git_status, {})
+      vim.keymap.set("n", "<leader>g", function()
+        io.popen("tmux popup -E -w 90% -h 90% 'tmux new -s floating -c " .. vim.fn.getcwd() .. " lazygit'")
+      end, {})
 
       vim.keymap.set("n", "<leader>p", builtin.find_files, {})
       vim.keymap.set("n", "<leader>pp", function()
