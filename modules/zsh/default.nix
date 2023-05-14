@@ -47,15 +47,7 @@ in
       };
 
       initExtra = builtins.concatStringsSep "\n" (
-        [ ]
-        # tea autocomplete
-        ++ lib.optionals config.homecfg.git.tea [
-          "PROG=tea _CLI_ZSH_AUTOCOMPLETE_HACK=1 source $HOME/.config/tea/autocomplete.zsh"
-        ]
-        ++ lib.optionals config.homecfg.git.glab [
-          "eval \"$(glab completion -s zsh)\""
-        ]
-        ++ [
+        [
           # no beeps
           "unsetopt beep"
           # don't save duplicates in zsh_history

@@ -5,9 +5,7 @@ in
 {
   imports = [
     ./github.nix
-    ./glab.nix
     ./ssh_signing.nix
-    ./tea.nix
   ];
 
   options.homecfg.git = {
