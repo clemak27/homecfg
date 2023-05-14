@@ -23,6 +23,7 @@ return {
           diagnostics_format = "[#{c}] #{m} (#{s})",
         }),
 
+        code_actions.gitsigns,
         code_actions.shellcheck,
 
         formatting.shfmt.with({
