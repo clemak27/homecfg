@@ -22,7 +22,6 @@ in
         rnix-lsp
         sumneko-lua-language-server
         stylua
-        texlab
       ];
     };
 
