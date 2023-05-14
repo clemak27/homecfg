@@ -24,7 +24,6 @@ return {
           "json-lsp",
           "ltex-ls",
           "terraform-ls",
-          "texlab",
           "typescript-language-server",
           "vetur-vls",
           "vim-language-server",
