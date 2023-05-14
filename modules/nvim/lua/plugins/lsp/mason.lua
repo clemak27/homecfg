@@ -46,7 +46,6 @@ return {
           "gofumpt",
           "goimports",
           "shfmt",
-          "stylua",
         },
         -- https://github.com/williamboman/mason.nvim/issues/916
         -- auto_update = true,
