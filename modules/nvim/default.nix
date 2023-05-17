@@ -19,7 +19,7 @@ in
         python311
         yarn
 
-        rnix-lsp
+        nil
         sumneko-lua-language-server
         stylua
       ];

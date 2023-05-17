@@ -93,7 +93,7 @@ return {
         -- jdtls is configured in ftplugin/java.lua
         "jsonls",
         "ltex",
-        "rnix",
+        "nil_ls",
         "lua_ls",
         "terraformls",
         "texlab",
