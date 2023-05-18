@@ -19,9 +19,19 @@ in
         python311
         yarn
 
+        # lsp
         nil
         sumneko-lua-language-server
         stylua
+
+        # linter
+        hadolint
+        nodePackages.markdownlint-cli
+        shellcheck
+        yamllint
+
+        # formatter
+        shfmt
       ];
     };
 

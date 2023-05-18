@@ -37,15 +37,10 @@ return {
 
           -- Linter
           "golangci-lint",
-          "hadolint",
-          "markdownlint",
-          "shellcheck",
-          "yamllint",
 
           -- Formatter
           "gofumpt",
           "goimports",
-          "shfmt",
         },
         -- https://github.com/williamboman/mason.nvim/issues/916
         -- auto_update = true,
