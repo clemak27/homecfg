@@ -20,9 +20,13 @@ in
         yarn
 
         # lsp
+        ltex-ls
         nil
-        sumneko-lua-language-server
+        nodePackages.bash-language-server
+        nodePackages.vscode-langservers-extracted
+        nodePackages.yaml-language-server
         stylua
+        sumneko-lua-language-server
 
         # linter
         hadolint

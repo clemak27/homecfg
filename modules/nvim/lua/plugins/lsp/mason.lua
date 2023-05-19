@@ -15,19 +15,13 @@ return {
       require("mason-tool-installer").setup({
         ensure_installed = {
           -- LSP
-          "bash-language-server",
-          "css-lsp",
           "gopls",
           "gradle-language-server",
-          "html-lsp",
           "jdtls",
-          "json-lsp",
-          "ltex-ls",
           "terraform-ls",
           "typescript-language-server",
           "vetur-vls",
           "vim-language-server",
-          "yaml-language-server",
 
           -- DAP
           "delve",
