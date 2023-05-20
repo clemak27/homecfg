@@ -19,21 +19,21 @@ return {
       local formatting = null_ls.builtins.formatting
 
       local nullLsSources = {
-        diagnostics.markdownlint.with({
-          diagnostics_format = "[#{c}] #{m} (#{s})",
-        }),
-
         code_actions.gitsigns,
         code_actions.shellcheck,
 
+        diagnostics.golangci_lint,
+        diagnostics.hadolint,
+        diagnostics.markdownlint.with({
+          diagnostics_format = "[#{c}] #{m} (#{s})",
+        }),
+        diagnostics.yamllint,
+
+        formatting.goimports,
         formatting.shfmt.with({
           extra_args = { "-i", "2", "-sr", "-ci" },
         }),
         formatting.stylua,
-        formatting.goimports,
-        diagnostics.yamllint,
-        diagnostics.hadolint,
-        diagnostics.golangci_lint,
       }
 
       if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/eslint") then
@@ -53,6 +53,23 @@ return {
           nullLsSources,
           formatting.eslint.with({
             prefer_local = "node_modules/.bin",
+          })
+        )
+      end
+
+      if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/prettier") then
+        table.insert(
+          nullLsSources,
+          formatting.prettier.with({
+            prefer_local = "node_modules/.bin",
+          })
+        )
+      else
+        table.insert(
+          nullLsSources,
+          formatting.prettier.with({
+            filetypes = { "markdown" },
+            extra_args = { "--prose-wrap", "always" },
           })
         )
       end

@@ -35,6 +35,7 @@ in
         yamllint
 
         # formatter
+        nodePackages.prettier
         shfmt
       ];
     };
