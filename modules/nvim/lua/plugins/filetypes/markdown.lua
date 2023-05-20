@@ -14,10 +14,8 @@ return {
         ]],
         false
       )
-      vim.api.nvim_set_keymap("n", "<Leader>ww", [[<Cmd>e ~/Notes/index.md<CR>]], { noremap = true, silent = true })
     end,
   },
-  { "godlygeek/tabular", ft = { "markdown" } },
   {
     "iamcco/markdown-preview.nvim",
     ft = { "markdown" },
