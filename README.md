@@ -2,8 +2,8 @@
 
 This is my home-manager configuration.
 
-It configures basically all CLI tools I want and is split into modules that can be
-enabled/disabled as needed.
+It configures basically all CLI tools I want and is split into modules that can
+be enabled/disabled as needed.
 
 ## Usage
 
@@ -26,19 +26,19 @@ The flake provides a NixOS module, which can be imported in an existing config.
    ];
    ```
 
-3. For local development/changes to `homecfg`, use the absolute path to
-   the checked out git repo when switching config, e.g.
+3. For local development/changes to `homecfg`, use the absolute path to the
+   checked out git repo when switching config, e.g.
    `home-manager switch --flake . --impure --override-input homecfg 'path:<path-to-homecfg>'"`
 
 ## Notes
 
 ### Updating and nixpkgs
 
-Managing the `nixpkgs` config you use is out of scope for this project
-and is part of your setup. This is just a module.
+Managing the `nixpkgs` config you use is out of scope for this project and is
+part of your setup. This is just a module.
 
-Note that if you want to update just `homecfg`, instead
-of your whole flake, use `nix flake lock --update-input homecfg`.
+Note that if you want to update just `homecfg`, instead of your whole flake, use
+`nix flake lock --update-input homecfg`.
 
 ### Aliases
 
