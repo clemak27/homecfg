@@ -14,30 +14,24 @@ return {
       })
       require("mason-tool-installer").setup({
         ensure_installed = {
-          -- LSP
-          "gopls",
-          "gradle-language-server",
+          -- java
           "jdtls",
-          "terraform-ls",
-          "typescript-language-server",
-          "vetur-vls",
-          "vim-language-server",
-
-          -- DAP
-          "delve",
-          "js-debug-adapter",
+          "gradle-language-server",
           "java-debug-adapter",
           "java-test",
 
-          -- Linter
-          "golangci-lint",
+          -- js
+          "typescript-language-server",
+          "js-debug-adapter",
+          "vetur-vls",
 
-          -- Formatter
+          -- go
+          "delve",
+          "golangci-lint",
+          "gopls",
           "gofumpt",
           "goimports",
         },
-        -- https://github.com/williamboman/mason.nvim/issues/916
-        -- auto_update = true,
       })
     end,
   },
