@@ -18,14 +18,6 @@ return {
         "phpdoc",
       },
     })
-
-    -- workaround issue with vim-markdown
-    vim.api.nvim_exec(
-      [[
-    au BufNewFile,BufRead *.md TSBufDisable highlight
-    ]],
-      false
-    )
   end,
   build = ":TSUpdate",
 }
