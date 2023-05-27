@@ -2,8 +2,31 @@
 
 return {
   "nvim-lualine/lualine.nvim",
+  dependencies = {
+    {
+      "SmiteshP/nvim-navic",
+      config = function()
+        require("nvim-navic").setup({
+          lsp = {
+            auto_attach = true,
+            preference = nil,
+          },
+          highlight = true,
+        })
+      end,
+    },
+  },
   config = function()
     local C = require("catppuccin.palettes").get_palette("mocha")
+    local function navic()
+      local navic = require("nvim-navic")
+      if navic.is_available() then
+        return navic.get_location(opts, bufnr)
+      else
+        return ""
+      end
+    end
+
     require("lualine").setup({
       options = {
         theme = "catppuccin",
@@ -36,6 +59,9 @@ return {
           {
             "filename",
             separator = "|",
+          },
+          {
+            navic,
           },
         },
         lualine_x = {

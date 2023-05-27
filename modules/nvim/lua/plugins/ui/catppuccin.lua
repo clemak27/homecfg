@@ -24,6 +24,10 @@ return {
           lsp_trouble = true,
           markdown = true,
           mason = true,
+          navic = {
+            enabled = true,
+            custom_bg = "#181825",
+          },
           noice = true,
           notify = true,
           nvimtree = true,
