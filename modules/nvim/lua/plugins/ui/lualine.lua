@@ -40,6 +40,9 @@ return {
         },
         lualine_x = {
           {
+            "diagnostics",
+            sources = { "nvim_lsp" },
+            separator = "|",
           },
           "searchcount",
           "location",
