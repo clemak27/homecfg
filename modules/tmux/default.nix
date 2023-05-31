@@ -125,7 +125,7 @@ in
         set -g status-left-style NONE
         set -g status-right-style NONE
 
-        set -g status-left "#[fg=$thm_blue,bg=$thm_gray] #S "
+        set -g status-left "#[fg=$thm_blue,bg=$thm_gray,bold] #S "
         set -g status-right ""
 
         setw -g window-status-activity-style "underscore,fg=$thm_fg,bg=$thm_black"
