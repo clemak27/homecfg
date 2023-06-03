@@ -188,5 +188,19 @@
       "<!-- markdownlint-restore -->"
     ],
     "description": "Inserts a markdownlint-restore comment"
+  },
+  "ltex_disable": {
+    "prefix": "ltex_disable",
+    "body": [
+      "<!-- LTex: enabled=false -->"
+    ],
+    "description": "Inserts a ltex disable comment"
+  },
+  "ltex_enable": {
+    "prefix": "ltex_enable",
+    "body": [
+      "<!-- LTex: enabled=true -->"
+    ],
+    "description": "Inserts a ltex enable comment"
   }
 }
