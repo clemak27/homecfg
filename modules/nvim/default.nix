@@ -1,6 +1,12 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.nvim;
+  defaultMarkdownlintRc = {
+    "default" = true;
+    "MD013" = {
+      "code_blocks" = false;
+    };
+  };
 in
 {
   options.homecfg.nvim.enable = lib.mkEnableOption "Manage neovim with homecfg";
@@ -42,7 +48,7 @@ in
     };
 
     home.file = {
-      ".markdownlintrc".source = ./markdownlintrc;
+      ".markdownlintrc".text = (builtins.toJSON defaultMarkdownlintRc);
       ".vsnip".source = ./vsnip;
     };
     xdg.configFile = {
