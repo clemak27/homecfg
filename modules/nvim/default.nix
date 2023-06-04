@@ -35,6 +35,7 @@ in
         yamllint
 
         # formatter
+        nixpkgs-fmt
         nodePackages.prettier
         shfmt
       ];
