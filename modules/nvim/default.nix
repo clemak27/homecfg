@@ -7,6 +7,19 @@ let
       "code_blocks" = false;
     };
   };
+  jdtlsFormat = ''
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <profiles version="13">
+      <profile kind="CodeFormatterProfile" name="custom" version="13">
+        <setting id="org.eclipse.jdt.core.formatter.align_assignment_statements_on_columns" value="true"/>
+        <setting id="org.eclipse.jdt.core.formatter.align_type_members_on_columns" value="true"/>
+        <setting id="org.eclipse.jdt.core.formatter.align_variable_declarations_on_columns" value="true"/>
+        <setting id="org.eclipse.jdt.core.formatter.join_wrapped_lines" value="true"/>
+        <setting id="org.eclipse.jdt.core.formatter.lineSplit" value="200"/>
+        <setting id="org.eclipse.jdt.core.formatter.tabulation.char" value="space"/>
+      </profile>
+    </profiles>
+  '';
 in
 {
   options.homecfg.nvim.enable = lib.mkEnableOption "Manage neovim with homecfg";
@@ -49,6 +62,7 @@ in
 
     home.file = {
       ".markdownlintrc".text = (builtins.toJSON defaultMarkdownlintRc);
+      ".jdtls-fmt.xml".text = jdtlsFormat;
       ".vsnip".source = ./vsnip;
     };
     xdg.configFile = {

@@ -109,6 +109,10 @@ local jdtls_config = function()
             "jdk.*",
             "sun.*",
           },
+          format = {
+            settings = {
+              url = os.getenv("HOME") .. "/.jdtls-fmt.xml"
+          },
           importOrder = {
             "at",
             "com",
