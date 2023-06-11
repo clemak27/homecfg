@@ -17,6 +17,9 @@ in
       prefix = "C-y";
       plugins = with pkgs; [
         {
+          plugin = tmuxPlugins.fzf-tmux-url;
+        }
+        {
           plugin = tmuxPlugins.resurrect;
         }
         # TODO autosave does not work, it gets loaded before extraConfig which means status-right get overridden
