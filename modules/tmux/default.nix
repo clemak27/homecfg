@@ -21,13 +21,15 @@ in
         }
         {
           plugin = tmuxPlugins.resurrect;
+          extraConfig = ''
+            set -g @resurrect-processes '~nvim'
+          '';
         }
-        # TODO autosave does not work, it gets loaded before extraConfig which means status-right get overridden
         {
           plugin = tmuxPlugins.continuum;
           extraConfig = ''
             set -g @continuum-restore 'on'
-            set -g @continuum-save-interval '15' # minutes
+            set -g @continuum-save-interval '0'
           '';
         }
       ];
