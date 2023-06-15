@@ -22,7 +22,8 @@ in
         {
           plugin = tmuxPlugins.resurrect;
           extraConfig = ''
-            set -g @resurrect-processes '~nvim'
+            set -g @resurrect-processes '~vim ~nvim'
+            set -g @resurrect-hook-post-save-all '~/.config/tmux/post_save.sh ~/.tmux/resurrect/last'
           '';
         }
         {
@@ -51,11 +52,13 @@ in
         bind j select-pane -D
         bind k select-pane -U
         bind l select-pane -R
+
         bind t if-shell -F '#{==:#{session_name},floating}' { detach-client } { popup -E -w 90% -h 90% 'tmux attach -t floating || tmux new -s floating -c "#{pane_current_path}"' }
         bind g popup -E -w 90% -h 90% 'tmux new -s floating -c "#{pane_current_path}" lazygit'
         if -F "#{==:#{session_name},floating}" "set -g status off" "set -g status on"
         set-hook -g window-linked 'if -F "#{==:#{session_name},floating}" "set status off" "set status on"'
         set-hook -g window-unlinked 'if -F "#{==:#{session_name},floating}" "set status off" "set status on"'
+
         bind -n M-, swap-pane -U
         bind -n M-. swap-pane -D
         bind -n M-h previous-window
@@ -148,5 +151,16 @@ in
         { name = "tlg"; value = ''tmux popup -E -w 90% -h 90% 'tmux new -s floating -c "#{pane_current_path}" lazygit' ''; }
       ]
     );
+
+    # see https://github.com/tmux-plugins/tmux-resurrect/issues/247
+    xdg.configFile = {
+      "tmux/post_save.sh" = {
+        text = ''
+          sed -ie "s| --cmd .*||g" $1
+        '';
+        executable = true;
+      };
+    };
+
   };
 }
