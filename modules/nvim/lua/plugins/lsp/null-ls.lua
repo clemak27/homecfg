@@ -35,6 +35,7 @@ return {
         }),
         formatting.stylua,
         formatting.nixpkgs_fmt,
+        formatting.yamlfmt,
       }
 
       if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/eslint") then
