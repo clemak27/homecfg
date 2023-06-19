@@ -7,6 +7,23 @@ let
       "code_blocks" = false;
     };
   };
+  goimports = pkgs.buildGoModule rec {
+    pname = "goimports";
+    version = "0.12.2";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "golang";
+      repo = "tools";
+      rev = "gopls/v${version}";
+      sha256 = "sha256-mbJ9CzJxhAxYByfNpNux/zOWBGaiH4fvIRIh+BMprMk=";
+    };
+
+    vendorSha256 = "sha256-W5t1ZLI4zBocAtxfB8zXfxx2asgUXrMi9YOfkWcOxmM=";
+
+    doCheck = false;
+
+    subPackages = [ "cmd/goimports" ];
+  };
   # jdtlsFormat = ''
   #   <?xml version="1.0" encoding="UTF-8" standalone="no"?>
   #   <profiles version="13">
@@ -58,6 +75,13 @@ in
         nodePackages.prettier
         shfmt
         yamlfmt
+
+        # go
+        delve
+        golangci-lint
+        gopls
+        gofumpt
+        goimports
       ];
     };
 

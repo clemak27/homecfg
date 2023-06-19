@@ -24,13 +24,6 @@ return {
           "typescript-language-server",
           "js-debug-adapter",
           "vetur-vls",
-
-          -- go
-          "delve",
-          "golangci-lint",
-          "gopls",
-          "gofumpt",
-          "goimports",
         },
       })
     end,
