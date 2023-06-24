@@ -41,6 +41,13 @@ in
       goPath = ".go";
     };
 
+    # https://utcc.utoronto.ca/~cks/space/blog/programming/Go121ToolchainDownloads
+    xdg.configFile = {
+      "go/env".text = ''
+        GOTOOLCHAIN=local
+      '';
+    };
+
     editorconfig = {
       enable = true;
       settings = {
