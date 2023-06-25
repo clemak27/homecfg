@@ -22,7 +22,7 @@ in
         {
           plugin = tmuxPlugins.resurrect;
           extraConfig = ''
-            set -g @resurrect-processes '~vim ~nvim'
+            set -g @resurrect-processes '~vim ~nvim tdt'
             set -g @resurrect-hook-post-save-all '~/.config/tmux/post_save.sh ~/.tmux/resurrect/last'
           '';
         }
