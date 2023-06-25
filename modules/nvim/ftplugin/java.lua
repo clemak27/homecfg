@@ -30,7 +30,7 @@ local set_mappings = function()
   vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
   vim.keymap.set("n", "gf", function()
     vim.lsp.buf.format({ async = true })
-    require 'jdtls'.organize_imports()
+    require("jdtls").organize_imports()
   end, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
@@ -54,11 +54,15 @@ local jdtls_config = function()
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
   local workspace_dir = os.getenv("HOME") .. "/.jdtls-workspace/" .. project_name
 
+  local handle = io.popen("which java")
+  local javaBin = handle:read("*a")
+  handle:close()
+
+  javaBin = javaBin:gsub("\r", "")
+  javaBin = javaBin:gsub("\n", "")
+
   local bundles = {
-    vim.fn.glob(
-      masonPath ..
-      "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"
-    ),
+    vim.fn.glob(masonPath .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
   }
 
   vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/java-test/extension/server/*.jar"), "\n"))
@@ -69,7 +73,7 @@ local jdtls_config = function()
 
   return {
     cmd = {
-      os.getenv("HOME") .. "/.nix-profile/bin/java",
+      javaBin,
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
       "-Dosgi.bundles.defaultStartLevel=4",
       "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -143,14 +147,14 @@ local jdtls_config = function()
       require("jdtls.setup").add_commands()
 
       vim.api.nvim_create_user_command("JdtTestClass", function()
-        require 'jdtls'.test_class()
+        require("jdtls").test_class()
       end, {})
 
       vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
-        require 'jdtls'.test_nearest_method()
+        require("jdtls").test_nearest_method()
       end, {})
 
-      require('jdtls').setup_dap({ hotcodereplace = 'auto' })
+      require("jdtls").setup_dap({ hotcodereplace = "auto" })
     end,
     init_options = {
       bundles = bundles,
@@ -158,4 +162,4 @@ local jdtls_config = function()
   }
 end
 
-require('jdtls').start_or_attach(jdtls_config())
+require("jdtls").start_or_attach(jdtls_config())
