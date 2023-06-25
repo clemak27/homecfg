@@ -225,7 +225,8 @@ vim_map("§", "^")
 vim_map("0", "^")
 -- Remap ß to end of line
 vim_map("ß", "$")
-
+-- Map save
+vim_map("gs", ":wa<CR>")
 ----------------------------------------- plugins -----------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
