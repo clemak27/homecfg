@@ -16,16 +16,6 @@ return {
     end,
   },
   {
-    "petertriho/nvim-scrollbar",
-    config = function()
-      require("scrollbar").setup({
-        handle = {
-          color = "#45475A",
-        },
-      })
-    end,
-  },
-  {
     "RRethy/vim-illuminate",
     config = function()
       require("illuminate").configure({
