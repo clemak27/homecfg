@@ -5,10 +5,10 @@ return {
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-vsnip",
       "ray-x/cmp-treesitter",
       "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "onsails/lspkind-nvim",
     },
@@ -37,8 +37,8 @@ return {
           end,
         },
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = cmp.config.window.bordered({ scrollbar = false }),
+          documentation = cmp.config.window.bordered({ scrollbar = false }),
         },
         mapping = {
           ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
@@ -76,12 +76,32 @@ return {
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
+          { name = "nvim_lsp_document_symbol" },
+          { name = "nvim_lsp_signature_help" },
+          { name = "vsnip" },
+          { name = "path" },
+          { name = "treesitter" },
+        }, {
+          { name = "vsnip" },
+          { name = "treesitter" },
+          { name = "path" },
+          { name = "buffer" },
+        }, {
+          { name = "path" },
+          { name = "buffer" },
+        }),
+      })
+
+      cmp.setup.filetype("markdown", {
+        sources = {
+          { name = "nvim_lsp" },
+          { name = "nvim_lsp_document_symbol" },
+          { name = "nvim_lsp_signature_help" },
           { name = "vsnip" },
           { name = "path" },
           { name = "treesitter" },
           { name = "buffer" },
-          { name = "nvim_lsp_signature_help" },
-        }),
+        },
       })
     end,
   },
