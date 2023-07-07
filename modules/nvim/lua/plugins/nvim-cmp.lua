@@ -13,7 +13,7 @@ return {
       "onsails/lspkind-nvim",
     },
     config = function()
-      vim.o.completeopt = "menuone,noselect"
+      vim.o.completeopt = "menu,menuone,noinsert"
       vim.cmd("set shortmess+=c")
 
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
@@ -74,18 +74,13 @@ return {
             maxwidth = 50,
           }),
         },
+        preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
           { name = "vsnip" },
-          { name = "path" },
           { name = "treesitter" },
-        }, {
-          { name = "vsnip" },
-          { name = "treesitter" },
-          { name = "path" },
-          { name = "buffer" },
         }, {
           { name = "path" },
           { name = "buffer" },
