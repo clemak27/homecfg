@@ -56,6 +56,7 @@ in
         yarn
 
         # lsp
+        efm-langserver
         ltex-ls
         nil
         nodePackages.bash-language-server

@@ -87,6 +87,7 @@ return {
       local servers = {
         "bashls",
         "cssls",
+        "efm",
         "gopls",
         "gradle_ls",
         "html",
@@ -199,6 +200,94 @@ return {
             config.settings = {
               yaml = {
                 keyOrdering = false,
+              },
+            }
+          end
+
+          if server == "efm" then
+            config.filetypes = { "markdown", "dockerfile", "yaml", "go", "sh", "nix", "lua", "javascript" }
+            config.init_options = { documentFormatting = true }
+            config.settings = {
+              loglevel = 5,
+              languages = {
+                markdown = {
+                  {
+                    lintCommand = "markdownlint --stdin",
+                    lintStdin = true,
+                    lintIgnoreExitCode = true,
+                    lintFormats = {
+                      "stdin:%l %m",
+                      "stdin:%l:%c %m",
+                      "stdin: %l: %m",
+                    },
+                    lintSeverity = 2,
+                  },
+                  {
+                    formatCommand = "prettier --prose-wrap always ${INPUT}",
+                    formatStdin = false,
+                  },
+                },
+                dockerfile = {
+                  {
+                    lintCommand = "hadolint --no-color -",
+                    lintStdin = true,
+                    lintIgnoreExitCode = true,
+                    lintFormats = { "-:%l %.%# %trror: %m", "-:%l %.%# %tarning: %m", "-:%l %.%# %tnfo: %m" },
+                    rootMarkers = { ".hadolint.yaml", "Dockerfile" },
+                  },
+                },
+                yaml = {
+                  {
+                    lintCommand = "yamllint -f parsable -",
+                    lintStdin = true,
+                    lintIgnoreExitCode = true,
+                    lintFormats = {
+                      "%s:%l:%c: [%tarning] %m",
+                      "%s:%l:%c: [%trror] %m",
+                    },
+                  },
+                  {
+                    formatCommand = "yamlfmt -",
+                    formatStdin = true,
+                  },
+                },
+                go = {
+                  {
+                    lintCommand = "golangci-lint run --color=never --out-format=tab --print-linter-name=false ${INPUT}",
+                    lintStdin = false,
+                    lintIgnoreExitCode = true,
+                    lintFormats = { "%.%#:%l:%c %m" },
+                    lintSeverity = 2,
+                  },
+                  {
+                    formatCommand = "goimports",
+                    formatStdin = true,
+                  },
+                },
+                sh = {
+                  {
+                    lintCommand = "shellcheck --color=never --format=gcc -",
+                    lintStdin = true,
+                    lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
+                  },
+                  {
+                    formatCommand = "shfmt -i 2 -sr -ci -",
+                    formatStdin = true,
+                  },
+                },
+                nix = {
+                  {
+                    formatCommand = "nixpkgs-fmt",
+                    formatStdin = true,
+                  },
+                },
+                lua = {
+                  {
+                    formatCommand = "stylua --color Never -",
+                    formatStdin = true,
+                    rootMarkers = { "stylua.toml", ".stylua.toml" },
+                  },
+                },
               },
             }
           end

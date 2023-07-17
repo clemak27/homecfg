@@ -21,21 +21,6 @@ return {
       local nullLsSources = {
         code_actions.gitsigns,
         code_actions.shellcheck,
-
-        diagnostics.golangci_lint,
-        diagnostics.hadolint,
-        diagnostics.markdownlint.with({
-          diagnostics_format = "[#{c}] #{m} (#{s})",
-        }),
-        diagnostics.yamllint,
-
-        formatting.goimports,
-        formatting.shfmt.with({
-          extra_args = { "-i", "2", "-sr", "-ci" },
-        }),
-        formatting.stylua,
-        formatting.nixpkgs_fmt,
-        formatting.yamlfmt,
       }
 
       if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/eslint") then
@@ -67,22 +52,11 @@ return {
           })
         )
       else
-        table.insert(
-          nullLsSources,
-          formatting.prettier.with({
-            filetypes = { "markdown" },
-            extra_args = { "--prose-wrap", "always" },
-          })
-        )
       end
 
       require("null-ls").setup({
         sources = nullLsSources,
       })
-
-      vim.api.nvim_create_user_command("NullLsToggle", function()
-        require("null-ls").toggle({})
-      end, {})
     end,
   },
 }
