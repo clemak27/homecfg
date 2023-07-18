@@ -7,5 +7,12 @@
       "EOF"
     ],
     "description": "Inserts a heredoc redirecting into a file"
+  },
+  "shellcheck_disable": {
+    "prefix": "shellcheck_disable",
+    "body": [
+      "# shellcheck disable=SC$0"
+    ],
+    "description": "Inserts a shellcheck disable directive"
   }
 }

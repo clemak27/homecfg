@@ -20,7 +20,6 @@ return {
 
       local nullLsSources = {
         code_actions.gitsigns,
-        code_actions.shellcheck,
       }
 
       if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/eslint") then
