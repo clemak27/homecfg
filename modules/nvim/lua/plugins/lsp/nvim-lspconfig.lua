@@ -88,6 +88,7 @@ return {
         "bashls",
         "cssls",
         "efm",
+        "eslint",
         "gopls",
         "gradle_ls",
         "html",

@@ -18,30 +18,7 @@ return {
       local diagnostics = null_ls.builtins.diagnostics
       local formatting = null_ls.builtins.formatting
 
-      local nullLsSources = {
-        code_actions.gitsigns,
-      }
-
-      if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/eslint") then
-        table.insert(
-          nullLsSources,
-          code_actions.eslint.with({
-            prefer_local = "node_modules/.bin",
-          })
-        )
-        table.insert(
-          nullLsSources,
-          diagnostics.eslint.with({
-            prefer_local = "node_modules/.bin",
-          })
-        )
-        table.insert(
-          nullLsSources,
-          formatting.eslint.with({
-            prefer_local = "node_modules/.bin",
-          })
-        )
-      end
+      local nullLsSources = {}
 
       if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/prettier") then
         table.insert(
