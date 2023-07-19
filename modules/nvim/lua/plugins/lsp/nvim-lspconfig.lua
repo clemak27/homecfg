@@ -206,6 +206,26 @@ return {
           end
 
           if server == "efm" then
+            local function file_exists(name)
+              local f = io.open(name, "r")
+              if f ~= nil then
+                io.close(f)
+                return true
+              else
+                return false
+              end
+            end
+
+            local jsPrettier = {}
+
+            if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/prettier") then
+              table.insert(jsPrettier, {
+                formatCommand = vim.fn.getcwd() .. "/node_modules/.bin/prettier ${INPUT}",
+                formatStdin = false,
+              })
+            else
+            end
+
             config.filetypes = { "markdown", "dockerfile", "yaml", "go", "sh", "nix", "lua", "javascript" }
             config.init_options = { documentFormatting = true }
             config.settings = {
@@ -289,6 +309,7 @@ return {
                     rootMarkers = { "stylua.toml", ".stylua.toml" },
                   },
                 },
+                javascript = jsPrettier,
               },
             }
           end
