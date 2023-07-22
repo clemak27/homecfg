@@ -3,8 +3,8 @@
   imports = [
     ./modules/dev
     ./modules/fun
-    ./modules/k8s
     ./modules/git
+    ./modules/k8s
     ./modules/nvim
     ./modules/tmux
     ./modules/tools
