@@ -9,6 +9,7 @@
     ./modules/tmux
     ./modules/tools
     ./modules/zsh
+    ./modules/zellij
   ];
 
   config = {
