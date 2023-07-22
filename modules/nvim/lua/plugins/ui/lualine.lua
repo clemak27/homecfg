@@ -27,6 +27,14 @@ return {
       end
     end
 
+    local function macro_recording()
+      local mode = require("noice").api.statusline.mode.get()
+      if mode then
+        return string.match(mode, "^recording @.*") or ""
+      end
+      return ""
+    end
+
     require("lualine").setup({
       options = {
         theme = "catppuccin",
@@ -59,6 +67,9 @@ return {
           {
             "filename",
             separator = "|",
+          },
+          {
+            macro_recording,
           },
           {
             navic,
