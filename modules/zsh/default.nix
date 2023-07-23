@@ -41,9 +41,7 @@ in
 
       sessionVariables = {
         BROWSER = "firefox";
-        EDITOR = "nvim";
         PATH = "$PATH:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.local/bin:$HOME/.local/bin/npm/bin";
-        VISUAL = "nvim";
       };
 
       initExtra = builtins.concatStringsSep "\n" (
