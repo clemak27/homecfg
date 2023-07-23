@@ -13,6 +13,24 @@ let
       zellij action new-tab --cwd $path --name $pname --layout custom
     fi
   '';
+
+  sidetree = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "sidetree";
+    version = "v0.8.2";
+
+    src = pkgs.fetchFromGitHub {
+      owner = "topisani";
+      repo = pname;
+      rev = version;
+      hash = "sha256-3Pq1Ta3BgE68Z9de9b11Im+Zrm1vZxhNHf1rWDAT34g";
+    };
+
+    cargoSha256 = "sha256-4W1M3Y4lckQU5t7kaYJqOwkF6nFlTYWUBfC2LVUkKI8=";
+  };
+
+  zellijHelixSideTree = pkgs.writeShellScriptBin "zhst" ''
+    zellij run -c -d=left -- sidetree
+  '';
 in
 {
   options.homecfg.zellij = {
@@ -27,6 +45,8 @@ in
     };
 
     home.packages = [
+      sidetree
+      zellijHelixSideTree
       zellijLazygit
       zellijOpenProject
     ];
@@ -34,6 +54,18 @@ in
     xdg.configFile = {
       "zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/config.kdl";
       "zellij/layouts/custom.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/custom.kdl";
+      "sidetree/sidetreerc".text = ''
+        set show_hidden true
+        set quit_on_open true
+        set open_cmd 'zellij action focus-previous-pane && zellij action write-chars ":open $sidetree_entry"'
+
+        set file_icons true
+        set icon_style white
+        set dir_name_style lightblue+b
+        set file_name_style reset
+        set highlight_style +r
+        set link_style cyan+b
+      '';
     };
   };
 }
