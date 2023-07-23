@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg;
+
+  zellijLazygit = pkgs.writeShellScriptBin "zlg" ''
+    zellij run -c -- lazygit && zellij action toggle-fullscreen
+  '';
 in
 {
   options.homecfg.zellij = {
@@ -13,6 +17,10 @@ in
       enable = true;
       # enableZshIntegration = true;
     };
+
+    home.packages = [
+      zellijLazygit
+    ];
 
     xdg.configFile = {
       "zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/config.kdl";
