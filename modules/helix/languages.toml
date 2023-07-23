@@ -59,3 +59,17 @@ languages = { yaml = [
   { formatCommand = "yamlfmt -", formatStdin = true }
 ] }
 
+# shell
+
+[[language]]
+name = "bash"
+auto-format = true
+formatter = { command = 'shfmt', args = [ "-i", "2", "-sr", "-ci", "-" ] }
+language-servers = [ "efm-bash", "bash-language-server" ]
+
+[language-server.efm-bash]
+command = "efm-langserver"
+config = { documentFormatting = true, languages = { sh = [
+  { lintCommand = "shellcheck --color=never --format=gcc -", lintStdin = true, lintFormats = [ "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" ] },
+  { formatCommand = "shfmt -i 2 -sr -ci -", formatStdin = true }
+] } }
