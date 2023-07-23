@@ -5,6 +5,14 @@ let
   zellijLazygit = pkgs.writeShellScriptBin "zlg" ''
     zellij run -c -- lazygit && zellij action toggle-fullscreen
   '';
+
+  zellijOpenProject = pkgs.writeShellScriptBin "zpf" ''
+    path=$(fd --type=d --hidden ".git" --exclude gitea-repos --absolute-path $HOME/Projects | grep ".git/" | sd "/.git/" "" | fzf)
+    if [ "$path" != "" ]; then
+      pname=$(basename $path)
+      zellij action new-tab --cwd $path --name $pname --layout custom
+    fi
+  '';
 in
 {
   options.homecfg.zellij = {
@@ -20,6 +28,7 @@ in
 
     home.packages = [
       zellijLazygit
+      zellijOpenProject
     ];
 
     xdg.configFile = {
