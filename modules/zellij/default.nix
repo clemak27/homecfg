@@ -10,7 +10,7 @@ let
     path=$(fd --type=d --hidden ".git" --exclude gitea-repos --absolute-path $HOME/Projects | grep ".git/" | sd "/.git/" "" | fzf)
     if [ "$path" != "" ]; then
       pname=$(basename $path)
-      zellij action new-tab --cwd $path --name $pname --layout custom
+      zellij action new-tab --cwd $path --name $pname --layout dev
     fi
   '';
 
@@ -29,7 +29,7 @@ let
   };
 
   zellijHelixSideTree = pkgs.writeShellScriptBin "zhst" ''
-    zellij run -c -d=left -- sidetree
+    zellij run -c -f -d left -- sidetree
   '';
 in
 {
@@ -54,10 +54,11 @@ in
     xdg.configFile = {
       "zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/config.kdl";
       "zellij/layouts/custom.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/custom.kdl";
+      "zellij/layouts/dev.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/dev.kdl";
       "sidetree/sidetreerc".text = ''
         set show_hidden true
-        set quit_on_open true
-        set open_cmd 'zellij action focus-previous-pane && zellij action write-chars ":open $sidetree_entry"'
+        set quit_on_open false
+        set open_cmd 'zellij action move-focus right && zellij action write-chars ":open $sidetree_entry"'
 
         set file_icons true
         set icon_style white

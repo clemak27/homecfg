@@ -1,0 +1,21 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="zellij:compact-bar"
+    }
+    pane split_direction="vertical" size="80%"{
+        pane {
+            command "sidetree"
+            close_on_exit true
+            size "15%"
+        }
+        pane {
+            command "hx"
+            args "."
+            focus true
+            name "helix"
+            close_on_exit true
+        }
+    }
+    pane
+}
+
