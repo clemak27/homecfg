@@ -91,6 +91,14 @@ in
       # ".jdtls-fmt.xml".text = jdtlsFormat;
       ".vsnip".source = ./vsnip;
     };
+
+    programs.zsh = {
+      sessionVariables = {
+        EDITOR = "nvim";
+        VISUAL = "nvim";
+      };
+    };
+
     xdg.configFile = {
       "nvim/init.lua".source = ./init.lua;
       "nvim/lua".source = ./lua;
