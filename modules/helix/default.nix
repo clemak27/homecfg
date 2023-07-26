@@ -73,7 +73,7 @@ in
     package = lib.mkOption {
       type = lib.types.package;
       default = pkgs.helix;
-      # description = "The package of helix to use.";
+      description = "The package of helix to use.";
     };
   };
 
