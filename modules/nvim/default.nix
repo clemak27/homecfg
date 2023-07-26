@@ -92,12 +92,12 @@ in
       ".vsnip".source = ./vsnip;
     };
 
-    programs.zsh = {
-      sessionVariables = {
-        EDITOR = "nvim";
-        VISUAL = "nvim";
-      };
-    };
+    # programs.zsh = {
+    #   sessionVariables = {
+    #     EDITOR = "nvim";
+    #     VISUAL = "nvim";
+    #   };
+    # };
 
     xdg.configFile = {
       "nvim/init.lua".source = ./init.lua;
