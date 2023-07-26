@@ -60,7 +60,7 @@ in
         set quit_on_open false
         set open_cmd 'zellij action move-focus right && zellij action write-chars ":open $sidetree_entry"'
 
-        set file_icons true
+        set file_icons false
         set icon_style white
         set dir_name_style lightblue+b
         set file_name_style reset
