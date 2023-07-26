@@ -83,12 +83,12 @@ in
       wrappedHelix
     ];
 
-    programs.zsh = {
-      sessionVariables = {
-        EDITOR = "helix";
-        VISUAL = "helix";
-      };
-    };
+    # programs.zsh = {
+    #   sessionVariables = {
+    #     EDITOR = "hx";
+    #     VISUAL = "hx";
+    #   };
+    # };
 
     xdg.configFile = {
       "helix/config.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/helix/config.toml";
