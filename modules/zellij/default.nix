@@ -52,9 +52,9 @@ in
     ];
 
     xdg.configFile = {
-      "zellij/config.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/config.kdl";
-      "zellij/layouts/custom.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/custom.kdl";
-      "zellij/layouts/dev.kdl".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/zellij/dev.kdl";
+      "zellij/config.kdl".source = ./config.kdl;
+      "zellij/layouts/custom.kdl".source = ./custom.kdl;
+      "zellij/layouts/dev.kdl".source = ./dev.kdl;
       "sidetree/sidetreerc".text = ''
         set show_hidden true
         set quit_on_open false

@@ -91,8 +91,8 @@ in
     # };
 
     xdg.configFile = {
-      "helix/config.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/helix/config.toml";
-      "helix/languages.toml".source = config.lib.file.mkOutOfStoreSymlink "/home/clemens/Projects/homecfg/modules/helix/languages.toml";
+      "helix/config.toml".source = ./config.toml;
+      "helix/languages.toml".source = ./languages.toml;
 
       "yamlfmt/.yamlfmt".text = ''
         formatter:
