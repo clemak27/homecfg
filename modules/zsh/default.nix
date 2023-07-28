@@ -54,18 +54,6 @@ in
           "for file in ~/.zsh_functions/*; do . $file; done"
           # https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
           "source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-
-          # this is there so you can install nvim and hx
-          "if command -v hx &> /dev/null; then"
-          "  export EDITOR=hx"
-          "  export VISUAL=hx"
-          "elif command -v nvim &> /dev/null; then"
-          "  export EDITOR=nvim"
-          "  export VISUAL=nvim"
-          "else"
-          "  export EDITOR=vim"
-          "  export VISUAL=vim"
-          "fi"
         ]
       );
     };
