@@ -17,6 +17,7 @@ in
 {
   imports = [
     ./hx.nix
+    ./nvim.nix
   ];
 
   options.homecfg.zellij = {
