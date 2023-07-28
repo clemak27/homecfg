@@ -33,10 +33,10 @@ return {
         },
         extensions = {
           fzf = {
-            fuzzy = true, -- false will only do exact matching
+            fuzzy = true,                   -- false will only do exact matching
             override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+            override_file_sorter = true,    -- override the file sorter
+            case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
             -- the default case_mode is "smart_case"
           },
         },
@@ -51,9 +51,11 @@ return {
       vim.keymap.set("n", "<leader>f", builtin.live_grep, {})
       -- vim.api.nvim_set_keymap( "n", "<Leader>ff", [[<Cmd>lua require('fzf-lua').grep_project({rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=512"})<CR>]] , opt
 
-      vim.keymap.set("n", "<leader>g", function()
-        io.popen("tmux popup -E -w 90% -h 90% 'tmux new -s floating -c " .. vim.fn.getcwd() .. " lazygit'")
-      end, {})
+      if os.execute("command -v lazygit") == 0 then
+        vim.keymap.set("n", "<leader>g", function()
+          io.popen("lg")
+        end, {})
+      end
 
       vim.keymap.set("n", "<leader>p", builtin.find_files, {})
       vim.keymap.set("n", "<leader>pp", function()

@@ -2,10 +2,6 @@
 let
   cfg = config.homecfg;
 
-  zellijLazygit = pkgs.writeShellScriptBin "zlg" ''
-    zellij run -c -- lazygit && zellij action toggle-fullscreen
-  '';
-
   zellijOpenProject = pkgs.writeShellScriptBin "zpf" ''
     path=$(fd --type=d --hidden ".git" --exclude gitea-repos --absolute-path $HOME/Projects | grep ".git/" | sd "/.git/" "" | fzf)
     if [ "$path" != "" ]; then
@@ -32,7 +28,6 @@ in
     };
 
     home.packages = [
-      zellijLazygit
       zellijOpenProject
     ];
 

@@ -1,6 +1,16 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg;
+  lgFullscreen = pkgs.writeShellScriptBin "lg" ''
+    if [[ ! -z $ZELLIJ ]]; then
+      zellij run -c -- lazygit && zellij action toggle-fullscreen
+    elif [[ ! -z $TMUX ]]; then
+      tmux split-window -Z lazygit
+    else
+      lazygit
+    fi
+  '';
+
 in
 {
   imports = [
@@ -74,8 +84,9 @@ in
       };
     };
 
-    home.packages = with pkgs; [
-      lazygit
+    home.packages = [
+      pkgs.lazygit
+      lgFullscreen
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
@@ -96,7 +107,6 @@ in
         { name = "gstp"; value = "git stash pop"; }
         { name = "gsurr"; value = "git submodule update --remote --rebase"; }
         { name = "gus"; value = "git reset HEAD"; }
-        { name = "lg"; value = "lazygit"; }
       ]
     );
   };

@@ -148,7 +148,6 @@ in
       [
         { name = "trwp"; value = "tmux rename-window '#{b:pane_current_path}'"; }
         { name = "tfp"; value = ''tmux if-shell -F '#{==:#{session_name},floating}' { detach-client } { popup -E -w 90% -h 90% 'tmux attach -t floating || tmux new -s floating -c "#{pane_current_path}"' }''; }
-        { name = "tlg"; value = ''tmux popup -E -w 90% -h 90% 'tmux new -s floating -c "#{pane_current_path}" lazygit' ''; }
       ]
     );
 
