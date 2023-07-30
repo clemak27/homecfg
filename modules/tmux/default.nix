@@ -1,6 +1,15 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.tmux;
+  statusRight = pkgs.writeShellScriptBin "tmux-status-right" ''
+    # kube context
+    if [ -f "$HOME/.kube/config" ]; then
+      context=$(kubectl config view --minify=true | yq ".current-context")
+      ns=$(kubectl config view --minify=true | yq ".contexts[0].context.namespace")
+      echo "#[fg=cyan,bold] 󱃾 $context/$ns "
+    fi
+
+  '';
 in
 {
   options.homecfg.tmux.enable = lib.mkEnableOption "Manage tmux with home-manager";
@@ -134,7 +143,7 @@ in
         set -g status-right-style NONE
 
         set -g status-left "#[fg=$thm_blue,bg=$thm_gray,bold] #S "
-        set -g status-right ""
+        set -g status-right "#(${statusRight})"
 
         setw -g window-status-activity-style "underscore,fg=$thm_fg,bg=$thm_black"
         setw -g window-status-separator ""
@@ -150,6 +159,10 @@ in
         { name = "tfp"; value = ''tmux if-shell -F '#{==:#{session_name},floating}' { detach-client } { popup -E -w 90% -h 90% 'tmux attach -t floating || tmux new -s floating -c "#{pane_current_path}"' }''; }
       ]
     );
+
+    home.packages = [
+      statusRight
+    ];
 
     # see https://github.com/tmux-plugins/tmux-resurrect/issues/247
     xdg.configFile = {
