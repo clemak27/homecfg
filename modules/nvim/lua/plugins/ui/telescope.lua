@@ -51,7 +51,7 @@ return {
       vim.keymap.set("n", "<leader>r", builtin.live_grep, {})
       -- vim.api.nvim_set_keymap( "n", "<Leader>ff", [[<Cmd>lua require('fzf-lua').grep_project({rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=512"})<CR>]] , opt
 
-      if os.execute("command -v lg") == 0 then
+      if os.execute("command -v lg &> /dev/null") == 0 then
         vim.keymap.set("n", "<leader>g", function()
           io.popen("lg")
         end, {})
