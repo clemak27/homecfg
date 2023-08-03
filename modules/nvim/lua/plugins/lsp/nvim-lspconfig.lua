@@ -244,8 +244,8 @@ return {
                     lintSeverity = 2,
                   },
                   {
-                    formatCommand = "prettier --prose-wrap always ${INPUT}",
-                    formatStdin = false,
+                    formatCommand = "prettier --prose-wrap always --stdin-filepath ${INPUT}",
+                    formatStdin = true,
                   },
                 },
                 dockerfile = {
