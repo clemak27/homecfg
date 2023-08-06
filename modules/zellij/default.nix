@@ -1,14 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg;
-
-  zellijOpenProject = pkgs.writeShellScriptBin "zpf" ''
-    path=$(fd --type=d --hidden ".git" --exclude gitea-repos --absolute-path $HOME/Projects | grep ".git/" | sd "/.git/" "" | fzf)
-    if [ "$path" != "" ]; then
-      pname=$(basename $path)
-      zellij action new-tab --cwd $path --name $pname --layout dev
-    fi
-  '';
 in
 {
   imports = [
@@ -26,10 +18,6 @@ in
       enable = true;
       # enableZshIntegration = true;
     };
-
-    home.packages = [
-      zellijOpenProject
-    ];
 
     xdg.configFile = {
       "zellij/config.kdl".source = ./config.kdl;
