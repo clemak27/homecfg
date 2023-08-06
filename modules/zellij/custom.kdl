@@ -4,6 +4,7 @@ layout {
     }
     pane {
         borderless false
+        cwd "~"
     }
 }
 
