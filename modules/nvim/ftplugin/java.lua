@@ -42,7 +42,7 @@ end
 local jdtls_config = function()
   local masonPath = vim.fn.stdpath("data") .. "/mason/packages"
   local jdtlsPath = masonPath .. "/jdtls"
-  local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.400.v20210924-0641.jar"
+  local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.500.v20230622-2056.jar"
   local osName = ""
   if vim.loop.os_uname().sysname == "Darwin" then
     osName = "mac"
