@@ -97,6 +97,7 @@ return {
         "ltex",
         "nil_ls",
         "lua_ls",
+        "rust_analyzer",
         "terraformls",
         "texlab",
         "tsserver",
