@@ -13,7 +13,6 @@ layout {
             args "."
             focus true
             name "helix"
-            close_on_exit true
         }
     }
     pane

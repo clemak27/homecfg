@@ -7,7 +7,6 @@ layout {
             command "nvim"
             focus true
             name "nvim"
-            close_on_exit true
         }
     }
     pane
