@@ -1,0 +1,18 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="file:~/.config/zellij/custom-zellij-bar.wasm"
+    }
+    pane split_direction="vertical" {
+      pane {
+        cwd "~/Notes"
+        command "zsh"
+        args "-c" "NVIM_LTEX_ENABLE=false nvim"
+        name "nvim"
+      }
+      pane {
+        cwd "~/Notes"
+        command "tdt"
+        size "40%"
+      }
+    }
+}

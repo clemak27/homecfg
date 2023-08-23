@@ -22,6 +22,7 @@ in
     xdg.configFile = {
       "zellij/config.kdl".source = ./config.kdl;
       "zellij/layouts/custom.kdl".source = ./custom.kdl;
+      "zellij/layouts/notes.kdl".source = ./notes.kdl;
       "zellij/custom-zellij-bar.wasm".source = ./custom-zellij-bar.wasm;
     };
   };
