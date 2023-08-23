@@ -25,6 +25,7 @@ return {
       })
     end,
   },
+  "calops/hmts.nvim",
   {
     "windwp/nvim-autopairs",
     config = function()
