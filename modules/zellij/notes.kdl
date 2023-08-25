@@ -5,8 +5,8 @@ layout {
     pane split_direction="vertical" {
       pane {
         cwd "~/Notes"
-        command "zsh"
-        args "-c" "NVIM_LTEX_ENABLE=false nvim"
+        // command "zsh"
+        // args "-c" "NVIM_LTEX_ENABLE=false nvim"
         name "nvim"
       }
       pane {
