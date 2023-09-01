@@ -227,7 +227,7 @@ return {
             else
             end
 
-            config.filetypes = { "markdown", "dockerfile", "yaml", "go", "sh", "nix", "lua", "javascript" }
+            config.filetypes = { "markdown", "dockerfile", "yaml", "sh", "nix", "lua", "javascript" }
             config.init_options = { documentFormatting = true }
             config.settings = {
               loglevel = 5,
