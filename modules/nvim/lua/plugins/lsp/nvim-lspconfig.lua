@@ -335,7 +335,7 @@ return {
       -- format on save
       vim.api.nvim_create_augroup("format_on_write", { clear = true })
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-        pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh,*.md,*.nix",
+        pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh,*.nix",
         group = "format_on_write",
         callback = function()
           vim.lsp.buf.format(nil, 500)
