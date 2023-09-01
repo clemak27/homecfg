@@ -66,7 +66,7 @@ in
         sumneko-lua-language-server
 
         # linter
-        hadolint
+        stable.hadolint
         nodePackages.markdownlint-cli
         shellcheck
         yamllint
