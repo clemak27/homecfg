@@ -80,6 +80,7 @@ in
         # go
         delve
         golangci-lint
+        golangci-lint-langserver
         gopls
         gofumpt
         goimports

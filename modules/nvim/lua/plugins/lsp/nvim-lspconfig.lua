@@ -90,6 +90,7 @@ return {
         "efm",
         "eslint",
         "gopls",
+        "golangci_lint_ls",
         "gradle_ls",
         "html",
         -- jdtls is configured in ftplugin/java.lua
