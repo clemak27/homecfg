@@ -9,16 +9,16 @@ let
   };
   goimports = pkgs.buildGoModule rec {
     pname = "goimports";
-    version = "0.12.2";
+    version = "0.13.2";
 
     src = pkgs.fetchFromGitHub {
       owner = "golang";
       repo = "tools";
       rev = "gopls/v${version}";
-      sha256 = "sha256-mbJ9CzJxhAxYByfNpNux/zOWBGaiH4fvIRIh+BMprMk=";
+      sha256 = "sha256-fRpVAYg4UwRe3bcjQPOnCGWSANfoTwD5Y9vs3QET1eM=";
     };
 
-    vendorSha256 = "sha256-W5t1ZLI4zBocAtxfB8zXfxx2asgUXrMi9YOfkWcOxmM=";
+    vendorSha256 = "sha256-Nbpd4nNYfCTEw1trMXxTVZwSZ5CbUv0hAAi+0eDJLWU=";
 
     doCheck = false;
 
