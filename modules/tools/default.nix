@@ -23,7 +23,7 @@ in
       bat-extras.batman
       btop
       curl
-      exa
+      eza
       fd
       gojq
       hyperfine
@@ -84,8 +84,8 @@ in
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
         { name = "cat"; value = "bat"; }
-        { name = "ls"; value = "exa --icons"; }
-        { name = "lsa"; value = "exa --icons -hal"; }
+        { name = "ls"; value = "eza --icons"; }
+        { name = "lsa"; value = "eza --icons -hal"; }
         { name = "man"; value = "batman"; }
         { name = "todo"; value = "todo.sh"; }
         { name = "watch"; value = "viddy"; }
