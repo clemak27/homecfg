@@ -51,7 +51,7 @@ in
       extraPackages = with pkgs; [
         cargo
         gcc
-        nodejs-16_x
+        nodejs-18_x
         python311
         yarn
 

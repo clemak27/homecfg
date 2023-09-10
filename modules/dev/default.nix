@@ -9,7 +9,7 @@ in
     home.packages = with pkgs; [
       gnumake
       gradle
-      nodejs-16_x
+      nodejs-18_x
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
