@@ -23,7 +23,6 @@ return {
           -- js
           "typescript-language-server",
           "js-debug-adapter",
-          "vetur-vls",
         },
       })
     end,
