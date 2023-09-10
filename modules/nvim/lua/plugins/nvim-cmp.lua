@@ -81,22 +81,9 @@ return {
           { name = "nvim_lsp_signature_help" },
           { name = "vsnip" },
           { name = "treesitter" },
-        }, {
           { name = "path" },
           { name = "buffer" },
         }),
-      })
-
-      cmp.setup.filetype("markdown", {
-        sources = {
-          { name = "nvim_lsp" },
-          { name = "nvim_lsp_document_symbol" },
-          { name = "nvim_lsp_signature_help" },
-          { name = "vsnip" },
-          { name = "path" },
-          { name = "treesitter" },
-          { name = "buffer" },
-        },
       })
     end,
   },
