@@ -21,7 +21,6 @@ return {
           "java-test",
 
           -- js
-          "typescript-language-server",
           "js-debug-adapter",
         },
       })

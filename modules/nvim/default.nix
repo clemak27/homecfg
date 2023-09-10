@@ -84,6 +84,9 @@ in
         gopls
         gofumpt
         goimports
+
+        # js
+        nodePackages.typescript-language-server
       ];
     };
 
