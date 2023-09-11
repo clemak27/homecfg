@@ -32,7 +32,7 @@ in
 
     programs.java = {
       enable = true;
-      package = pkgs.openjdk17-bootstrap;
+      package = pkgs.temurin-bin-17;
     };
 
     programs.go = {
