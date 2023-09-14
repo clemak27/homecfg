@@ -118,14 +118,15 @@ local jdtls_config = function()
             "com",
             "org",
             "javax",
+            "jakarta",
             "java",
           },
         },
-        -- format = {
-        --   settings = {
-        --     url = os.getenv("HOME") .. "/.jdtls-fmt.xml",
-        --   },
-        -- },
+        format = {
+          settings = {
+            url = os.getenv("HOME") .. "/.jdtls-fmt.xml",
+          },
+        },
         sources = {
           organizeImports = {
             starThreshold = 9999,
