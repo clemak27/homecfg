@@ -61,8 +61,6 @@ in
             }
         }
       '';
-
-      "zellij/custom-zellij-bar.wasm".source = ./custom-zellij-bar.wasm;
     };
   };
 }
