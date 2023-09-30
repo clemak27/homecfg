@@ -28,7 +28,30 @@ in
     ];
 
     xdg.configFile = {
-      "zellij/layouts/dev.kdl".source = ./devHx.kdl;
+      "zellij/layouts/dev.kdl".text = ''
+        layout {
+            pane size=1 borderless=true {
+                plugin location="${cfg.zellij.bar}"
+            }
+            pane split_direction="vertical" size="80%"{
+                pane {
+                    command "sidetree"
+                    close_on_exit true
+                    size "15%"
+                }
+                pane {
+                    command "hx"
+                    args "."
+                    focus true
+                    name "helix"
+                }
+            }
+            pane
+        }
+
+      '';
+
+
       "sidetree/sidetreerc".text = ''
         set show_hidden true
         set quit_on_open false
