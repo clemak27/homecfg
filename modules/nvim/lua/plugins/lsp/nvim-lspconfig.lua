@@ -211,30 +211,10 @@ return {
           end
 
           if server == "efm" then
-            local function file_exists(name)
-              local f = io.open(name, "r")
-              if f ~= nil then
-                io.close(f)
-                return true
-              else
-                return false
-              end
-            end
-
-            local jsPrettier = {}
-
-            if file_exists(vim.fn.getcwd() .. "/node_modules/.bin/prettier") then
-              table.insert(jsPrettier, {
-                formatCommand = vim.fn.getcwd() .. "/node_modules/.bin/prettier ${INPUT}",
-                formatStdin = false,
-              })
-            else
-            end
-
-            config.filetypes = { "markdown", "dockerfile", "yaml", "sh", "javascript" }
-            config.init_options = { documentFormatting = true }
+            config.filetypes = { "markdown", "dockerfile", "yaml", "sh" }
+            config.init_options = { documentFormatting = false }
             config.settings = {
-              loglevel = 5,
+              loglevel = 1,
               languages = {
                 markdown = {
                   {
@@ -276,7 +256,6 @@ return {
                     lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
                   },
                 },
-                javascript = jsPrettier,
               },
             }
           end
