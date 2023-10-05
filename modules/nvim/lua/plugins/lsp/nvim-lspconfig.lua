@@ -269,15 +269,6 @@ return {
                     },
                   },
                 },
-                go = {
-                  {
-                    lintCommand = "golangci-lint run --color=never --out-format=tab --print-linter-name=false ${INPUT}",
-                    lintStdin = false,
-                    lintIgnoreExitCode = true,
-                    lintFormats = { "%.%#:%l:%c %m" },
-                    lintSeverity = 2,
-                  },
-                },
                 sh = {
                   {
                     lintCommand = "shellcheck --color=never --format=gcc -",
