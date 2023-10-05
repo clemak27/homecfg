@@ -45,7 +45,10 @@ return {
         vim.keymap.set("n", "gt", builtin.lsp_type_definitions, bufopts)
         vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
         vim.keymap.set("n", "gf", function()
-          vim.lsp.buf.format({ async = true })
+          require("conform").format({
+            timeout_ms = 500,
+            lsp_fallback = true,
+          })
         end, bufopts)
         vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
         vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
@@ -228,7 +231,7 @@ return {
             else
             end
 
-            config.filetypes = { "markdown", "dockerfile", "yaml", "sh", "nix", "lua", "javascript" }
+            config.filetypes = { "markdown", "dockerfile", "yaml", "sh", "javascript" }
             config.init_options = { documentFormatting = true }
             config.settings = {
               loglevel = 5,
@@ -244,10 +247,6 @@ return {
                       "stdin: %l: %m",
                     },
                     lintSeverity = 2,
-                  },
-                  {
-                    formatCommand = "prettier --prose-wrap always --stdin-filepath ${INPUT}",
-                    formatStdin = true,
                   },
                 },
                 dockerfile = {
@@ -269,10 +268,6 @@ return {
                       "%s:%l:%c: [%trror] %m",
                     },
                   },
-                  {
-                    formatCommand = "yamlfmt -",
-                    formatStdin = true,
-                  },
                 },
                 go = {
                   {
@@ -282,33 +277,12 @@ return {
                     lintFormats = { "%.%#:%l:%c %m" },
                     lintSeverity = 2,
                   },
-                  {
-                    formatCommand = "goimports",
-                    formatStdin = true,
-                  },
                 },
                 sh = {
                   {
                     lintCommand = "shellcheck --color=never --format=gcc -",
                     lintStdin = true,
                     lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
-                  },
-                  {
-                    formatCommand = "shfmt -i 2 -sr -ci -",
-                    formatStdin = true,
-                  },
-                },
-                nix = {
-                  {
-                    formatCommand = "nixpkgs-fmt",
-                    formatStdin = true,
-                  },
-                },
-                lua = {
-                  {
-                    formatCommand = "stylua --color Never -",
-                    formatStdin = true,
-                    rootMarkers = { "stylua.toml", ".stylua.toml" },
                   },
                 },
                 javascript = jsPrettier,
@@ -335,10 +309,14 @@ return {
       -- format on save
       vim.api.nvim_create_augroup("format_on_write", { clear = true })
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-        pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh,*.nix",
+        pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh,*.nix,*.md",
         group = "format_on_write",
-        callback = function()
-          vim.lsp.buf.format(nil, 500)
+        callback = function(args)
+          require("conform").format({
+            bufnr = args.buf,
+            timeout_ms = 500,
+            lsp_fallback = true,
+          })
         end,
       })
     end,
