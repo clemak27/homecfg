@@ -203,11 +203,36 @@ return {
           end
 
           if server == "yamlls" then
+            local function loadSchemas(schemaFile)
+              local f = io.open(schemaFile)
+              if f ~= nil then
+                local content = f:read("*all")
+                f:close()
+                return vim.json.decode(content)
+              else
+                return {}
+              end
+            end
+
             config.settings = {
               yaml = {
                 keyOrdering = false,
               },
             }
+
+            local cfg = require("yaml-companion").setup({
+              -- additional schemas are loaded from a file like this:
+              -- [
+              --   {
+              --     "name": "argoproj.io/application_v1alpha1",
+              --     "uri": "https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/argoproj.io/application_v1alpha1.json"
+              --   }
+              -- ]
+              schemas = loadSchemas(os.getenv("HOME") .. "/.yaml-schema.json"),
+              lspconfig = config,
+            })
+            lspconfig["yamlls"].setup(cfg)
+            return
           end
 
           if server == "efm" then
