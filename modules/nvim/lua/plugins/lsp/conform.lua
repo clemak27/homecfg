@@ -11,6 +11,8 @@ return {
         },
       })
 
+      require("conform.formatters.shfmt").args = { "-i", "2", "-sr", "-ci", "-filename", "$FILENAME" }
+
       require("conform").setup({
         formatters_by_ft = {
           markdown = { "prettiermd" },
