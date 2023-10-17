@@ -29,7 +29,6 @@ local set_mappings = function()
   vim.keymap.set("n", "gt", builtin.lsp_type_definitions, bufopts)
   vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
   vim.keymap.set("n", "gf", function()
-    vim.lsp.buf.format({ async = true })
     require("jdtls").organize_imports()
   end, bufopts)
   vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
@@ -144,8 +143,6 @@ local jdtls_config = function()
       set_mappings()
 
       buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-
-      require("jdtls.setup").add_commands()
 
       vim.api.nvim_create_user_command("JdtTestClass", function()
         require("jdtls").test_class()
