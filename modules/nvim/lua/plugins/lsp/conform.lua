@@ -5,7 +5,8 @@ return {
     config = function()
       require("conform").formatters.prettiermd = vim.tbl_deep_extend("force", require("conform.formatters.prettier"), {
         args = {
-          "--prose-wrap always",
+          "--prose-wrap",
+          "always",
           "--stdin-filepath",
           "$FILENAME",
         },
