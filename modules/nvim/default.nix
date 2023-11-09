@@ -44,6 +44,7 @@ in
 
         # lsp
         efm-langserver
+        kotlin-language-server
         ltex-ls
         nil
         nodePackages.bash-language-server

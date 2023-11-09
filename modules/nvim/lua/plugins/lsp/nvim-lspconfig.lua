@@ -98,6 +98,7 @@ return {
         "html",
         -- jdtls is configured in ftplugin/java.lua
         "jsonls",
+        "kotlin_language_server",
         "ltex",
         "nil_ls",
         "lua_ls",
