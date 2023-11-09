@@ -8,6 +8,6 @@ gcmld() {
     git checkout main
   fi
 
-  git pull
+  git pull --rebase --autostash
   comm -12 <(git branch | sed "s/ *//g") <(git remote prune origin --dry-run | sed "s/^.*origin\///g") | xargs -I'{}' git branch -D {}
 }
