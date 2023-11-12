@@ -9,5 +9,16 @@ gcmld() {
   fi
 
   git pull --rebase --autostash
-  comm -12 <(git branch | sed "s/ *//g") <(git remote prune origin --dry-run | sed "s/^.*origin\///g") | xargs -I'{}' git branch -D {}
+
+  # prune deleted remote branches
+  git remote prune origin
+
+  # prune local branches that have been merged
+  if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
+    branches=$(git branch --merged master | grep -v '^[ *]*master$')
+    if [ "$branches" != "" ]; then xargs git branch -d "$branches"; fi
+  else
+    branches=$(git branch --merged main | grep -v '^[ *]*main$')
+    if [ "$branches" != "" ]; then xargs git branch -d "$branches"; fi
+  fi
 }
