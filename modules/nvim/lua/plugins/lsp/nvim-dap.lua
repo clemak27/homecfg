@@ -24,6 +24,8 @@ return {
         dapui.close({})
       end
 
+      dap.defaults.fallback.switchbuf = "useopen,uselast"
+
       -- go
       require("dap-go").setup()
 
