@@ -100,6 +100,7 @@ in
         formatter:
           type: basic
           include_document_start: true
+          pad_line_comments: 2
       '';
     };
   };
