@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, ... }:
 let
   cfg = config.homecfg;
 in
@@ -37,28 +37,6 @@ in
             borderless false
               cwd "~"
           }
-        }
-      '';
-
-
-      "zellij/layouts/notes.kdl".text = ''
-        layout {
-            pane size=1 borderless=true {
-              plugin location="${cfg.zellij.bar}"
-            }
-            pane split_direction="vertical" {
-              pane {
-                cwd "~/Notes"
-                // command "zsh"
-                // args "-c" "NVIM_LTEX_ENABLE=false nvim"
-                name "nvim"
-              }
-              pane {
-                cwd "~/Notes"
-                command "tdt"
-                size "40%"
-              }
-            }
         }
       '';
     };
