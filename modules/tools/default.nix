@@ -1,18 +1,6 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.tools;
-  todoDue = pkgs.writeShellScript "todo-due" ''
-    todo.sh ls | rg -q due:$(date -I) -
-    if [ $? -eq 0 ]; then
-      echo "Tasks due today:"
-      todo.sh ls | rg --color=never due:$(date -I) -
-    fi
-  '';
-  todoAgain = builtins.fetchGit {
-    url = "https://github.com/nthorne/todo.txt-cli-again-addon.git";
-    ref = "master";
-    rev = "0c29ac97018d0cd43f8f30006d8bc766b2173e86";
-  };
 in
 {
   options.homecfg.tools.enable = lib.mkEnableOption "Manage command line tools with homecfg";
@@ -34,8 +22,6 @@ in
       ripgrep
       sd
       tealdeer
-      timewarrior
-      todo-txt-cli
       tree
       unzip
       viddy
@@ -43,13 +29,6 @@ in
     ] ++ lib.optionals stdenv.isLinux [
       android-tools
     ];
-
-    home.file.".oh-my-zsh/custom/plugins/timewarrior".source =
-      builtins.fetchGit {
-        url = "https://github.com/svenXY/timewarrior.git";
-        ref = "master";
-        rev = "083d40edfa0b0a64d84a23ee370097beb43d4dd8";
-      };
 
     home.file.".config/ranger/plugins/ranger_devicons".source =
       builtins.fetchGit {
@@ -78,7 +57,6 @@ in
       "fd"
       "fzf"
       "ripgrep"
-      "timewarrior"
     ];
 
     programs.zsh.shellAliases = builtins.listToAttrs (
@@ -87,19 +65,15 @@ in
         { name = "ls"; value = "eza --icons"; }
         { name = "lsa"; value = "eza --icons -hal"; }
         { name = "man"; value = "batman"; }
-        { name = "todo"; value = "todo.sh"; }
         { name = "watch"; value = "viddy"; }
       ]
     );
 
     home.file = {
-      ".todo/config".source = ./todo/todo.cfg;
-      ".todo.actions.d/due".source = "${todoDue}";
       ".config/tealdeer/config.toml".source = ./tealdeer.toml;
       ".local/bin/rfv".source = ./rfv;
       ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
       ".config/btop/btop.conf".source = ./btop.conf;
-      ".todo.actions.d/again".source = "${todoAgain}/again";
     };
 
     xdg.configFile = {
