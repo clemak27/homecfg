@@ -19,7 +19,13 @@ in
 
   config = lib.mkIf (cfg.enable) {
 
+    xdg.configFile."task/taskrc".text = ''
+      data.location=~/.local/share/task
+      hooks.location=~/.config/task/hooks
+    '';
     home.packages = with pkgs; [
+      taskwarrior
+      taskwarrior-tui
       timewarrior
       todo-txt-cli
     ];
@@ -33,6 +39,7 @@ in
 
     programs.zsh = {
       oh-my-zsh.plugins = [
+        "taskwarrior"
         "timewarrior"
       ];
 
