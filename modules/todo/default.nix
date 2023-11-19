@@ -1,6 +1,6 @@
 { pkgs, config, lib, ... }:
 let
-  cfg = config.homecfg.tasks;
+  cfg = config.homecfg.todo;
   todoDue = pkgs.writeShellScript "todo-due" ''
     todo.sh ls | rg -q due:$(date -I) -
     if [ $? -eq 0 ]; then
@@ -15,7 +15,7 @@ let
   };
 in
 {
-  options.homecfg.tasks.enable = lib.mkEnableOption "Manage tasks with home-manager";
+  options.homecfg.todo.enable = lib.mkEnableOption "Manage todo/tasks with home-manager";
 
   config = lib.mkIf (cfg.enable) {
 
