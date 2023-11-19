@@ -23,6 +23,12 @@ in
       data.location=~/.local/share/task
       hooks.location=~/.config/task/hooks
     '';
+
+    xdg.configFile."task/hooks/on-modify.timewarrior" = {
+      source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
+      executable = true;
+    };
+
     home.packages = with pkgs; [
       taskwarrior
       taskwarrior-tui
