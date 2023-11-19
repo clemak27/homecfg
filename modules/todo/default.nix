@@ -19,20 +19,7 @@ in
 
   config = lib.mkIf (cfg.enable) {
 
-    xdg.configFile."task/taskrc".text = ''
-      data.location=~/.local/share/task
-      hooks.location=~/.config/task/hooks
-    '';
-
-    xdg.configFile."task/hooks/on-modify.timewarrior" = {
-      source = "${pkgs.timewarrior}/share/doc/timew/ext/on-modify.timewarrior";
-      executable = true;
-    };
-
     home.packages = with pkgs; [
-      taskwarrior
-      taskwarrior-tui
-      timewarrior
       todo-txt-cli
     ];
 
@@ -44,16 +31,9 @@ in
       };
 
     programs.zsh = {
-      oh-my-zsh.plugins = [
-        "taskwarrior"
-        "timewarrior"
-      ];
-
-      shellAliases = builtins.listToAttrs (
-        [
-          { name = "todo"; value = "todo.sh"; }
-        ]
-      );
+      shellAliases = builtins.listToAttrs ([
+        { name = "todo"; value = "todo.sh"; }
+      ]);
     };
 
     home.file = {
