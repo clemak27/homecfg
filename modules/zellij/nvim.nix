@@ -9,7 +9,7 @@ in
       "zellij/layouts/dev.kdl".text = ''
         layout {
             pane size=1 borderless=true {
-                plugin location="${cfg.zellij.bar}"
+                plugin location="${cfg.zellij.bar}" ${cfg.zellij.barOptions}
             }
             pane split_direction="vertical" size="80%"{
                 pane {
