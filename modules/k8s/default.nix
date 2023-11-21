@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg;
+  watchk8s = pkgs.writeShellScriptBin "wk" ''
+    ${pkgs.viddy}/bin/viddy --no-title kubecolor --force-colors "$@"
+  '';
+
 in
 {
   imports = [
@@ -19,6 +23,7 @@ in
       kubernetes-helm
       kustomize
       stern
+      watchk8s
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
