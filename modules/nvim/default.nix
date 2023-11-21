@@ -7,7 +7,7 @@ let
       "code_blocks" = false;
     };
   };
-  goimports = pkgs.buildGoModule rec {
+  goimports = pkgs.buildGoModule {
     pname = "goimports";
     version = "0.15.0";
 
@@ -18,7 +18,7 @@ let
       hash = "sha256-0IbED/zdARNSht5ouc3/v/ivDASLIK1l3YU+ocDVE0Q=";
     };
 
-    vendorSha256 = "sha256-lqPYZDQbBO9lmD1PRRFm+SKWMOVSzEIsYZTpZyLti/Y=";
+    vendorHash = "sha256-lqPYZDQbBO9lmD1PRRFm+SKWMOVSzEIsYZTpZyLti/Y=";
 
     doCheck = false;
 
