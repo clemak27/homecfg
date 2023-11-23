@@ -155,6 +155,15 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+vim.api.nvim_create_augroup("hurl_ft", { clear = true })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.hurl",
+  group = "hurl_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=hurl", false)
+  end,
+})
+
 -- relative line numbers
 vim.api.nvim_create_augroup("numbertoggle", { clear = true })
 vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnter" }, {
