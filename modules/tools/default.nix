@@ -14,6 +14,7 @@ in
       eza
       fd
       gojq
+      hurl
       hyperfine
       jo
       libqalculate
