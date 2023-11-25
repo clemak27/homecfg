@@ -106,6 +106,7 @@ return {
         "terraformls",
         "texlab",
         "tsserver",
+        "typst_lsp",
         "vimls",
         "vuels",
         "yamlls",

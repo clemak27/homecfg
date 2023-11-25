@@ -21,6 +21,14 @@ return {
       },
       filetype = "kdl",
     }
+    parser_config.typst = {
+      filetype = "typst",
+      install_info = {
+        url = "https://github.com/SeniorMars/tree-sitter-typst",
+        files = { "src/parser.c", "src/scanner.c" },
+        branch = "main",
+      },
+    }
 
     require("nvim-treesitter.configs").setup({
       ensure_installed = "all",

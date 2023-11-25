@@ -163,6 +163,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     vim.api.nvim_exec("set filetype=hurl", false)
   end,
 })
+vim.api.nvim_create_augroup("typst_ft", { clear = true })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.typ",
+  group = "typst_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=typst", false)
+  end,
+})
 
 -- relative line numbers
 vim.api.nvim_create_augroup("numbertoggle", { clear = true })
