@@ -3,18 +3,23 @@ return {
   {
     "stevearc/conform.nvim",
     config = function()
-      require("conform").formatters.prettiermd = vim.tbl_deep_extend("force", require("conform.formatters.prettier"), {
-        args = {
-          "--prose-wrap",
-          "always",
-          "--stdin-filepath",
-          "$FILENAME",
-        },
-      })
-
-      require("conform.formatters.shfmt").args = { "-i", "2", "-sr", "-ci", "-filename", "$FILENAME" }
-
       require("conform").setup({
+        formatters = {
+          shfmt = {
+            args = { "-i", "2", "-sr", "-ci", "-filename", "$FILENAME" },
+          },
+          prettiermd = {
+            command = require("conform.formatters.prettier").command,
+            cwd = require("conform.formatters.prettier").cwd,
+            range_args = require("conform.formatters.prettier").range_args,
+            args = {
+              "--prose-wrap",
+              "always",
+              "--stdin-filepath",
+              "$FILENAME",
+            },
+          },
+        },
         formatters_by_ft = {
           markdown = { "prettiermd" },
           yaml = { "yamlfmt" },
