@@ -6,7 +6,6 @@
     ./modules/helix
     ./modules/k8s
     ./modules/nvim
-    ./modules/tmux
     ./modules/todo
     ./modules/tools
     ./modules/zsh

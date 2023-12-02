@@ -4,8 +4,6 @@ let
   lgFullscreen = pkgs.writeShellScriptBin "lg" ''
     if [[ ! -z $ZELLIJ ]]; then
       zellij run -c -- lazygit && zellij action toggle-fullscreen
-    elif [[ ! -z $TMUX ]]; then
-      tmux split-window -Z lazygit
     else
       lazygit
     fi
