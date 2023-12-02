@@ -3,7 +3,6 @@
     ./modules/dev
     ./modules/fun
     ./modules/git
-    ./modules/helix
     ./modules/k8s
     ./modules/nvim
     ./modules/todo
