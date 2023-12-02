@@ -4,7 +4,6 @@ let
 in
 {
   imports = [
-    ./hx.nix
     ./nvim.nix
   ];
 
