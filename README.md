@@ -10,7 +10,7 @@ be enabled/disabled as needed.
 The flake provides a home-manager module, which can be imported in an existing
 config.
 
-Add this input to you `flake.nix`:
+Add this input to your `flake.nix`:
 
 ```nix
 homecfg = {
