@@ -137,6 +137,22 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+vim.api.nvim_create_augroup("linting_ft", { clear = true })
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = ".yamllint",
+  group = "linting_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=yaml", false)
+  end,
+})
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = ".markdownlintrc",
+  group = "linting_ft",
+  callback = function()
+    vim.api.nvim_exec("set filetype=json", false)
+  end,
+})
+
 vim.api.nvim_create_augroup("tsconfig_ft", { clear = true })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "tsconfig.json",
