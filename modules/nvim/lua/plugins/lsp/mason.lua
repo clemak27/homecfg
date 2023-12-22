@@ -22,6 +22,7 @@ return {
 
           -- js
           "js-debug-adapter",
+          "vue-language-server",
         },
       })
     end,

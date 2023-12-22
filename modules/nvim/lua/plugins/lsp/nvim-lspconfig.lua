@@ -107,7 +107,7 @@ return {
         "texlab",
         "tsserver",
         "vimls",
-        "vuels",
+        "volar",
         "yamlls",
       }
 
@@ -164,6 +164,17 @@ return {
           if server == "gradle_ls" then
             config.settings = {
               gradleWrapperEnabled = true,
+            }
+          end
+
+          if server == "volar" then
+            config.filetypes = {
+              "typescript",
+              "javascript",
+              "javascriptreact",
+              "typescriptreact",
+              "vue",
+              "json",
             }
           end
 
