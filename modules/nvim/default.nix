@@ -37,6 +37,7 @@ in
       vimdiffAlias = true;
       extraPackages = with pkgs; [
         cargo
+        deno
         gcc
         nodejs-18_x
         python311
