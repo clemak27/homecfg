@@ -271,4 +271,22 @@ require("lazy").setup("plugins", {
   ui = {
     border = "single",
   },
+  checker = {
+    enabled = true,
+    concurrency = nil,
+    notify = true,
+    frequency = 86400, -- 24h
+    check_pinned = false,
+  },
+})
+
+vim.api.nvim_create_augroup("lazyupdate", { clear = true })
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
+  pattern = "*",
+  group = "lazyupdate",
+  callback = function()
+    if require("lazy.status").has_updates then
+      require("lazy").update({ show = false })
+    end
+  end,
 })
