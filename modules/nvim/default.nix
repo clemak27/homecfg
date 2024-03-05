@@ -104,6 +104,7 @@ in
           type: basic
           include_document_start: true
           pad_line_comments: 2
+          retain_line_breaks_single: true
       '';
     };
   };
