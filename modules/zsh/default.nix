@@ -61,7 +61,7 @@ in
       builtins.fetchGit {
         url = "https://github.com/zsh-users/zsh-syntax-highlighting.git";
         ref = "master";
-        rev = "b2c910a85ed84cb7e5108e7cb3406a2e825a858f";
+        rev = "e0165eaa730dd0fa321a6a6de74f092fe87630b0";
       };
 
     programs.dircolors.enable = true;
