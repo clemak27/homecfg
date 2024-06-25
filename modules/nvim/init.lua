@@ -40,9 +40,6 @@ vim.o.magic = true
 vim.o.showmatch = true
 -- How many tenths of a second to blink when matching brackets
 vim.o.mat = 2
--- No annoying sound on errors
-vim.o.t_vb = ""
-vim.o.tm = 500
 -- Set utf8 as standard encoding and en_US as the standard language
 vim.o.encoding = "utf8"
 -- Use Unix as the standard file type
@@ -67,7 +64,7 @@ vim.o.showtabline = 0
 -- Specify the behavior when switching between buffers
 vim.o.switchbuf = "useopen,usetab,newtab"
 
-vim.api.nvim_exec(
+vim.api.nvim_exec2(
   [[
   " Dont show mode in statusline
   set noshowmode
@@ -84,7 +81,7 @@ vim.api.nvim_exec(
   " E355: Unknown option: nowb
   " E355: Unknown option: noswapfile
 ]],
-  false
+  { output = false }
 )
 
 -- Return to last edit position when opening files
@@ -107,14 +104,17 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold", "CursorHo
   pattern = "*",
   group = "reload_on_change",
   callback = function()
-    vim.api.nvim_exec([[ if mode() != 'c' | checktime | endif ]], false)
+    vim.api.nvim_exec2([[ if mode() != 'c' | checktime | endif ]], { output = false })
   end,
 })
 vim.api.nvim_create_autocmd({ "FileChangedShellPost" }, {
   pattern = "*",
   group = "reload_on_change",
   callback = function()
-    vim.api.nvim_exec([[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]], false)
+    vim.api.nvim_exec2(
+      [[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]],
+      { output = false }
+    )
   end,
 })
 
@@ -126,14 +126,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.bu",
   group = "coreos_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=yaml", false)
+    vim.api.nvim_exec2("set filetype=yaml", { output = false })
   end,
 })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.ign",
   group = "coreos_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=json", false)
+    vim.api.nvim_exec2("set filetype=json", { output = false })
   end,
 })
 
@@ -142,14 +142,14 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = ".yamllint",
   group = "linting_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=yaml", false)
+    vim.api.nvim_exec2("set filetype=yaml", { output = false })
   end,
 })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = ".markdownlintrc",
   group = "linting_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=json", false)
+    vim.api.nvim_exec2("set filetype=json", { output = false })
   end,
 })
 
@@ -158,7 +158,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "tsconfig.json",
   group = "coreos_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=jsonc", false)
+    vim.api.nvim_exec2("set filetype=jsonc", { output = false })
   end,
 })
 
@@ -167,7 +167,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "todo.txt",
   group = "todo_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=todotxt", false)
+    vim.api.nvim_exec2("set filetype=todotxt", { output = false })
   end,
 })
 
@@ -176,7 +176,7 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   pattern = "*.hurl",
   group = "hurl_ft",
   callback = function()
-    vim.api.nvim_exec("set filetype=hurl", false)
+    vim.api.nvim_exec2("set filetype=hurl", { output = false })
   end,
 })
 
@@ -186,14 +186,14 @@ vim.api.nvim_create_autocmd({ "BufEnter", "FocusGained", "InsertLeave", "WinEnte
   pattern = "*",
   group = "numbertoggle",
   callback = function()
-    vim.api.nvim_exec([[ if &nu && mode() != "i" | set rnu | endif ]], false)
+    vim.api.nvim_exec2([[ if &nu && mode() != "i" | set rnu | endif ]], { output = false })
   end,
 })
 vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave" }, {
   pattern = "*",
   group = "numbertoggle",
   callback = function()
-    vim.api.nvim_exec([[ if &nu | set nornu | endif ]], false)
+    vim.api.nvim_exec2([[ if &nu | set nornu | endif ]], { output = false })
   end,
 })
 

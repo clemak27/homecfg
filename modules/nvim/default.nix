@@ -7,23 +7,6 @@ let
       "code_blocks" = false;
     };
   };
-  goimports = pkgs.buildGoModule {
-    pname = "goimports";
-    version = "0.15.0";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "golang";
-      repo = "tools";
-      rev = "v0.15.0";
-      hash = "sha256-0IbED/zdARNSht5ouc3/v/ivDASLIK1l3YU+ocDVE0Q=";
-    };
-
-    vendorHash = "sha256-lqPYZDQbBO9lmD1PRRFm+SKWMOVSzEIsYZTpZyLti/Y=";
-
-    doCheck = false;
-
-    subPackages = [ "cmd/goimports" ];
-  };
 in
 {
   options.homecfg.nvim.enable = lib.mkEnableOption "Manage neovim with homecfg";
@@ -43,40 +26,7 @@ in
         nodejs-18_x
         python311
         yarn
-
-        # lsp
-        efm-langserver
-        kotlin-language-server
-        ltex-ls
         nil
-        nodePackages.bash-language-server
-        nodePackages.vscode-langservers-extracted
-        nodePackages.yaml-language-server
-        stylua
-        sumneko-lua-language-server
-
-        # linter
-        stable.hadolint
-        nodePackages.markdownlint-cli
-        shellcheck
-        yamllint
-
-        # formatter
-        nixpkgs-fmt
-        nodePackages.prettier
-        shfmt
-        yamlfmt
-
-        # go
-        delve
-        golangci-lint
-        golangci-lint-langserver
-        gopls
-        gofumpt
-        goimports
-
-        # js
-        nodePackages.typescript-language-server
       ];
     };
 

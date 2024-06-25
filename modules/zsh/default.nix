@@ -40,7 +40,7 @@ in
       );
 
       sessionVariables = {
-        PATH = "$PATH:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.local/bin:$HOME/.local/bin/npm/bin";
+        PATH = "$PATH:$HOME/.cargo/bin:$HOME/.go/bin:$HOME/.local/bin:$HOME/.local/bin/npm/bin:$HOME/.local/share/nvim/mason/bin";
       };
 
       initExtra = builtins.concatStringsSep "\n" (

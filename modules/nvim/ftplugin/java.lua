@@ -31,7 +31,6 @@ local set_mappings = function()
   vim.keymap.set("n", "gf", function()
     require("jdtls").organize_imports()
   end, bufopts)
-  vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
   vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
   vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
   vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
@@ -41,7 +40,7 @@ end
 local jdtls_config = function()
   local masonPath = vim.fn.stdpath("data") .. "/mason/packages"
   local jdtlsPath = masonPath .. "/jdtls"
-  local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.500.v20230717-2134.jar"
+  local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
   local osName = ""
   if vim.loop.os_uname().sysname == "Darwin" then
     osName = "mac"
@@ -52,13 +51,6 @@ local jdtls_config = function()
 
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
   local workspace_dir = os.getenv("HOME") .. "/.jdtls-workspace/" .. project_name
-
-  local handle = io.popen("which java")
-  local javaBin = handle:read("*a")
-  handle:close()
-
-  javaBin = javaBin:gsub("\r", "")
-  javaBin = javaBin:gsub("\n", "")
 
   local bundles = {
     vim.fn.glob(masonPath .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
@@ -72,7 +64,7 @@ local jdtls_config = function()
 
   return {
     cmd = {
-      javaBin,
+      "java",
       "-Declipse.application=org.eclipse.jdt.ls.core.id1",
       "-Dosgi.bundles.defaultStartLevel=4",
       "-Declipse.product=org.eclipse.jdt.ls.core.product",

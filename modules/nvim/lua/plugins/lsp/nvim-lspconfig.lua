@@ -12,6 +12,16 @@ return {
         end,
       },
       "barreiroleo/ltex_extra.nvim",
+      {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {
+          library = {
+            "luvit-meta/library",
+          },
+        },
+      },
+      { "Bilal2453/luvit-meta", lazy = true },
     },
     config = function()
       local set_border = function()
@@ -50,7 +60,6 @@ return {
             lsp_fallback = true,
           })
         end, bufopts)
-        vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
         vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
         vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
@@ -90,7 +99,6 @@ return {
       local servers = {
         "bashls",
         "cssls",
-        "efm",
         "eslint",
         "gopls",
         "golangci_lint_ls",
@@ -98,6 +106,7 @@ return {
         "html",
         -- jdtls is configured in ftplugin/java.lua
         "jsonls",
+        "jedi_language_server",
         "kotlin_language_server",
         "ltex",
         "nil_ls",
@@ -124,28 +133,9 @@ return {
           end
 
           if server == "lua_ls" then
-            local runtime_path = vim.split(package.path, ";")
-            table.insert(runtime_path, "lua/?.lua")
-            table.insert(runtime_path, "lua/?/init.lua")
             config.cmd = { "lua-language-server" }
             config.settings = {
               Lua = {
-                runtime = {
-                  -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                  version = "LuaJIT",
-                  -- Setup your lua path
-                  path = runtime_path,
-                },
-                diagnostics = {
-                  -- Get the language server to recognize the `vim` global
-                  globals = { "vim" },
-                },
-                workspace = {
-                  -- Make the server aware of Neovim runtime files
-                  library = vim.api.nvim_get_runtime_file("", true),
-                  checkThirdParty = false,
-                },
-                -- Do not send telemetry data containing a randomized but unique identifier
                 telemetry = {
                   enable = false,
                 },
@@ -167,14 +157,21 @@ return {
             }
           end
 
-          if server == "volar" then
+          if server == "tsserver" and vim.fn.isdirectory(vim.fn.getcwd() .. "/node_modules/vue") ~= false then
+            config.init_options = {
+              plugins = {
+                {
+                  name = "@vue/typescript-plugin",
+                  -- npm i --save-dev @vue/typescript-plugin
+                  location = os.getenv("HOME") .. "/.local/bin/npm/lib/node_modules/@vue/typescript-plugin",
+                  languages = { "javascript", "typescript", "vue" },
+                },
+              },
+            }
             config.filetypes = {
-              "typescript",
               "javascript",
-              "javascriptreact",
-              "typescriptreact",
+              "typescript",
               "vue",
-              "json",
             }
           end
 
@@ -204,7 +201,7 @@ return {
 
             local ltexEnabled = true
             if os.getenv("NVIM_LTEX_ENABLE") == "false" then
-              ltexEnabled = false
+              config.filetypes = { "imaginaryFiletype" }
             end
 
             config.settings = {
@@ -244,57 +241,6 @@ return {
               lspconfig = config,
             })
             lspconfig["yamlls"].setup(cfg)
-            return
-          end
-
-          if server == "efm" then
-            config.filetypes = { "markdown", "dockerfile", "yaml", "sh" }
-            config.init_options = { documentFormatting = false }
-            config.settings = {
-              loglevel = 1,
-              languages = {
-                markdown = {
-                  {
-                    lintCommand = "markdownlint --stdin",
-                    lintStdin = true,
-                    lintIgnoreExitCode = true,
-                    lintFormats = {
-                      "stdin:%l %m",
-                      "stdin:%l:%c %m",
-                      "stdin: %l: %m",
-                    },
-                    lintSeverity = 2,
-                  },
-                },
-                dockerfile = {
-                  {
-                    lintCommand = "hadolint --no-color -",
-                    lintStdin = true,
-                    lintIgnoreExitCode = true,
-                    lintFormats = { "-:%l %.%# %trror: %m", "-:%l %.%# %tarning: %m", "-:%l %.%# %tnfo: %m" },
-                    rootMarkers = { ".hadolint.yaml", "Dockerfile" },
-                  },
-                },
-                yaml = {
-                  {
-                    lintCommand = "yamllint -f parsable -",
-                    lintStdin = true,
-                    lintIgnoreExitCode = true,
-                    lintFormats = {
-                      "%s:%l:%c: [%tarning] %m",
-                      "%s:%l:%c: [%trror] %m",
-                    },
-                  },
-                },
-                sh = {
-                  {
-                    lintCommand = "shellcheck --color=never --format=gcc -",
-                    lintStdin = true,
-                    lintFormats = { "-:%l:%c: %trror: %m", "-:%l:%c: %tarning: %m", "-:%l:%c: %tote: %m" },
-                  },
-                },
-              },
-            }
           end
 
           lspconfig[server].setup(config)
