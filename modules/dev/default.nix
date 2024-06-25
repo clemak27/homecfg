@@ -22,7 +22,7 @@ in
       builtins.fetchGit {
         url = "https://github.com/gradle/gradle-completion";
         ref = "master";
-        rev = "b042038e3d3b30a6440c121268894234c509ca1c";
+        rev = "25da917cf5a88f3e58f05be3868a7b2748c8afe6";
       };
 
     home.file.".npmrc".text = ''
