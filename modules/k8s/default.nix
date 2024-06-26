@@ -42,7 +42,7 @@ in
       # use kubecolor if available (install on nix did not work)
       # go install github.com/hidetatz/kubecolor/cmd/kubecolor@latest
       if [ -e "$GOPATH/bin/kubecolor" ]; then
-        source <(kubectl completion zsh)
+        source <(kubecolor completion zsh)
         alias kubectl=kubecolor
         compdef kubecolor=kubectl
       fi
