@@ -18,6 +18,7 @@ in
   config = lib.mkIf (cfg.k8s.enable) {
 
     home.packages = with pkgs; [
+      krew
       kubectl
       kubectx
       kubernetes-helm
@@ -46,10 +47,13 @@ in
         alias kubectl=kubecolor
         compdef kubecolor=kubectl
       fi
+
       # https://github.com/ohmyzsh/ohmyzsh/issues/12515
       unalias k &> /dev/null || :
       function k() { kubectl "$@" }
       compdef _kubectl k
+
+      export PATH="$HOME/.krew/bin:$PATH"
     '';
   };
 }
