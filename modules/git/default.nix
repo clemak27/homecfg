@@ -3,7 +3,7 @@ let
   cfg = config.homecfg;
   lgFullscreen = pkgs.writeShellScriptBin "lg" ''
     if [[ -n $WEZTERM_PANE ]]; then
-        wezterm cli zoom-pane --pane-id "$(wezterm cli split-pane -- lazygit)"
+      wezterm cli zoom-pane --pane-id "$(wezterm cli split-pane -- lazygit)"
     elif [[ ! -z $ZELLIJ ]]; then
       zellij run -c -- lazygit && zellij action toggle-fullscreen
     else
