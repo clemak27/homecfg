@@ -8,7 +8,6 @@ in
   config = lib.mkIf (cfg.enable) {
     home.packages = with pkgs; [
       gnumake
-      gradle
       nodejs-18_x
     ];
 
@@ -34,6 +33,7 @@ in
       enable = true;
       package = pkgs.temurin-bin-17;
     };
+    programs.gradle.enable = true;
 
     programs.go = {
       enable = true;
