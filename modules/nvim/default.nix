@@ -1,11 +1,55 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg.nvim;
-  defaultMarkdownlintRc = {
-    "default" = true;
-    "MD013" = {
-      "code_blocks" = false;
+
+  jdtlsSource = pkgs.stdenv.mkDerivation {
+    name = "jdtls-source";
+    version = "1.35.0";
+    src = pkgs.fetchurl {
+      url = "https://download.eclipse.org/jdtls/milestones/1.35.0/jdt-language-server-1.35.0-202404251256.tar.gz";
+      hash = "sha256-ATncoa4mSDTDYg18udvjMQGGIhpC/0ClZzlCwHsIDxU=";
     };
+    unpackPhase = ":";
+    nativeBuildInputs = [ ];
+    installPhase = ''
+      mkdir -p ./tmp
+      tar xf "$src" --directory ./tmp
+      cp -R "./tmp" "$out"
+    '';
+  };
+
+  javaTest = pkgs.stdenv.mkDerivation {
+    name = "vscode-java-test";
+    version = "0.41.1";
+    src = pkgs.fetchurl {
+      url = "https://open-vsx.org/api/vscjava/vscode-java-test/0.41.1/file/vscjava.vscode-java-test-0.41.1.vsix";
+      hash = "sha256-iXIeTkyn1LNtG8Fs9pIw56dFgFfPZy5nQWRPxBHoZMI=";
+    };
+    unpackPhase = ":";
+    nativeBuildInputs = [ pkgs.unzip ];
+    installPhase = ''
+      cp "$src" "tmp.zip"
+      mkdir -p ./tmp
+      unzip "tmp.zip" -d ./tmp
+      cp -R "./tmp/extension/server" "$out"
+    '';
+  };
+
+  javaDebug = pkgs.stdenv.mkDerivation {
+    name = "vscode-java-debug";
+    version = "0.58.0";
+    src = pkgs.fetchurl {
+      url = "https://open-vsx.org/api/vscjava/vscode-java-debug/0.58.0/file/vscjava.vscode-java-debug-0.58.0.vsix";
+      hash = "sha256-Q3TE/nubd15Wj+6k19Gi+6nIUFbUQ24CxbBP6GAGRHE=";
+    };
+    unpackPhase = ":";
+    nativeBuildInputs = [ pkgs.unzip ];
+    installPhase = ''
+      cp "$src" "tmp.zip"
+      mkdir -p ./tmp
+      unzip "tmp.zip" -d ./tmp
+      cp -R "./tmp/extension/server" "$out"
+    '';
   };
 in
 {
@@ -26,14 +70,78 @@ in
         nodejs-18_x
         python311
         yarn
+
+        # html/css/json/eslint
+        nodePackages.vscode-langservers-extracted
+
+        # markdown
+        nodePackages.markdownlint-cli
+        ltex-ls
+
+        # container
+        stable.hadolint
+
+        # yaml
+        nodePackages.yaml-language-server
+        yamlfmt
+        yamllint
+
+        # shell
+        nodePackages.bash-language-server
+        shellcheck
+        shfmt
+
+        # nix
         nil
+        nixpkgs-fmt
+
+        # lua
+        lua-language-server
+        stylua
+
+        # go
+        delve
+        gofumpt
+        golangci-lint
+        golangci-lint-langserver
+        gopls
+        gotools
+
+        # java
+        jdt-language-server
+
+        # js
+        nodePackages.prettier
+        nodePackages.typescript-language-server
+        vscode-js-debug
+        vue-language-server
+
+        # rust
+        rust-analyzer
+
+        # python
+        python312Packages.black
+        python312Packages.jedi-language-server
       ];
     };
 
     home.file = {
-      ".markdownlintrc".text = (builtins.toJSON defaultMarkdownlintRc);
-      ".jdtls-fmt.xml".source = ./jdtls-fmt.xml;
+      ".markdownlintrc".text = ''
+        {
+          "default" = true;
+          "MD013" = {
+            "code_blocks" = false;
+          };
+        }
+      '';
       ".vsnip".source = ./vsnip;
+
+      ".jdtls/plugins".source = "${jdtlsSource}/plugins";
+      ".jdtls/config_linux/config.ini".source = "${jdtlsSource}/config_linux/config.ini";
+      ".jdtls/config_mac/config.ini".source = "${jdtlsSource}/config_mac/config.ini";
+      ".jdtls/formatter.xml".source = ./jdtls-fmt.xml;
+      ".jdtls/bundles/java-test".source = javaTest;
+      ".jdtls/bundles/java-debug-adapter".source = javaDebug;
     };
 
     programs.zsh = {

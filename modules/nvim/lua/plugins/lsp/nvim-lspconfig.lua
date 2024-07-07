@@ -3,7 +3,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason-lspconfig.nvim",
       "mfussenegger/nvim-jdtls",
       {
         "someone-stole-my-name/yaml-companion.nvim",
@@ -94,8 +93,6 @@ return {
 
       local lspconfig = require("lspconfig")
 
-      require("mason-lspconfig").setup()
-
       local servers = {
         "bashls",
         "cssls",
@@ -104,10 +101,8 @@ return {
         "golangci_lint_ls",
         "gradle_ls",
         "html",
-        -- jdtls is configured in ftplugin/java.lua
         "jsonls",
         "jedi_language_server",
-        "kotlin_language_server",
         "ltex",
         "nil_ls",
         "lua_ls",

@@ -30,7 +30,6 @@ return {
           gitsigns = true,
           lsp_trouble = true,
           markdown = true,
-          mason = true,
           navic = {
             enabled = true,
             custom_bg = navicBG,

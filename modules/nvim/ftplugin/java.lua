@@ -38,25 +38,26 @@ local set_mappings = function()
 end
 
 local jdtls_config = function()
-  local masonPath = vim.fn.stdpath("data") .. "/mason/packages"
-  local jdtlsPath = masonPath .. "/jdtls"
-  local lspJar = jdtlsPath .. "/plugins/org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
+  local jdtlsHome = os.getenv("HOME") .. "/.jdtls"
+  local lspJar = jdtlsHome .. "/plugins/org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
+
   local osName = ""
   if vim.loop.os_uname().sysname == "Darwin" then
     osName = "mac"
   else
     osName = "linux"
   end
-  local lspConfig = jdtlsPath .. "/config_" .. osName
+  local lspConfig = jdtlsHome .. "/config_" .. osName
 
   local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-  local workspace_dir = os.getenv("HOME") .. "/.jdtls-workspace/" .. project_name
+  local workspace_dir = jdtlsHome .. "/workspaces/" .. project_name
 
+  local bundlePath = jdtlsHome .. "/bundles"
   local bundles = {
-    vim.fn.glob(masonPath .. "/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+    vim.fn.glob(bundlePath .. "/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar"),
   }
 
-  vim.list_extend(bundles, vim.split(vim.fn.glob(masonPath .. "/java-test/extension/server/*.jar"), "\n"))
+  vim.list_extend(bundles, vim.split(vim.fn.glob(bundlePath .. "/java-test/*.jar"), "\n"))
 
   vim.api.nvim_create_user_command("JdtAddCommands", function()
     require("jdtls.setup").add_commands()
@@ -115,7 +116,7 @@ local jdtls_config = function()
         },
         format = {
           settings = {
-            url = os.getenv("HOME") .. "/.jdtls-fmt.xml",
+            url = jdtlsHome .. "/formatter.xml",
           },
         },
         sources = {
