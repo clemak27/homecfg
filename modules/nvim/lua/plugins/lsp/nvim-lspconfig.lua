@@ -99,7 +99,6 @@ return {
         "eslint",
         "gopls",
         "golangci_lint_ls",
-        "gradle_ls",
         "html",
         "jsonls",
         "jedi_language_server",
@@ -143,12 +142,6 @@ return {
               gopls = {
                 gofumpt = true,
               },
-            }
-          end
-
-          if server == "gradle_ls" then
-            config.settings = {
-              gradleWrapperEnabled = true,
             }
           end
 
