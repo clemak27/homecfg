@@ -137,6 +137,8 @@ local jdtls_config = function()
 
       buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
+      vim.lsp.inlay_hint.enable(true)
+
       vim.api.nvim_create_user_command("JdtTestClass", function()
         require("jdtls").test_class()
       end, {})
