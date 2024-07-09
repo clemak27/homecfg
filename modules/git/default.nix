@@ -85,9 +85,10 @@ in
     };
 
     home.packages = [
-      pkgs.lazygit
       lgFullscreen
     ];
+
+    programs.lazygit.enable = true;
 
     programs.zsh.oh-my-zsh.plugins = [
       "git"
