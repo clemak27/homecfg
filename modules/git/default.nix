@@ -54,6 +54,9 @@ in
         pull = {
           rebase = "true";
         };
+        rebase = {
+          autoStash = "true";
+        };
       };
     };
 
