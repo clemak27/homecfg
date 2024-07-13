@@ -141,8 +141,18 @@ return {
             config.settings = {
               gopls = {
                 gofumpt = true,
+                ["ui.inlayhint.hints"] = {
+                  assignVariableTypes = false,
+                  compositeLiteralFields = false,
+                  compositeLiteralTypes = false,
+                  constantValues = false,
+                  functionTypeParameters = true,
+                  parameterNames = true,
+                  rangeVariableTypes = false,
+                },
               },
             }
+            vim.lsp.inlay_hint.enable(true)
           end
 
           if server == "tsserver" and vim.fn.isdirectory(vim.fn.getcwd() .. "/node_modules/vue") ~= false then
