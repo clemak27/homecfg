@@ -20,7 +20,16 @@ return {
           },
         },
       },
-      { "Bilal2453/luvit-meta", lazy = true },
+      {
+        "Bilal2453/luvit-meta",
+        lazy = true,
+      },
+      {
+        "stevearc/overseer.nvim",
+        config = function()
+          require("overseer").setup()
+        end,
+      },
     },
     config = function()
       local set_border = function()
