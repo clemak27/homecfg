@@ -9,7 +9,7 @@ return {
       "rcarriga/nvim-dap-ui",
       "nvim-neotest/nvim-nio",
     },
-    ft = { "go", "java", "javascript", "typescript" },
+    ft = { "go", "java" },
     config = function()
       require("nvim-dap-virtual-text").setup({})
       require("dapui").setup()
