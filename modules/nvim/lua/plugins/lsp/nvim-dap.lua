@@ -30,11 +30,11 @@ return {
       -- go
       require("dap-go").setup()
 
-      -- java workaround for debugging tests:
-      -- 1. start server with gradle --no-daemon --no-build-cache --rerun-tasks test --debug-jvm --tests=DemoApplicationTests.contextLoads
+      -- java workaround for debugging more complex tests:
+      -- 1. start server with gradle --rerun-tasks test --tests "DemoApplicationTests.contextLoads"
       -- 2. attach DAP
-      -- for running other tasks, JdtRefreshDebugConfigs + dap normally works
-      -- related gh issues: https://github.com/microsoft/vscode-java-test/issues/1481, https://github.com/microsoft/vscode-java-test/issues/1045
+      -- for running other tasks, JdtRefreshDebugConfigs and/or JdtTestClass/NearestMethod
+      -- https://github.com/microsoft/vscode-java-test/issues/1045
       local util = require("jdtls.util")
       dap.adapters.java = function(callback)
         util.execute_command({ command = "vscode.java.startDebugSession" }, function(err0, port)
