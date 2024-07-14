@@ -2,30 +2,9 @@
 
 return {
   "nvim-lualine/lualine.nvim",
-  dependencies = {
-    {
-      "SmiteshP/nvim-navic",
-      config = function()
-        require("nvim-navic").setup({
-          lsp = {
-            auto_attach = true,
-            preference = { "volar", "tsserver" },
-          },
-          highlight = true,
-        })
-      end,
-    },
-  },
+  dependencies = {},
   config = function()
     local C = require("catppuccin.palettes").get_palette("mocha")
-    local function navic()
-      local navic = require("nvim-navic")
-      if navic.is_available() then
-        return navic.get_location(opts, bufnr)
-      else
-        return ""
-      end
-    end
 
     local function macro_recording()
       local mode = require("noice").api.statusline.mode.get()
@@ -34,6 +13,16 @@ return {
       end
       return ""
     end
+
+    local trouble = require("trouble")
+    local symbols = trouble.statusline({
+      mode = "lsp_document_symbols",
+      groups = {},
+      title = false,
+      filter = { range = true },
+      format = "{kind_icon}{symbol.name:Normal}",
+      hl_group = "lualine_c_normal",
+    })
 
     require("lualine").setup({
       options = {
@@ -72,10 +61,12 @@ return {
             macro_recording,
           },
           {
-            navic,
+            symbols.get,
+            cond = symbols.has,
           },
         },
         lualine_x = {
+          "overseer",
           {
             "diagnostics",
             sources = { "nvim_lsp" },
