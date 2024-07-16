@@ -95,6 +95,11 @@ in
     ];
 
     programs.lazygit.enable = true;
+    programs.lazygit.settings = {
+      git = {
+        overrideGpg = true;
+      };
+    };
 
     programs.zsh.oh-my-zsh.plugins = [
       "git"
