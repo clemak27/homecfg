@@ -57,6 +57,9 @@ in
         rebase = {
           autoStash = "true";
         };
+        fetch = {
+          prune = "true";
+        };
       };
     };
 
