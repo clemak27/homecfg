@@ -27,7 +27,11 @@ return {
       {
         "stevearc/overseer.nvim",
         config = function()
-          require("overseer").setup()
+          require("overseer").setup({
+            task_list = {
+              min_height = 14,
+            },
+          })
         end,
       },
     },
