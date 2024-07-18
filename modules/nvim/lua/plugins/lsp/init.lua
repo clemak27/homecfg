@@ -4,5 +4,4 @@ return {
   require("plugins.lsp.nvim-lint"),
   require("plugins.lsp.nvim-dap"),
   require("plugins.lsp.nvim-lspconfig"),
-  require("plugins.lsp.trouble"),
 }

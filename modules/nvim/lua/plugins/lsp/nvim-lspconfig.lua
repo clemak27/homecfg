@@ -32,6 +32,21 @@ return {
               min_height = 14,
             },
           })
+          local opt = { noremap = true, silent = true }
+
+          vim.api.nvim_set_keymap("n", "<Leader>t", [[<Cmd>OverseerToggle<CR>]], opt)
+          vim.api.nvim_set_keymap("n", "<Leader>tr", [[<Cmd>OverseerRun<CR>]], opt)
+        end,
+      },
+      {
+        "folke/trouble.nvim",
+        config = function()
+          require("trouble").setup({})
+          local opt = { noremap = true, silent = true }
+
+          vim.api.nvim_set_keymap("n", "<Leader>d", [[<Cmd>Trouble diagnostics toggle<CR>]], opt)
+          vim.api.nvim_set_keymap("n", "<Leader>s", [[<Cmd>Trouble lsp_document_symbols toggle<CR>]], opt)
+          vim.api.nvim_set_keymap("n", "<Leader>q", [[<Cmd>Trouble quickfix toggle<CR>]], opt)
         end,
       },
     },
@@ -55,25 +70,24 @@ return {
 
       local set_mappings = function()
         -- See :help vim.lsp.* for documentation on any of the below functions
-        local builtin = require("telescope.builtin")
+        local telescope = require("telescope.builtin")
         local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-        vim.keymap.set("n", "gd", builtin.lsp_definitions, bufopts)
+        vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
+        vim.keymap.set("n", "gd", telescope.lsp_definitions, bufopts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+        vim.keymap.set("n", "gi", telescope.lsp_implementations, bufopts)
         vim.keymap.set("n", "gr", function()
-          builtin.lsp_references({ show_line = false })
+          telescope.lsp_references({ show_line = false })
         end, bufopts)
-        vim.keymap.set("n", "gi", builtin.lsp_implementations, bufopts)
-        vim.keymap.set("n", "gt", builtin.lsp_type_definitions, bufopts)
-        vim.keymap.set("n", "<leader>s", builtin.lsp_document_symbols, {})
+        vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
+        vim.keymap.set("n", "gt", telescope.lsp_type_definitions, bufopts)
         vim.keymap.set("n", "gf", function()
           require("conform").format({
             timeout_ms = 500,
             lsp_fallback = true,
           })
         end, bufopts)
-        vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
         vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
         vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
       end
