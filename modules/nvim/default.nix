@@ -126,14 +126,14 @@ in
     };
 
     home.file = {
-      ".markdownlintrc".text = ''
+      ".markdownlintrc".text = (builtins.toJSON
         {
-          "default" = true;
-          "MD013" = {
-            "code_blocks" = false;
+          default = true;
+          MD013 = {
+            code_blocks = false;
           };
         }
-      '';
+      );
       ".vsnip".source = ./vsnip;
 
       ".jdtls/plugins".source = "${jdtlsSource}/plugins";
