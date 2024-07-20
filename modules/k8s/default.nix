@@ -4,7 +4,6 @@ let
   watchk8s = pkgs.writeShellScriptBin "wk" ''
     ${pkgs.viddy}/bin/viddy --no-title kubecolor --force-colors "$@"
   '';
-
 in
 {
   imports = [
@@ -22,8 +21,10 @@ in
       kubectl
       kubectx
       kubernetes-helm
+      kubecolor
       kustomize
       stern
+
       watchk8s
     ];
 
@@ -40,13 +41,9 @@ in
     );
 
     programs.zsh.initExtra = ''
-      # use kubecolor if available (install on nix did not work)
-      # go install github.com/hidetatz/kubecolor/cmd/kubecolor@latest
-      if [ -e "$GOPATH/bin/kubecolor" ]; then
-        source <(kubecolor completion zsh)
-        alias kubectl=kubecolor
-        compdef kubecolor=kubectl
-      fi
+      source <(kubecolor completion zsh)
+      alias kubectl=kubecolor
+      compdef kubecolor=kubectl
 
       # https://github.com/ohmyzsh/ohmyzsh/issues/12515
       unalias k &> /dev/null || :
