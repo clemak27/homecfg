@@ -146,6 +146,7 @@ return {
         "html",
         "jsonls",
         "jedi_language_server",
+        "kotlin_language_server",
         "ltex",
         "nil_ls",
         "lua_ls",

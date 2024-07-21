@@ -122,6 +122,9 @@ in
         # python
         python312Packages.black
         python312Packages.jedi-language-server
+
+        # kotlin-language-server
+        kotlin-language-server
       ];
     };
 

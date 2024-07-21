@@ -9,6 +9,7 @@ in
     home.packages = with pkgs; [
       gnumake
       nodejs-18_x
+      kotlin
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
