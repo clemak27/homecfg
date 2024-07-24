@@ -154,6 +154,7 @@ return {
         "terraformls",
         "texlab",
         "tsserver",
+        "biome",
         "vimls",
         "volar",
         "yamlls",

@@ -111,6 +111,7 @@ in
         jdt-language-server
 
         # js
+        biome
         nodePackages.prettier
         nodePackages.typescript-language-server
         vscode-js-debug
