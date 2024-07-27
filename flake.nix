@@ -43,39 +43,16 @@
         };
       };
 
-      checks = forAllSystems (system:
-        let
-          pkgs = nixpkgsFor.${system};
-        in
-        {
-          pre-commit-check = pre-commit-hooks.lib.${system}.run {
-            src = ./.;
-            hooks = {
-              editorconfig-checker.enable = true;
-              nixpkgs-fmt.enable = true;
-
-              conventional_commits = {
-                enable = true;
-                name = "commit message";
-                description = ''
-                  Check whether the current commit message follows commiting rules.
-                '';
-                entry =
-                  let
-                    script = pkgs.writeShellScript "pre-commit-conventional" ''
-                      commit_msg=$(cat "$1")
-                      regex="^(fixup! )?(build|chore|ci|docs|feat|feat!|fix|perf|refactor|revert|style|test)(\(.*\))?: .*$"
-                      error="Commit message does not conform to regex: $regex"
-                      [[ "$commit_msg" =~ $regex ]] && exit 0 || (echo $error && exit 1)
-                    '';
-                  in
-                  toString
-                    script;
-                stages = [ "commit-msg" ];
-              };
-            };
+      checks = forAllSystems (system: {
+        pre-commit-check = pre-commit-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            editorconfig-checker.enable = true;
+            nixpkgs-fmt.enable = true;
+            commitizen.enable = true;
           };
-        });
+        };
+      });
 
       devShells = forAllSystems
         (system: {
