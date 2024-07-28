@@ -14,7 +14,28 @@ let
       fi
     '';
   };
+  gcmld = pkgs.writeShellApplication {
+    name = "gcmld";
+    runtimeInputs = with pkgs; [ git ];
+    text = /* bash */ ''
+      if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
+        git checkout master
+      else
+        git checkout main
+      fi
 
+      git pull --rebase --autostash
+
+      git remote prune origin
+
+      if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
+        branches=$(git branch --merged master | grep -v '^[ *]*master$')
+      else
+        branches=$(git branch --merged main | grep -v '^[ *]*main$')
+      fi
+      if [ "$branches" != "" ]; then echo "$branches" | xargs git branch -d; fi
+    '';
+  };
 in
 {
   imports = [
@@ -95,6 +116,7 @@ in
     };
 
     home.packages = [
+      gcmld
       lgFullscreen
     ];
 
