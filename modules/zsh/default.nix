@@ -49,8 +49,6 @@ in
           "unsetopt beep"
           # don't save duplicates in zsh_history
           "setopt HIST_SAVE_NO_DUPS"
-          # custom functions
-          "for file in ~/.zsh_functions/*; do . $file; done"
           # https://github.com/zsh-users/zsh-syntax-highlighting#why-must-zsh-syntax-highlightingzsh-be-sourced-at-the-end-of-the-zshrc-file
           "source $HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
         ]
@@ -69,13 +67,5 @@ in
     home.packages = with pkgs; [
       zsh-completions
     ];
-
-
-    home.file = {
-      ".zsh_functions" = {
-        source = ./zsh_functions;
-        recursive = true;
-      };
-    };
   };
 }
