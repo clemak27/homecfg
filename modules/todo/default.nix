@@ -1,13 +1,17 @@
 { pkgs, config, lib, ... }:
 let
   cfg = config.homecfg.todo;
-  todoDue = pkgs.writeShellScript "todo-due" ''
-    todo.sh ls | rg -q due:$(date -I) -
-    if [ $? -eq 0 ]; then
-      echo "Tasks due today:"
-      todo.sh ls | rg --color=never due:$(date -I) -
-    fi
-  '';
+  todoDue = pkgs.writeShellApplication {
+    name = "todo-due";
+    runtimeInputs = with pkgs; [ todo-txt-cli ];
+    text = ''
+      todo.sh ls | rg -q due:$(date -I) -
+      if [ $? -eq 0 ]; then
+        echo "Tasks due today:"
+        todo.sh ls | rg --color=never due:$(date -I) -
+      fi
+    '';
+  };
   todoAgain = builtins.fetchGit {
     url = "https://github.com/nthorne/todo.txt-cli-again-addon.git";
     ref = "master";
