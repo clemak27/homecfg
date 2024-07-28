@@ -34,4 +34,8 @@ return {
       "nvim-tree/nvim-web-devicons",
     },
   },
+  {
+    "calops/hmts.nvim",
+    version = "*",
+  },
 }
