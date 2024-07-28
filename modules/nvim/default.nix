@@ -75,6 +75,7 @@ in
         nodePackages.vscode-langservers-extracted
 
         # markdown
+        marksman
         nodePackages.markdownlint-cli
         ltex-ls
 

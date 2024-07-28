@@ -144,6 +144,7 @@ return {
         "gopls",
         "golangci_lint_ls",
         "html",
+        "marksman",
         "jsonls",
         "jedi_language_server",
         "kotlin_language_server",
