@@ -1,15 +1,19 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg;
-  lgFullscreen = pkgs.writeShellScriptBin "lg" ''
-    if [[ -n $WEZTERM_PANE ]]; then
-      wezterm cli zoom-pane --pane-id "$(wezterm cli split-pane --right --cells 1 -- lazygit)"
-    elif [[ ! -z $ZELLIJ ]]; then
-      zellij run -c -- lazygit && zellij action toggle-fullscreen
-    else
-      lazygit
-    fi
-  '';
+  lgFullscreen = pkgs.writeShellApplication {
+    name = "lg";
+    runtimeInputs = with pkgs; [ lazygit wezterm zellij ];
+    text = ''
+      if [[ -n $WEZTERM_PANE ]]; then
+        wezterm cli zoom-pane --pane-id "$(wezterm cli split-pane --right --cells 1 -- lazygit)"
+      elif [[ -n $ZELLIJ ]]; then
+        zellij run -c -- lazygit && zellij action toggle-fullscreen
+      else
+        lazygit
+      fi
+    '';
+  };
 
 in
 {
