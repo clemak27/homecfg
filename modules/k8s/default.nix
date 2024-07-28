@@ -1,9 +1,27 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.homecfg;
-  watchk8s = pkgs.writeShellScriptBin "wk" ''
-    ${pkgs.viddy}/bin/viddy --no-title kubecolor --force-colors "$@"
-  '';
+  getYaml = pkgs.writeShellApplication {
+    name = "ky";
+    runtimeInputs = with pkgs; [ kubectl bat ];
+    text = ''
+      kubectl "$@" -o yaml | bat -p -P --language=yaml
+    '';
+  };
+  watchkResource = pkgs.writeShellApplication {
+    name = "wk";
+    runtimeInputs = with pkgs; [ viddy kubecolor ];
+    text = ''
+      viddy --no-title kubecolor --force-colors "$@"
+    '';
+  };
+  watchAll = pkgs.writeShellApplication {
+    name = "kgaw";
+    runtimeInputs = [ watchkResource ];
+    text = ''
+      wk get all
+    '';
+  };
 in
 {
   imports = [
@@ -25,7 +43,9 @@ in
       kustomize
       stern
 
-      watchk8s
+      getYaml
+      watchkResource
+      watchAll
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
@@ -34,7 +54,6 @@ in
 
     programs.zsh.shellAliases = builtins.listToAttrs (
       [
-        { name = "kgaw"; value = "[ -e $GOPATH/bin/kubecolor ] && watch -n 1 --no-title kubecolor get all --force-colors ||  watch -n 1 --no-title kubectl get all"; }
         { name = "kns"; value = "kubens"; }
         { name = "kctx"; value = "kubectx"; }
       ]
