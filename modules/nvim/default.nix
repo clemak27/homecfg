@@ -93,7 +93,7 @@ in
         shfmt
 
         # nix
-        nil
+        nixd
         nixpkgs-fmt
 
         # lua

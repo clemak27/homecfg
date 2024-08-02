@@ -143,7 +143,7 @@ return {
         "jedi_language_server",
         "kotlin_language_server",
         "ltex",
-        "nil_ls",
+        "nixd",
         "lua_ls",
         "rust_analyzer",
         "terraformls",
@@ -254,6 +254,18 @@ return {
             config.settings = {
               yaml = {
                 keyOrdering = false,
+              },
+            }
+          end
+
+          if server == "nixd" then
+            config.settings = {
+              nixd = {
+                diagnostic = {
+                  suppress = {
+                    "sema-escaping-with",
+                  },
+                },
               },
             }
           end
