@@ -28,11 +28,7 @@ let
 
       git remote prune origin
 
-      if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
-        branches=$(git branch --merged master | grep -v '^[ *]*master$')
-      else
-        branches=$(git branch --merged main | grep -v '^[ *]*main$')
-      fi
+      branches=$(git branch --merged | grep -Ev "(^\*|master|main)" || echo "")
       if [ "$branches" != "" ]; then echo "$branches" | xargs git branch -d; fi
     '';
   };
