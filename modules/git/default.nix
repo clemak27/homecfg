@@ -81,6 +81,9 @@ in
         fetch = {
           prune = "true";
         };
+        init = {
+          defaultBranch = "main";
+        };
       };
     };
 
