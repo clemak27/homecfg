@@ -55,9 +55,7 @@ in
     };
 
     programs.zsh.oh-my-zsh.plugins = [
-      "fd"
       "fzf"
-      "ripgrep"
     ];
 
     programs.zsh.shellAliases = builtins.listToAttrs (
