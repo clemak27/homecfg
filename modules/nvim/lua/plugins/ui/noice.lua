@@ -45,6 +45,7 @@ return {
               { find = "%d more lines" },
               { find = "%d lines changed" },
               { find = "%d lines yanked" },
+              { find = "%d buffers wiped out" },
               { find = "Replaced %d line with %d lines" },
             },
           },

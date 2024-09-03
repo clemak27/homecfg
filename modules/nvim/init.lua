@@ -63,7 +63,7 @@ vim.o.laststatus = 3
 vim.o.showtabline = 0
 -- Specify the behavior when switching between buffers
 vim.o.switchbuf = "useopen,usetab,newtab"
-
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 vim.api.nvim_exec2(
   [[
   " Dont show mode in statusline
