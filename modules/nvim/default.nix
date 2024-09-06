@@ -4,10 +4,10 @@ let
 
   jdtlsSource = pkgs.stdenv.mkDerivation {
     name = "jdtls-source";
-    version = "1.35.0";
+    version = "1.38.0";
     src = pkgs.fetchurl {
-      url = "https://download.eclipse.org/jdtls/milestones/1.35.0/jdt-language-server-1.35.0-202404251256.tar.gz";
-      hash = "sha256-ATncoa4mSDTDYg18udvjMQGGIhpC/0ClZzlCwHsIDxU=";
+      url = "https://download.eclipse.org/jdtls/milestones/1.38.0/jdt-language-server-1.38.0-202408011337.tar.gz";
+      hash = "sha256-uml3iKGfK6V7FjAqums0PGSZKMlfdrDRcElKwS0XrHg=";
     };
     unpackPhase = ":";
     nativeBuildInputs = [ ];
@@ -22,6 +22,7 @@ let
     name = "vscode-java-test";
     version = "0.41.1";
     src = pkgs.fetchurl {
+      # https://open-vsx.org/extension/vscjava/vscode-java-test
       url = "https://open-vsx.org/api/vscjava/vscode-java-test/0.41.1/file/vscjava.vscode-java-test-0.41.1.vsix";
       hash = "sha256-iXIeTkyn1LNtG8Fs9pIw56dFgFfPZy5nQWRPxBHoZMI=";
     };
@@ -39,6 +40,7 @@ let
     name = "vscode-java-debug";
     version = "0.58.0";
     src = pkgs.fetchurl {
+      # https://open-vsx.org/extension/vscjava/vscode-java-debug
       url = "https://open-vsx.org/api/vscjava/vscode-java-debug/0.58.0/file/vscjava.vscode-java-debug-0.58.0.vsix";
       hash = "sha256-Q3TE/nubd15Wj+6k19Gi+6nIUFbUQ24CxbBP6GAGRHE=";
     };

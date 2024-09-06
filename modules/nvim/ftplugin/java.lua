@@ -39,7 +39,7 @@ end
 
 local jdtls_config = function()
   local jdtlsHome = os.getenv("HOME") .. "/.jdtls"
-  local lspJar = jdtlsHome .. "/plugins/org.eclipse.equinox.launcher_1.6.800.v20240330-1250.jar"
+  local lspJar = jdtlsHome .. "/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
 
   local osName = ""
   if vim.loop.os_uname().sysname == "Darwin" then
