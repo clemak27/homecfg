@@ -148,7 +148,7 @@ return {
         "rust_analyzer",
         "terraformls",
         "texlab",
-        "tsserver",
+        "ts_ls",
         "biome",
         "vimls",
         "volar",
@@ -196,7 +196,7 @@ return {
             vim.lsp.inlay_hint.enable(true)
           end
 
-          if server == "tsserver" and vim.fn.isdirectory(vim.fn.getcwd() .. "/node_modules/vue") ~= false then
+          if server == "ts_ls" and vim.fn.isdirectory(vim.fn.getcwd() .. "/node_modules/vue") ~= false then
             config.init_options = {
               plugins = {
                 {
