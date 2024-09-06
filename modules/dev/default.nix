@@ -39,6 +39,7 @@ in
     programs.go = {
       enable = true;
       goPath = ".go";
+      package = pkgs.go_1_23;
     };
 
     # https://utcc.utoronto.ca/~cks/space/blog/programming/Go121ToolchainDownloads

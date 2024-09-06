@@ -107,7 +107,7 @@ in
         gofumpt
         golangci-lint
         golangci-lint-langserver
-        gopls
+        (gopls.override { buildGoModule = pkgs.buildGo123Module; })
         gotools
 
         # java
