@@ -65,13 +65,20 @@ in
         disabled = true;
       };
       golang = {
-        disabled = true;
+        disabled = false;
+        symbol = " ";
+      };
+      gradle = {
+        symbol = " ";
       };
       java = {
         disabled = true;
       };
       julia = {
         disabled = true;
+      };
+      lua = {
+        symbol = " ";
       };
       memory_usage = {
         disabled = true;
@@ -80,7 +87,7 @@ in
         disabled = true;
       };
       nodejs = {
-        disabled = true;
+        disabled = false;
       };
       package = {
         disabled = true;
