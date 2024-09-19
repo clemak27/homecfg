@@ -12,7 +12,7 @@ let
     name = "wk";
     runtimeInputs = with pkgs; [ viddy kubecolor ];
     text = ''
-      viddy --no-title kubecolor --force-colors "$@"
+      viddy --no-title --disable_auto_save kubecolor --force-colors "$@"
     '';
   };
   watchAll = pkgs.writeShellApplication {
