@@ -56,6 +56,7 @@ in
       [
         { name = "kns"; value = "kubens"; }
         { name = "kctx"; value = "kubectx"; }
+        { name = "ky"; value = "${getYaml}/bin/ky"; }
       ]
     );
 
