@@ -42,6 +42,7 @@ return {
   {
     "rmagatti/auto-session",
     lazy = false,
+    commit = "972d23b2b9615bdd10ad80c225260af4213c3612",
     opts = {
       log_level = "error",
       suppressed_dirs = { "~/", "~/Projects" },
