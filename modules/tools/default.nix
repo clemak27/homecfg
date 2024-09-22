@@ -19,24 +19,17 @@ in
       jo
       libqalculate
       pgcli
-      ranger
       ripgrep
       sd
       tealdeer
       tree
       unzip
       viddy
+      yazi
       yq-go
     ] ++ lib.optionals stdenv.isLinux [
       android-tools
     ];
-
-    home.file.".config/ranger/plugins/ranger_devicons".source =
-      builtins.fetchGit {
-        url = "https://github.com/alexanderjeurissen/ranger_devicons.git";
-        ref = "main";
-        rev = "49fe4753c89615a32f14b2f4c78bbd02ee76be3c";
-      };
 
     programs.fzf = {
       enable = true;
@@ -76,8 +69,6 @@ in
     };
 
     xdg.configFile = {
-      "ranger/rc.conf".source = ./ranger/ranger.rc;
-      "ranger/commands.py".source = ./ranger/ranger.commands;
       "bat/config".source = ./bat/config;
     };
   };
