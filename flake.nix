@@ -5,13 +5,14 @@
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim.url = "github:nix-community/nixvim";
     pre-commit-hooks = {
       url = "github:cachix/pre-commit-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, pre-commit-hooks }:
+  outputs = { self, nixpkgs, home-manager, pre-commit-hooks, nixvim }:
     let
       supportedSystems = [
         "aarch64-linux"
@@ -26,6 +27,9 @@
     {
       hmModules.homecfg = { ... }: {
         imports = [
+          nixvim.homeManagerModules.nixvim
+          ./modules/nvim/default2.nix
+
           ./modules/dev
           ./modules/fun
           ./modules/git

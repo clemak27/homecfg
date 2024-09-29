@@ -60,77 +60,77 @@ in
 
   config = lib.mkIf (cfg.enable) {
 
-    programs.neovim = {
-      enable = true;
-      withNodeJs = true;
-      vimAlias = true;
-      vimdiffAlias = true;
-      extraPackages = with pkgs; [
-        cargo
-        deno
-        gcc
-        nodejs-18_x
-        python311
-        yarn
-
-        # html/css/json/eslint
-        nodePackages.vscode-langservers-extracted
-
-        # markdown
-        marksman
-        nodePackages.markdownlint-cli
-        ltex-ls
-
-        # container
-        stable.hadolint
-
-        # yaml
-        nodePackages.yaml-language-server
-        yamlfmt
-        yamllint
-
-        # shell
-        nodePackages.bash-language-server
-        shellcheck
-        shfmt
-
-        # nix
-        nixd
-        nixpkgs-fmt
-
-        # lua
-        lua-language-server
-        stylua
-
-        # go
-        delve
-        gofumpt
-        golangci-lint
-        golangci-lint-langserver
-        (gopls.override { buildGoModule = pkgs.buildGo123Module; })
-        gotools
-
-        # java
-        jdt-language-server
-
-        # js
-        biome
-        nodePackages.prettier
-        nodePackages.typescript-language-server
-        vscode-js-debug
-        vue-language-server
-
-        # rust
-        rust-analyzer
-
-        # python
-        python312Packages.black
-        python312Packages.jedi-language-server
-
-        # kotlin-language-server
-        kotlin-language-server
-      ];
-    };
+    # programs.neovim = {
+    #   enable = true;
+    #   withNodeJs = true;
+    #   vimAlias = true;
+    #   vimdiffAlias = true;
+    #   extraPackages = with pkgs; [
+    #     cargo
+    #     deno
+    #     gcc
+    #     nodejs-18_x
+    #     python311
+    #     yarn
+    #
+    #     # html/css/json/eslint
+    #     nodePackages.vscode-langservers-extracted
+    #
+    #     # markdown
+    #     marksman
+    #     nodePackages.markdownlint-cli
+    #     ltex-ls
+    #
+    #     # container
+    #     stable.hadolint
+    #
+    #     # yaml
+    #     nodePackages.yaml-language-server
+    #     yamlfmt
+    #     yamllint
+    #
+    #     # shell
+    #     nodePackages.bash-language-server
+    #     shellcheck
+    #     shfmt
+    #
+    #     # nix
+    #     nixd
+    #     nixpkgs-fmt
+    #
+    #     # lua
+    #     lua-language-server
+    #     stylua
+    #
+    #     # go
+    #     delve
+    #     gofumpt
+    #     golangci-lint
+    #     golangci-lint-langserver
+    #     (gopls.override { buildGoModule = pkgs.buildGo123Module; })
+    #     gotools
+    #
+    #     # java
+    #     jdt-language-server
+    #
+    #     # js
+    #     biome
+    #     nodePackages.prettier
+    #     nodePackages.typescript-language-server
+    #     vscode-js-debug
+    #     vue-language-server
+    #
+    #     # rust
+    #     rust-analyzer
+    #
+    #     # python
+    #     python312Packages.black
+    #     python312Packages.jedi-language-server
+    #
+    #     # kotlin-language-server
+    #     kotlin-language-server
+    #   ];
+    # };
 
     home.file = {
       ".markdownlintrc".text = (builtins.toJSON
@@ -160,7 +160,7 @@ in
     };
 
     xdg.configFile = {
-      "nvim/init.lua".source = ./init.lua;
+      # "nvim/init.lua".source = ./init.lua;
       "nvim/lua".source = ./lua;
       "nvim/ftplugin".source = ./ftplugin;
 
