@@ -8,7 +8,7 @@ in
   config = lib.mkIf (cfg.enable) {
     home.packages = with pkgs; [
       gnumake
-      nodejs-18_x
+      nodejs_22
       kotlin
     ];
 
