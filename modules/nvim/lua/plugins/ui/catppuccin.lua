@@ -13,9 +13,10 @@ return {
           return {
             NvimTreeVertSplit = { link = "VertSplit" },
             ["@field"] = { fg = colors.red },
+            ["@comment.todo.comment"] = { fg = colors.yellow, bg = nil },
           }
         end,
-        no_italic = true,
+        no_italic = false,
         integrations = {
           cmp = true,
           fidget = true,

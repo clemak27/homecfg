@@ -6,8 +6,9 @@ return {
     {
       "rcarriga/nvim-notify",
       config = function()
+        local colors = require("catppuccin.palettes").get_palette("mocha")
         require("notify").setup({
-          background_colour = "#1e1e2e",
+          background_colour = colors.base,
         })
         vim.notify = require("notify")
       end,
