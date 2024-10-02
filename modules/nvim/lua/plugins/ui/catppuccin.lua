@@ -4,13 +4,6 @@ return {
     as = "catppuccin",
     priority = 1000,
     config = function()
-      local navicBG
-      if os.getenv("NVIM_TRANSPARENT") == "true" then
-        navicBG = ""
-      else
-        navicBG = "#181825"
-      end
-
       require("catppuccin").setup({
         flavour = "mocha",
         compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
@@ -30,10 +23,6 @@ return {
           gitsigns = true,
           lsp_trouble = true,
           markdown = true,
-          navic = {
-            enabled = true,
-            custom_bg = navicBG,
-          },
           noice = true,
           notify = true,
           nvimtree = true,
