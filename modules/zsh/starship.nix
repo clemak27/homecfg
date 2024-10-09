@@ -105,6 +105,10 @@ in
         disabled = false;
         symbol = "󱘗 ";
       };
+      kotlin = {
+        disabled = false;
+        symbol = " ";
+      };
     };
 
   };
