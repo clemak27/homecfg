@@ -102,7 +102,8 @@ in
         disabled = true;
       };
       rust = {
-        disabled = true;
+        disabled = false;
+        symbol = "󱘗 ";
       };
     };
 
