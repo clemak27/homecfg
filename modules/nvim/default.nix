@@ -146,7 +146,6 @@ in
       ".jdtls/plugins".source = "${jdtlsSource}/plugins";
       ".jdtls/config_linux/config.ini".source = "${jdtlsSource}/config_linux/config.ini";
       ".jdtls/config_mac/config.ini".source = "${jdtlsSource}/config_mac/config.ini";
-      ".jdtls/formatter.xml".source = ./jdtls-fmt.xml;
       ".jdtls/bundles/java-test".source = javaTest;
       ".jdtls/bundles/java-debug-adapter".source = javaDebug;
     };
