@@ -53,6 +53,24 @@ let
       cp -R "./tmp/extension/server" "$out"
     '';
   };
+
+  springExtensions = pkgs.stdenv.mkDerivation {
+    name = "vscode-spring-boot";
+    version = "1.57.0";
+    src = pkgs.fetchurl {
+      # https://open-vsx.org/extension/VMware/vscode-spring-boot
+      url = "https://open-vsx.org/api/VMware/vscode-spring-boot/1.57.0/file/VMware.vscode-spring-boot-1.57.0.vsix";
+      hash = "sha256-6Lx8gF8v1E2U/wFtGyB+JyvnE9N1be6EN8UV5Rl1Do0=";
+    };
+    unpackPhase = ":";
+    nativeBuildInputs = [ pkgs.unzip ];
+    installPhase = ''
+      cp "$src" "tmp.zip"
+      mkdir -p ./tmp
+      unzip "tmp.zip" -d ./tmp
+      cp -R "./tmp/extension" "$out"
+    '';
+  };
 in
 {
   options.homecfg.nvim.enable = lib.mkEnableOption "Manage neovim with homecfg";
@@ -148,6 +166,7 @@ in
       ".jdtls/config_mac/config.ini".source = "${jdtlsSource}/config_mac/config.ini";
       ".jdtls/bundles/java-test".source = javaTest;
       ".jdtls/bundles/java-debug-adapter".source = javaDebug;
+      ".jdtls/bundles/vscode-spring-boot".source = springExtensions;
     };
 
     programs.zsh = {

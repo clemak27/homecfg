@@ -3,7 +3,6 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "mfussenegger/nvim-jdtls",
       "barreiroleo/ltex_extra.nvim",
       {
         "folke/lazydev.nvim",
@@ -300,5 +299,19 @@ return {
         end,
       })
     end,
+  },
+  {
+    "JavaHello/spring-boot.nvim",
+    dependencies = {
+      "mfussenegger/nvim-jdtls",
+      config = function()
+        require("spring_boot").setup({
+          ls_path = "~/.jdtls/bundles/vscode-spring-boot/language-server",
+        })
+        vim.g.spring_boot = {
+          jdt_extensions_path = "~/.jdtls/bundles/vscode-spring-boot/jars",
+        }
+      end,
+    },
   },
 }
