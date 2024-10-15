@@ -48,6 +48,10 @@ return {
               { find = "%d lines yanked" },
               { find = "%d buffers wiped out" },
               { find = "Replaced %d line with %d lines" },
+              -- this is a workaround for spring-boot.nvim, which fails
+              -- to show definitions in java files, and dynamically changing
+              -- the handler didn't work
+              { find = "'width' key must be a positive Integer" },
             },
           },
           opts = { skip = true },

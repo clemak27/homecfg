@@ -58,6 +58,7 @@ local jdtls_config = function()
   }
 
   vim.list_extend(bundles, vim.split(vim.fn.glob(bundlePath .. "/java-test/*.jar"), "\n"))
+  vim.list_extend(bundles, vim.split(vim.fn.glob(bundlePath .. "/vscode-spring-boot/jars/*.jar"), "\n"))
 
   vim.api.nvim_create_user_command("JdtAddCommands", function()
     require("jdtls.setup").add_commands()

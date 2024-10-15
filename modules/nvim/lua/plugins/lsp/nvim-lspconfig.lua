@@ -301,4 +301,23 @@ return {
       })
     end,
   },
+  {
+    "JavaHello/spring-boot.nvim",
+    dependencies = {
+      "mfussenegger/nvim-jdtls",
+      config = function()
+        vim.g.spring_boot = {
+          jdt_extensions_path = os.getenv("HOME") .. "/.jdtls/bundles/vscode-spring-boot/jars",
+        }
+        require("spring_boot").setup({
+          ls_path = os.getenv("HOME") .. "/.jdtls/bundles/vscode-spring-boot/language-server",
+          server = {
+            handlers = {
+              ["textDocument/inlayHint"] = function() end,
+            },
+          },
+        })
+      end,
+    },
+  },
 }
