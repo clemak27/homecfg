@@ -1,9 +1,74 @@
 -- ---------------------------------------- nvim-lspconfig --------------------------------------------------------
+local set_border = function()
+  local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+  }
+
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = border,
+  })
+end
+
+local set_mappings = function()
+  local telescope = require("telescope.builtin")
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+  vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "gd", telescope.lsp_definitions, bufopts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "gi", telescope.lsp_implementations, bufopts)
+  vim.keymap.set("n", "gr", function()
+    telescope.lsp_references({ show_line = false })
+  end, bufopts)
+  vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
+  vim.keymap.set("n", "gt", telescope.lsp_type_definitions, bufopts)
+  vim.keymap.set("n", "gf", function()
+    require("conform").format({
+      timeout_ms = 500,
+      lsp_fallback = true,
+    })
+  end, bufopts)
+  vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
+  vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
+end
+
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  local function buf_set_option(...)
+    vim.api.nvim_buf_set_option(bufnr, ...)
+  end
+
+  set_border()
+  set_mappings()
+
+  --Enable completion triggered by <c-x><c-o>
+  buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+end
+
+-- config that activates keymaps and enables snippet support
+local function set_base_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
+    on_attach = on_attach,
+  }
+end
+
 return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "mfussenegger/nvim-jdtls",
       "barreiroleo/ltex_extra.nvim",
       {
         "folke/lazydev.nvim",
@@ -62,73 +127,6 @@ return {
       },
     },
     config = function()
-      local set_border = function()
-        local border = {
-          { "╭", "FloatBorder" },
-          { "─", "FloatBorder" },
-          { "╮", "FloatBorder" },
-          { "│", "FloatBorder" },
-          { "╯", "FloatBorder" },
-          { "─", "FloatBorder" },
-          { "╰", "FloatBorder" },
-          { "│", "FloatBorder" },
-        }
-
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-          border = border,
-        })
-      end
-
-      local set_mappings = function()
-        -- See :help vim.lsp.* for documentation on any of the below functions
-        local telescope = require("telescope.builtin")
-        local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
-        vim.keymap.set("n", "ga", vim.lsp.buf.code_action, bufopts)
-        vim.keymap.set("n", "gd", telescope.lsp_definitions, bufopts)
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-        vim.keymap.set("n", "gi", telescope.lsp_implementations, bufopts)
-        vim.keymap.set("n", "gr", function()
-          telescope.lsp_references({ show_line = false })
-        end, bufopts)
-        vim.keymap.set("n", "gR", vim.lsp.buf.rename, bufopts)
-        vim.keymap.set("n", "gt", telescope.lsp_type_definitions, bufopts)
-        vim.keymap.set("n", "gf", function()
-          require("conform").format({
-            timeout_ms = 500,
-            lsp_fallback = true,
-          })
-        end, bufopts)
-        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, bufopts)
-        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, bufopts)
-      end
-
-      -- Use an on_attach function to only map the following keys
-      -- after the language server attaches to the current buffer
-      local on_attach = function(client, bufnr)
-        local function buf_set_option(...)
-          vim.api.nvim_buf_set_option(bufnr, ...)
-        end
-
-        set_border()
-        set_mappings()
-
-        --Enable completion triggered by <c-x><c-o>
-        buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
-      end
-
-      -- config that activates keymaps and enables snippet support
-      local function set_base_config()
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
-        capabilities.textDocument.completion.completionItem.snippetSupport = true
-        return {
-          -- enable snippet support
-          capabilities = capabilities,
-          -- map buffer local keybindings when the language server attaches
-          on_attach = on_attach,
-        }
-      end
-
       local lspconfig = require("lspconfig")
 
       local servers = {
@@ -289,7 +287,7 @@ return {
       -- format on save
       vim.api.nvim_create_augroup("format_on_write", { clear = true })
       vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-        pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh,*.nix",
+        pattern = "*.go,*.js,*.ts,*.lua,*.bash,*.sh,*.nix,*.java",
         group = "format_on_write",
         callback = function(args)
           require("conform").format({
@@ -302,22 +300,149 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" },
+    config = function()
+      local jdtls_config = function()
+        local jdtlsHome = os.getenv("HOME") .. "/.jdtls"
+        local lspJar = jdtlsHome .. "/plugins/org.eclipse.equinox.launcher_1.6.900.v20240613-2009.jar"
+
+        local osName = ""
+        if vim.loop.os_uname().sysname == "Darwin" then
+          osName = "mac"
+        else
+          osName = "linux"
+        end
+        local lspConfig = jdtlsHome .. "/config_" .. osName
+
+        local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+        local workspace_dir = jdtlsHome .. "/workspaces/" .. project_name
+
+        local bundlePath = jdtlsHome .. "/bundles"
+        local bundles = {
+          vim.fn.glob(bundlePath .. "/java-debug-adapter/com.microsoft.java.debug.plugin-*.jar"),
+        }
+
+        vim.list_extend(bundles, vim.split(vim.fn.glob(bundlePath .. "/java-test/*.jar"), "\n"))
+        vim.list_extend(bundles, vim.split(vim.fn.glob(bundlePath .. "/vscode-spring-boot/jars/*.jar"), "\n"))
+
+        return {
+          cmd = {
+            "java",
+            "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+            "-Dosgi.bundles.defaultStartLevel=4",
+            "-Declipse.product=org.eclipse.jdt.ls.core.product",
+            "-Dlog.protocol=true",
+            "-Dlog.level=ALL",
+            "-Xms1g",
+            "--add-modules=ALL-SYSTEM",
+            "--add-opens",
+            "java.base/java.util=ALL-UNNAMED",
+            "--add-opens",
+            "java.base/java.lang=ALL-UNNAMED",
+            "-jar",
+            lspJar,
+            "-configuration",
+            lspConfig,
+            "-data",
+            workspace_dir,
+          },
+          root_dir = require("jdtls.setup").find_root({ ".git", "mvnw", "gradlew" }),
+          settings = {
+            java = {
+              signatureHelp = { enabled = true },
+              saveActions = {
+                organizeImports = true,
+              },
+              completion = {
+                favoriteStaticMembers = {
+                  "org.hamcrest.MatcherAssert.assertThat",
+                  "org.hamcrest.Matchers.*",
+                  "org.hamcrest.CoreMatchers.*",
+                  "org.junit.jupiter.api.Assertions.*",
+                  "java.util.Objects.requireNonNull",
+                  "java.util.Objects.requireNonNullElse",
+                  "org.mockito.Mockito.*",
+                },
+                filteredTypes = {
+                  "com.sun.*",
+                  "io.micrometer.shaded.*",
+                  "java.awt.*",
+                  "jdk.*",
+                  "sun.*",
+                },
+                importOrder = {
+                  "at",
+                  "com",
+                  "org",
+                  "javax",
+                  "jakarta",
+                  "java",
+                },
+              },
+              sources = {
+                organizeImports = {
+                  starThreshold = 9999,
+                  staticStarThreshold = 9999,
+                },
+              },
+            },
+          },
+          on_attach = function(client, bufnr)
+            local function buf_set_option(...)
+              vim.api.nvim_buf_set_option(bufnr, ...)
+            end
+
+            set_border()
+            set_mappings()
+
+            buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
+
+            vim.lsp.inlay_hint.enable(true)
+
+            vim.api.nvim_create_user_command("JdtTestClass", function()
+              require("jdtls").test_class()
+            end, {})
+
+            vim.api.nvim_create_user_command("JdtTestNearestMethod", function()
+              require("jdtls").test_nearest_method()
+            end, {})
+
+            require("jdtls").setup_dap({ hotcodereplace = "auto" })
+          end,
+          init_options = {
+            bundles = bundles,
+          },
+        }
+      end
+
+      vim.api.nvim_create_augroup("jdtls_start", { clear = true })
+      vim.api.nvim_create_autocmd({ "FileType" }, {
+        pattern = "java",
+        group = "jdtls_start",
+        callback = function()
+          require("jdtls").start_or_attach(jdtls_config())
+        end,
+      })
+    end,
+  },
+  {
     "JavaHello/spring-boot.nvim",
     dependencies = {
       "mfussenegger/nvim-jdtls",
-      config = function()
-        vim.g.spring_boot = {
-          jdt_extensions_path = os.getenv("HOME") .. "/.jdtls/bundles/vscode-spring-boot/jars",
-        }
-        require("spring_boot").setup({
-          ls_path = os.getenv("HOME") .. "/.jdtls/bundles/vscode-spring-boot/language-server",
-          server = {
-            handlers = {
-              ["textDocument/inlayHint"] = function() end,
-            },
-          },
-        })
-      end,
     },
+    config = function()
+      vim.g.spring_boot = {
+        jdt_extensions_path = os.getenv("HOME") .. "/.jdtls/bundles/vscode-spring-boot/jars",
+      }
+      require("spring_boot").setup({
+        ls_path = os.getenv("HOME") .. "/.jdtls/bundles/vscode-spring-boot/language-server",
+        server = {
+          handlers = {
+            ["textDocument/inlayHint"] = function() end,
+          },
+        },
+      })
+    end,
   },
 }
