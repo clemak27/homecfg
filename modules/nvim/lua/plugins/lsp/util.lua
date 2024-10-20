@@ -42,7 +42,7 @@ return {
   end,
 
   on_attach = function(client, bufnr)
-    require("plugins.lsp.util").set_border()
+    require("plugins.lsp.util").set_hover_border()
     require("plugins.lsp.util").set_mappings()
   end,
 
