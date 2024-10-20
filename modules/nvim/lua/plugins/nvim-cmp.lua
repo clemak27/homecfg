@@ -5,15 +5,25 @@ return {
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
       "hrsh7th/cmp-path",
-      "hrsh7th/cmp-vsnip",
-      "hrsh7th/vim-vsnip",
-      "hrsh7th/vim-vsnip-integ",
       "onsails/lspkind-nvim",
-      "rafamadriz/friendly-snippets",
       "ray-x/cmp-treesitter",
+      "saadparwaiz1/cmp_luasnip",
+      {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*",
+        build = "make install_jsregexp",
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+        },
+        config = function()
+          require("luasnip.loaders.from_vscode").load({
+            paths = { vim.fn.stdpath("config") .. "/lua/plugins/snippets" },
+          })
+          require("luasnip.loaders.from_vscode").lazy_load()
+        end,
+      },
     },
     config = function()
       vim.o.completeopt = "menu,menuone,noinsert"
@@ -29,14 +39,10 @@ return {
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
       end
 
-      local feedkey = function(key, mode)
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-      end
-
       cmp.setup({
         snippet = {
           expand = function(args)
-            vim.fn["vsnip#anonymous"](args.body)
+            require("luasnip").lsp_expand(args.body)
           end,
         },
         window = {
@@ -51,12 +57,24 @@ return {
             i = cmp.mapping.abort(),
             c = cmp.mapping.close(),
           }),
-          ["<CR>"] = cmp.mapping.confirm({ select = true }),
+          ["<CR>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+              if require("luasnip").expandable() then
+                require("luasnip").expand()
+              else
+                cmp.confirm({
+                  select = true,
+                })
+              end
+            else
+              fallback()
+            end
+          end),
           ["<Tab>"] = cmp.mapping(function(fallback)
             if cmp.visible() then
               cmp.select_next_item()
-            elseif vim.fn["vsnip#available"](1) == 1 then
-              feedkey("<Plug>(vsnip-expand-or-jump)", "")
+            elseif require("luasnip").locally_jumpable(1) then
+              require("luasnip").jump(1)
             elseif has_words_before() then
               cmp.complete()
             else
@@ -66,8 +84,8 @@ return {
           ["<S-Tab>"] = cmp.mapping(function()
             if cmp.visible() then
               cmp.select_prev_item()
-            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-              feedkey("<Plug>(vsnip-jump-prev)", "")
+            elseif require("luasnip").locally_jumpable(-1) then
+              require("luasnip").jump(-1)
             end
           end, { "i", "s" }),
         },
@@ -80,9 +98,8 @@ return {
         preselect = cmp.PreselectMode.None,
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "nvim_lsp_document_symbol" },
           { name = "nvim_lsp_signature_help" },
-          { name = "vsnip" },
+          { name = "luasnip" },
           { name = "treesitter" },
           { name = "path" },
           { name = "buffer" },

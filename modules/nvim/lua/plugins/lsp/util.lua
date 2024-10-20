@@ -47,10 +47,8 @@ return {
   end,
 
   set_base_config = function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
     return {
-      capabilities = capabilities,
+      capabilities = require("cmp_nvim_lsp").default_capabilities(),
       on_attach = require("plugins.lsp.util").on_attach,
     }
   end,

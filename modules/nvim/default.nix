@@ -159,7 +159,6 @@ in
           };
         }
       );
-      ".vsnip".source = ./vsnip;
 
       ".jdtls/plugins".source = "${jdtlsSource}/plugins";
       ".jdtls/config_linux/config.ini".source = "${jdtlsSource}/config_linux/config.ini";
