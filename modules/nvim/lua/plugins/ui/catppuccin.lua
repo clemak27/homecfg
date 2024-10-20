@@ -31,8 +31,6 @@ return {
         },
       })
 
-      vim.wo.fillchars = "eob: "
-      vim.wo.cursorline = true
       vim.cmd.colorscheme("catppuccin")
       if os.getenv("NVIM_TRANSPARENT") == "true" then
         vim.wo.cursorlineopt = "number"
