@@ -4,13 +4,16 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-path",
-      "hrsh7th/cmp-vsnip",
-      "ray-x/cmp-treesitter",
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lsp-document-symbol",
       "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-vsnip",
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/vim-vsnip-integ",
       "onsails/lspkind-nvim",
+      "rafamadriz/friendly-snippets",
+      "ray-x/cmp-treesitter",
     },
     config = function()
       vim.o.completeopt = "menu,menuone,noinsert"

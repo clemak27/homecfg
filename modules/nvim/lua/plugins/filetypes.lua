@@ -46,23 +46,6 @@ return {
     end,
   },
   {
-    "OXY2DEV/markview.nvim",
-    enabled = false,
-    ft = { "markdown" },
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      local presets = require("markview.presets")
-
-      require("markview").setup({
-        headings = presets.headings.simple,
-        tables = presets.tables.border_headers,
-      })
-    end,
-  },
-  {
     "calops/hmts.nvim",
     version = "*",
   },

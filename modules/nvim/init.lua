@@ -252,6 +252,7 @@ vim_map("0", "^")
 vim_map("ß", "$")
 -- Map save
 vim_map("gs", ":wa<CR>")
+
 ----------------------------------------- plugins -----------------------------------------
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
