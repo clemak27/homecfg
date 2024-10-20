@@ -122,7 +122,6 @@ vim.api.nvim_create_autocmd({ "BufLeave", "FocusLost", "InsertEnter", "WinLeave"
 })
 
 -- don't show highlights after searching
--- https://this-week-in-neovim.org/2023/Jan/9#tips
 local ns = vim.api.nvim_create_namespace("toggle_hlsearch")
 local function toggle_hlsearch(char)
   if vim.fn.mode() == "n" then
