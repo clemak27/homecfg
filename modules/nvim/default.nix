@@ -87,7 +87,7 @@ in
         cargo
         deno
         gcc
-        nodejs-18_x
+        nodejs_22
         python311
         yarn
 
