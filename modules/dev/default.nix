@@ -10,6 +10,7 @@ in
       gnumake
       nodejs_22
       kotlin
+      delve
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
