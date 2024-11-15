@@ -7,10 +7,10 @@ in
 
   config = lib.mkIf (cfg.enable) {
     home.packages = with pkgs; [
-      gnumake
-      nodejs_22
-      kotlin
       delve
+      gnumake
+      kotlin
+      nodejs_22
     ];
 
     programs.zsh.oh-my-zsh.plugins = [
@@ -33,7 +33,7 @@ in
 
     programs.java = {
       enable = true;
-      package = pkgs.temurin-bin-17;
+      package = pkgs.temurin-bin;
     };
     programs.gradle.enable = true;
 
