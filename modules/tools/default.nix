@@ -63,7 +63,6 @@ in
     );
 
     home.file = {
-      ".local/bin/rfv".source = ./rfv;
       ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
       ".config/tealdeer/config.toml".text = ''
         [updates]
