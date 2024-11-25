@@ -14,5 +14,15 @@
       "# shellcheck disable=SC$0"
     ],
     "description": "Inserts a shellcheck disable directive"
+  },
+  "nix-shebang": {
+    "prefix": "nix-shebang",
+    "body": [
+      "#!/bin/sh",
+      "# shellcheck shell=bash",
+      "",
+      "set -eo pipefail"
+    ],
+    "description": "Inserts shebang"
   }
 }
