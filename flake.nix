@@ -30,7 +30,6 @@
           ./modules/git
           ./modules/k8s
           ./modules/nvim
-          ./modules/todo
           ./modules/tools
           ./modules/zsh
           ./modules/zellij
