@@ -27,7 +27,6 @@
       hmModules.homecfg = { ... }: {
         imports = [
           ./modules/dev
-          ./modules/fun
           ./modules/git
           ./modules/k8s
           ./modules/nvim
