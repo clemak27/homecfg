@@ -22,6 +22,7 @@ in
       ripgrep
       sd
       tealdeer
+      tokei
       tree
       unzip
       viddy
@@ -62,10 +63,21 @@ in
     );
 
     home.file = {
-      ".config/tealdeer/config.toml".source = ./tealdeer.toml;
       ".local/bin/rfv".source = ./rfv;
       ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
-      ".config/btop/btop.conf".source = ./btop.conf;
+      ".config/tealdeer/config.toml".text = ''
+        [updates]
+        auto_update = true
+      '';
+      ".config/btop/btop.conf".text = ''
+        color_theme = "TTY"
+        theme_background = False
+        vim_keys = True
+        shown_boxes = "cpu mem net proc"
+        update_ms = 2000
+        cpu_single_graph = True
+        net_sync = True
+      '';
     };
 
     xdg.configFile = {
