@@ -24,10 +24,6 @@ let
   };
 in
 {
-  imports = [
-    ./k9s.nix
-  ];
-
   options.homecfg.k8s = {
     enable = lib.mkEnableOption "Manage kubernetes with home-manager";
   };
