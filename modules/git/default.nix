@@ -5,10 +5,10 @@ let
     name = "lg";
     runtimeInputs = with pkgs; [ lazygit wezterm zellij ];
     text = ''
-      if [[ -n $WEZTERM_PANE ]]; then
+      if [[ -n $ZELLIJ ]]; then
+        zellij action new-pane --floating --height=100% --width=100% -x=0 -y=0 --close-on-exit --name=lazygit -- lazygit
+      elif [[ -n $WEZTERM_PANE ]]; then
         wezterm cli zoom-pane --pane-id "$(wezterm cli split-pane --right --cells 1 -- lazygit)"
-      elif [[ -n $ZELLIJ ]]; then
-        zellij run -c -- lazygit && zellij action toggle-fullscreen
       else
         lazygit
       fi

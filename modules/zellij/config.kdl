@@ -32,7 +32,7 @@ keybinds clear-defaults=true {
         bind "z" { TogglePaneFrames; SwitchToMode "Normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
-        bind "c" { SwitchToMode "RenamePane"; PaneNameInput 0;}
+        bind "c" { Clear; SwitchToMode "Normal"; }
     }
     move {
         bind "Ctrl m" { SwitchToMode "Normal"; }
@@ -157,7 +157,7 @@ plugins {
 theme "catppuccin-mocha"
 
 default_layout "custom"
-scroll_buffer_size 15000
+scroll_buffer_size 20000
 
 // layout_dir "$HOME/.config/zellij/layouts"
 
