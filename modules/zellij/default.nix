@@ -21,7 +21,7 @@ in
 
     programs.zellij = {
       enable = true;
-      enableZshIntegration = true;
+      enableZshIntegration = false;
     };
 
     xdg.configFile = {
@@ -45,17 +45,10 @@ in
         default_layout "custom"
         scroll_buffer_size 20000
 
-        // layout_dir "$HOME/.config/zellij/layouts"
-
-        ui {
-            pane_frames {
-                hide_session_name true
-            }
-        }
+        pane_frames false
 
         keybinds {
             unbind "Ctrl b"
-            unbind "Ctrl h"
             pane {
                 bind "c" { Clear; SwitchToMode "Normal"; }
             }
@@ -74,6 +67,7 @@ in
                 unbind "Alt o"
             }
             shared_except "move" "locked" {
+                unbind "Ctrl h"
                 bind "Ctrl q" { SwitchToMode "Move"; }
             }
             shared_except "tmux" "locked" {
