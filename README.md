@@ -60,9 +60,3 @@ If running on non NixOS systems, you need to add this to your `.zshrc`:
 ". $HOME/.nix-profile/etc/profile.d/nix.sh"
 "export GIT_SSH=/usr/bin/ssh"
 ```
-
-### zellij
-
-The zellij module uses [zjstatus](https://github.com/dj95/zjstatus) as tab bar.
-Currently, it needs to be added as an overlay to `nixpkgs` where homecfg is
-used.
