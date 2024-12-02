@@ -100,7 +100,7 @@ in
         ltex-ls
 
         # container
-        stable.hadolint
+        hadolint
 
         # yaml
         nodePackages.yaml-language-server
