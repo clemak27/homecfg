@@ -55,29 +55,36 @@ in
         pane_frames false
 
         keybinds {
-            unbind "Ctrl b"
             pane {
                 bind "c" { Clear; SwitchToMode "Normal"; }
-            }
-            move {
-                bind "Ctrl m" { SwitchToMode "Normal"; }
             }
             scroll {
                 bind "c" { Clear; }
             }
-            tmux clear-defaults=true {
-            }
             shared_except "locked" {
-                unbind "Ctrl q"
                 unbind "Alt f"
                 unbind "Alt i"
-                unbind "Alt o"
+                unbind "Ctrl q"
+                unbind "Ctrl g"
+                bind "Ctrl 0" { SwitchToMode "Locked"; }
+            }
+            tmux clear-defaults=true {}
+            shared_except "tmux" "locked" {
+                unbind "Ctrl b"
+            }
+            session clear-defaults=true {}
+            shared_except "session" "locked" {
+                unbind "Ctrl o"
+            }
+            move {
+                bind "Ctrl q" { SwitchToMode "Normal"; }
             }
             shared_except "move" "locked" {
                 unbind "Ctrl h"
                 bind "Ctrl q" { SwitchToMode "Move"; }
             }
-            shared_except "tmux" "locked" {
+            locked {
+                bind "Ctrl 0" { SwitchToMode "Normal"; }
             }
         }
       '';
