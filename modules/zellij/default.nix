@@ -97,6 +97,7 @@ in
           pane {
             focus true
             borderless true
+            cwd "~"
           }
         }
       '';
