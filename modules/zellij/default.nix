@@ -95,7 +95,21 @@ in
               plugin location="compact-bar" ${cfg.zellij.barOpts}
           }
           pane {
+            focus true
             borderless true
+          }
+        }
+      '';
+
+      "zellij/layouts/nvim.kdl".text = ''
+        layout {
+          pane size=1 borderless=true {
+              plugin location="compact-bar" ${cfg.zellij.barOpts}
+          }
+          pane {
+            focus true
+            borderless true
+            command "nvim"
           }
         }
       '';
