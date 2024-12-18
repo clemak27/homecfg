@@ -15,14 +15,21 @@ return {
       require("dapui").setup()
 
       local dap, dapui = require("dap"), require("dapui")
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open({})
+      dap.listeners.before.attach.dapui_config = function()
+        dapui.open()
+        require("nvim-tree.view").close()
+        require("overseer").close()
       end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close({})
+      dap.listeners.before.launch.dapui_config = function()
+        dapui.open()
+        require("nvim-tree.view").close()
+        require("overseer").close()
       end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close({})
+      dap.listeners.before.event_terminated.dapui_config = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited.dapui_config = function()
+        dapui.close()
       end
 
       dap.defaults.fallback.switchbuf = "useopen,uselast"
