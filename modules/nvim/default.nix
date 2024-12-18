@@ -2,11 +2,11 @@
 let
   cfg = config.homecfg.nvim;
 
-  jdtlsSource = pkgs.stdenv.mkDerivation {
+  jdtlsSource = let version = "1.40.0"; in pkgs.stdenv.mkDerivation {
     name = "jdtls-source";
-    version = "1.40.0";
+    version = "${version}";
     src = pkgs.fetchurl {
-      url = "https://download.eclipse.org/jdtls/milestones/1.40.0/jdt-language-server-1.40.0-202409261450.tar.gz";
+      url = "https://download.eclipse.org/jdtls/milestones${version}/jdt-language-server-${version}-202409261450.tar.gz";
       hash = "sha256-dBb8Yr76RQ4y8G7CtQPy7sXyLwscwS97juURK/ZxzxE=";
     };
     unpackPhase = ":";
@@ -18,12 +18,12 @@ let
     '';
   };
 
-  javaTest = pkgs.stdenv.mkDerivation {
+  javaTest = let version = "0.42.0"; in pkgs.stdenv.mkDerivation {
     name = "vscode-java-test";
-    version = "0.42.0";
+    version = "${version}";
     src = pkgs.fetchurl {
       # https://open-vsx.org/extension/vscjava/vscode-java-test
-      url = "https://open-vsx.org/api/vscjava/vscode-java-test/0.42.0/file/vscjava.vscode-java-test-0.42.0.vsix";
+      url = "https://open-vsx.org/api/vscjava/vscode-java-test/${version}/file/vscjava.vscode-java-test-${version}.vsix";
       hash = "sha256-YpMWdTNZW4EtBJDF4rZJ+SC/YeszHxfeYEY2T+OJS+o=";
     };
     unpackPhase = ":";
@@ -36,12 +36,12 @@ let
     '';
   };
 
-  javaDebug = pkgs.stdenv.mkDerivation {
+  javaDebug = let version = "0.58.0"; in pkgs.stdenv.mkDerivation {
     name = "vscode-java-debug";
-    version = "0.58.0";
+    version = "${version}";
     src = pkgs.fetchurl {
       # https://open-vsx.org/extension/vscjava/vscode-java-debug
-      url = "https://open-vsx.org/api/vscjava/vscode-java-debug/0.58.0/file/vscjava.vscode-java-debug-0.58.0.vsix";
+      url = "https://open-vsx.org/api/vscjava/vscode-java-debug/${version}/file/vscjava.vscode-java-debug-${version}.vsix";
       hash = "sha256-Q3TE/nubd15Wj+6k19Gi+6nIUFbUQ24CxbBP6GAGRHE=";
     };
     unpackPhase = ":";
@@ -54,12 +54,12 @@ let
     '';
   };
 
-  springExtensions = pkgs.stdenv.mkDerivation {
+  springExtensions = let version = "1.57.0"; in pkgs.stdenv.mkDerivation {
     name = "vscode-spring-boot";
-    version = "1.57.0";
+    version = "${version}";
     src = pkgs.fetchurl {
       # https://open-vsx.org/extension/VMware/vscode-spring-boot
-      url = "https://open-vsx.org/api/VMware/vscode-spring-boot/1.57.0/file/VMware.vscode-spring-boot-1.57.0.vsix";
+      url = "https://open-vsx.org/api/VMware/vscode-spring-boot/${version}/file/VMware.vscode-spring-boot-${version}.vsix";
       hash = "sha256-6Lx8gF8v1E2U/wFtGyB+JyvnE9N1be6EN8UV5Rl1Do0=";
     };
     unpackPhase = ":";
