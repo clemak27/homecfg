@@ -5,6 +5,7 @@ return {
     version = "0.1.8",
     dependencies = {
       "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
     },
     config = function()
       require("telescope").setup({
@@ -43,12 +44,13 @@ return {
       })
 
       require("telescope").load_extension("fzf")
+      require("telescope").load_extension("live_grep_args")
 
       -- mappings
       local builtin = require("telescope.builtin")
 
       vim.keymap.set("n", "<leader>b", builtin.buffers, {})
-      vim.keymap.set("n", "<leader>r", builtin.live_grep, {})
+      vim.keymap.set("n", "<leader>r", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", {})
       -- vim.api.nvim_set_keymap( "n", "<Leader>ff", [[<Cmd>lua require('fzf-lua').grep_project({rg_opts = "--column --hidden --line-number --no-heading --color=always --smart-case --max-columns=512"})<CR>]] , opt
 
       if os.execute("command -v lg &> /dev/null") == 0 then
