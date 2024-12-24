@@ -11,6 +11,7 @@ in
       bat-extras.batman
       btop
       curl
+      cyme
       eza
       fd
       gojq
@@ -57,6 +58,7 @@ in
         { name = "cat"; value = "bat"; }
         { name = "ls"; value = "eza --icons"; }
         { name = "lsa"; value = "eza --icons -hal"; }
+        { name = "lsusb"; value = "cyme --lsusb"; }
         { name = "man"; value = "batman"; }
         { name = "watch"; value = "viddy"; }
       ]
