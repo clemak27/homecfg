@@ -61,7 +61,7 @@ in
           indent_size = 2;
           indent_style = "space";
         };
-        "Makefile" = {
+        "{Makefile,*.mk}" = {
           indent_style = "tab";
           tab_width = 2;
         };
