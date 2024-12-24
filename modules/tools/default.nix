@@ -58,6 +58,7 @@ in
         { name = "lsusb"; value = "cyme --lsusb"; }
         { name = "man"; value = "batman"; }
         { name = "watch"; value = "viddy"; }
+        { name = "top"; value = "btop -p 1"; }
       ]
     );
 
