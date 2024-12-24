@@ -80,7 +80,10 @@ in
     };
 
     xdg.configFile = {
-      "bat/config".source = ./bat/config;
+      "bat/config".text = /*sh*/ ''
+        --theme="base16"
+        --paging=auto
+      '';
     };
   };
 }
