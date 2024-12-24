@@ -16,14 +16,11 @@ in
       fd
       gojq
       hurl
-      hyperfine
       jo
-      libqalculate
       pgcli
       ripgrep
       sd
       tealdeer
-      tokei
       tree
       unzip
       viddy
