@@ -3,11 +3,11 @@ let
   cfg = config.homecfg;
   lgFullscreen = pkgs.writeShellApplication {
     name = "lg";
-    runtimeInputs = with pkgs; [ lazygit wezterm zellij ];
+    runtimeInputs = with pkgs; [ lazygit ];
     text = ''
-      if [[ -n $ZELLIJ ]]; then
+      if command -v zellij; then
         zellij action new-pane --floating --height=100% --width=100% -x=0 -y=0 --close-on-exit --name=lazygit -- lazygit
-      elif [[ -n $WEZTERM_PANE ]]; then
+      elif command -v wezterm; then
         wezterm cli zoom-pane --pane-id "$(wezterm cli split-pane --right --cells 1 -- lazygit)"
       else
         lazygit
