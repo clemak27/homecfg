@@ -47,7 +47,7 @@ in
 
         # nix
         nixd
-        nixpkgs-fmt
+        nixfmt-rfc-style
 
         # lua
         lua-language-server

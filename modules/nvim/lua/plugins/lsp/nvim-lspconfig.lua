@@ -194,6 +194,9 @@ return {
                     "sema-escaping-with",
                   },
                 },
+                formatting = {
+                  command = { "nixfmt" },
+                },
               },
             }
           end
