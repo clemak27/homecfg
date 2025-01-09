@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.homecfg.dev;
 in
@@ -19,12 +24,11 @@ in
       "gradle-completion"
     ];
 
-    home.file.".oh-my-zsh/custom/plugins/gradle-completion".source =
-      builtins.fetchGit {
-        url = "https://github.com/gradle/gradle-completion";
-        ref = "master";
-        rev = "25da917cf5a88f3e58f05be3868a7b2748c8afe6";
-      };
+    home.file.".oh-my-zsh/custom/plugins/gradle-completion".source = builtins.fetchGit {
+      url = "https://github.com/gradle/gradle-completion";
+      ref = "master";
+      rev = "25da917cf5a88f3e58f05be3868a7b2748c8afe6";
+    };
 
     home.file.".npmrc".text = ''
       prefix=~/.local/bin/npm

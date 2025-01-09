@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.homecfg.nvim;
 in
@@ -81,8 +86,8 @@ in
     };
 
     home.file = {
-      ".markdownlintrc".text = (builtins.toJSON
-        {
+      ".markdownlintrc".text = (
+        builtins.toJSON {
           default = true;
           MD013 = {
             code_blocks = false;

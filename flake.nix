@@ -11,7 +11,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, pre-commit-hooks }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      pre-commit-hooks,
+    }:
     let
       supportedSystems = [
         "aarch64-linux"
@@ -20,45 +26,43 @@
         "x86_64-darwin"
       ];
       forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
-      nixpkgsFor = forAllSystems (system:
-        import nixpkgs { inherit system; });
+      nixpkgsFor = forAllSystems (system: import nixpkgs { inherit system; });
     in
     {
-      hmModules.homecfg = { ... }: {
-        imports = [
-          ./modules/dev
-          ./modules/git
-          ./modules/k8s
-          ./modules/nvim
-          ./modules/tools
-          ./modules/zsh
-          ./modules/zellij
-        ];
+      hmModules.homecfg =
+        { ... }:
+        {
+          imports = [
+            ./modules/dev
+            ./modules/git
+            ./modules/k8s
+            ./modules/nvim
+            ./modules/tools
+            ./modules/zsh
+            ./modules/zellij
+          ];
 
-        config = {
-          programs.home-manager.enable = true;
-          nixpkgs.config.allowUnfree = true;
+          config = {
+            programs.home-manager.enable = true;
+            nixpkgs.config.allowUnfree = true;
+          };
         };
-      };
 
       checks = forAllSystems (system: {
         pre-commit-check = pre-commit-hooks.lib.${system}.run {
           src = ./.;
           hooks = {
             editorconfig-checker.enable = true;
-            nixpkgs-fmt.enable = true;
+            nixfmt-rfc-style.enable = true;
             commitizen.enable = true;
           };
         };
       });
 
-      devShells = forAllSystems
-        (system: {
-          default = nixpkgsFor.${system}.mkShell
-            {
-              shellHook = (self.checks.${system}.pre-commit-check.shellHook);
-            };
-        });
+      devShells = forAllSystems (system: {
+        default = nixpkgsFor.${system}.mkShell {
+          shellHook = (self.checks.${system}.pre-commit-check.shellHook);
+        };
+      });
     };
 }
-

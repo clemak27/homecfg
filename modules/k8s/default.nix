@@ -1,16 +1,27 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.homecfg;
   getYaml = pkgs.writeShellApplication {
     name = "ky";
-    runtimeInputs = with pkgs; [ kubectl bat ];
+    runtimeInputs = with pkgs; [
+      kubectl
+      bat
+    ];
     text = ''
       kubectl "$@" -o yaml | bat -p -P --language=yaml
     '';
   };
   watchkResource = pkgs.writeShellApplication {
     name = "wk";
-    runtimeInputs = with pkgs; [ viddy kubecolor ];
+    runtimeInputs = with pkgs; [
+      viddy
+      kubecolor
+    ];
     text = ''
       viddy --no-title --disable_auto_save kubecolor --force-colors "$@"
     '';
@@ -48,13 +59,20 @@ in
       "kubectl"
     ];
 
-    programs.zsh.shellAliases = builtins.listToAttrs (
-      [
-        { name = "kns"; value = "kubens"; }
-        { name = "kctx"; value = "kubectx"; }
-        { name = "ky"; value = "${getYaml}/bin/ky"; }
-      ]
-    );
+    programs.zsh.shellAliases = builtins.listToAttrs ([
+      {
+        name = "kns";
+        value = "kubens";
+      }
+      {
+        name = "kctx";
+        value = "kubectx";
+      }
+      {
+        name = "ky";
+        value = "${getYaml}/bin/ky";
+      }
+    ]);
 
     programs.zsh.initExtra = ''
       source <(kubecolor completion zsh)

@@ -17,8 +17,9 @@ in
       type = lib.types.str;
       default = "";
       description = "Settings for chosen bar";
-      example = '' {
-            k8s_enable  true
+      example = ''
+        {
+          k8s_enable  true
         }
       '';
     };

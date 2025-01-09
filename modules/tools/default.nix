@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.homecfg.tools;
 in
@@ -6,29 +11,32 @@ in
   options.homecfg.tools.enable = lib.mkEnableOption "Manage command line tools with homecfg";
 
   config = lib.mkIf (cfg.enable) {
-    home.packages = with pkgs; [
-      bat
-      bat-extras.batman
-      btop
-      curl
-      cyme
-      eza
-      fd
-      gojq
-      hurl
-      jo
-      pgcli
-      ripgrep
-      sd
-      tealdeer
-      tree
-      unzip
-      viddy
-      yazi
-      yq-go
-    ] ++ lib.optionals stdenv.isLinux [
-      android-tools
-    ];
+    home.packages =
+      with pkgs;
+      [
+        bat
+        bat-extras.batman
+        btop
+        curl
+        cyme
+        eza
+        fd
+        gojq
+        hurl
+        jo
+        pgcli
+        ripgrep
+        sd
+        tealdeer
+        tree
+        unzip
+        viddy
+        yazi
+        yq-go
+      ]
+      ++ lib.optionals stdenv.isLinux [
+        android-tools
+      ];
 
     programs.fzf = {
       enable = true;
@@ -50,17 +58,36 @@ in
       "fzf"
     ];
 
-    programs.zsh.shellAliases = builtins.listToAttrs (
-      [
-        { name = "cat"; value = "bat"; }
-        { name = "ls"; value = "eza --icons"; }
-        { name = "lsa"; value = "eza --icons -hal"; }
-        { name = "lsusb"; value = "cyme --lsusb"; }
-        { name = "man"; value = "batman"; }
-        { name = "watch"; value = "viddy"; }
-        { name = "top"; value = "btop -p 1"; }
-      ]
-    );
+    programs.zsh.shellAliases = builtins.listToAttrs ([
+      {
+        name = "cat";
+        value = "bat";
+      }
+      {
+        name = "ls";
+        value = "eza --icons";
+      }
+      {
+        name = "lsa";
+        value = "eza --icons -hal";
+      }
+      {
+        name = "lsusb";
+        value = "cyme --lsusb";
+      }
+      {
+        name = "man";
+        value = "batman";
+      }
+      {
+        name = "watch";
+        value = "viddy";
+      }
+      {
+        name = "top";
+        value = "btop -p 1";
+      }
+    ]);
 
     home.file = {
       ".local/bin/jq".source = "${pkgs.gojq}/bin/gojq";
@@ -80,10 +107,11 @@ in
     };
 
     xdg.configFile = {
-      "bat/config".text = /*sh*/ ''
-        --theme="base16"
-        --paging=auto
-      '';
+      "bat/config".text = # sh
+        ''
+          --theme="base16"
+          --paging=auto
+        '';
     };
   };
 }

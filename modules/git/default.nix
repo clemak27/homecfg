@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.homecfg;
   lgFullscreen = pkgs.writeShellApplication {
@@ -17,20 +22,21 @@ let
   gcmld = pkgs.writeShellApplication {
     name = "gcmld";
     runtimeInputs = with pkgs; [ git ];
-    text = /* bash */ ''
-      if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
-        git checkout master
-      else
-        git checkout main
-      fi
+    text = # bash
+      ''
+        if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then
+          git checkout master
+        else
+          git checkout main
+        fi
 
-      git pull --rebase --autostash
+        git pull --rebase --autostash
 
-      git remote prune origin
+        git remote prune origin
 
-      branches=$(git branch --merged | grep -Ev "(^\*|master|main)" || echo "")
-      if [ "$branches" != "" ]; then echo "$branches" | xargs git branch -d; fi
-    '';
+        branches=$(git branch --merged | grep -Ev "(^\*|master|main)" || echo "")
+        if [ "$branches" != "" ]; then echo "$branches" | xargs git branch -d; fi
+      '';
   };
 in
 {
@@ -130,21 +136,55 @@ in
       "git"
     ];
 
-    programs.zsh.shellAliases = builtins.listToAttrs (
-      [
-        { name = "gcm"; value = "git commit -v -m"; }
-        { name = "gdc"; value = "git diff --cached"; }
-        { name = "gdm"; value = "git diff --cached master"; }
-        { name = "gfmm"; value = "git fetch origin && git merge origin/master"; }
-        { name = "gprom"; value = "if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then git pull --rebase origin master; else git pull --rebase origin main; fi"; }
-        { name = "gpskip"; value = "git push -o ci.skip"; }
-        { name = "gs"; value = "git status"; }
-        { name = "gst"; value = "git stash"; }
-        { name = "gstd"; value = "git stash drop"; }
-        { name = "gstp"; value = "git stash pop"; }
-        { name = "gsurr"; value = "git submodule update --remote --rebase"; }
-        { name = "gus"; value = "git reset HEAD"; }
-      ]
-    );
+    programs.zsh.shellAliases = builtins.listToAttrs ([
+      {
+        name = "gcm";
+        value = "git commit -v -m";
+      }
+      {
+        name = "gdc";
+        value = "git diff --cached";
+      }
+      {
+        name = "gdm";
+        value = "git diff --cached master";
+      }
+      {
+        name = "gfmm";
+        value = "git fetch origin && git merge origin/master";
+      }
+      {
+        name = "gprom";
+        value = "if git branch -a | grep -E 'remotes/origin/master' > /dev/null; then git pull --rebase origin master; else git pull --rebase origin main; fi";
+      }
+      {
+        name = "gpskip";
+        value = "git push -o ci.skip";
+      }
+      {
+        name = "gs";
+        value = "git status";
+      }
+      {
+        name = "gst";
+        value = "git stash";
+      }
+      {
+        name = "gstd";
+        value = "git stash drop";
+      }
+      {
+        name = "gstp";
+        value = "git stash pop";
+      }
+      {
+        name = "gsurr";
+        value = "git submodule update --remote --rebase";
+      }
+      {
+        name = "gus";
+        value = "git reset HEAD";
+      }
+    ]);
   };
 }
