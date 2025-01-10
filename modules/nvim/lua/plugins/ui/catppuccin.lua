@@ -7,7 +7,7 @@ return {
       require("catppuccin").setup({
         flavour = "mocha",
         compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
-        transparent_background = os.getenv("NVIM_TRANSPARENT") == "true",
+        transparent_background = true,
         color_overrides = {},
         custom_highlights = function(colors)
           return {
@@ -32,9 +32,7 @@ return {
       })
 
       vim.cmd.colorscheme("catppuccin")
-      if os.getenv("NVIM_TRANSPARENT") == "true" then
-        vim.wo.cursorlineopt = "number"
-      end
+      vim.wo.cursorlineopt = "number"
     end,
   },
 }

@@ -13,7 +13,6 @@ in
   ];
 
   options.homecfg.nvim.enable = lib.mkEnableOption "Manage neovim with homecfg";
-  options.homecfg.nvim.transparent = lib.mkEnableOption "Use a transparent background";
 
   config = lib.mkIf (cfg.enable) {
 
@@ -100,7 +99,6 @@ in
       sessionVariables = {
         EDITOR = "nvim";
         VISUAL = "nvim";
-        NVIM_TRANSPARENT = if cfg.transparent then "true" else "false";
       };
     };
 
